@@ -2294,7 +2294,7 @@ input, select, textarea {
 /* five */
 
 	#five {
-		background: url("images/timeplan.png"), url("../../images/five.png");
+		background: url("images/overlay.png"), url("../../images/five.png");
 		background-size: cover, cover;
 		background-attachment: fixed, fixed;
 		background-position: top left, bottom center;
