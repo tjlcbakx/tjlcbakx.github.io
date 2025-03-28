@@ -2297,7 +2297,8 @@ input, select, textarea {
 		background: url("images/timeplan.png"), url("../../images/five.png");
 		background-size: cover, cover;
 		background-attachment: fixed, fixed;
-		background-position: center center, center center;
+		background-position: top left, bottom center;
+		background-repeat: no-repeat, no-repeat;
 	}
 
 
