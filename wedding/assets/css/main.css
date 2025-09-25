@@ -2245,6 +2245,16 @@ input, select, textarea {
 
 /* Intro */
 
+
+	#zero {
+		background: url("images/zero.png"), url("../../images/zero.png");
+		background-size: cover, cover;
+		background-attachment: fixed, fixed;
+		background-position: top left, bottom center;
+		background-repeat: no-repeat, no-repeat;
+	}
+
+
 	#intro {
 		background: url("images/overlay3.png"), url("../../images/intro.png");
 		background-size: cover, cover;
