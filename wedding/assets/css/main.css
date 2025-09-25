@@ -2247,7 +2247,7 @@ input, select, textarea {
 
 
 	#zero {
-		background: url("images/zero.png"), url("../../images/zero.png");
+		background: url("images/overlay.png"), url("../../images/zero.png");
 		background-size: cover, cover;
 		background-attachment: fixed, fixed;
 		background-position: top left, bottom center;
