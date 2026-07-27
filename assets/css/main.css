@@ -2112,6 +2112,18 @@ input, select, textarea {
 				width: 100%;
 			}
 
+		.image.center {
+			display: block;
+			margin: 0 auto 2em auto;
+			max-width: 100%;
+		}
+
+			.image.center img {
+				margin: 0 auto;
+				max-width: 100%;
+				height: auto;
+			}
+
 /* List */
 
 	ol {
@@ -3330,10 +3342,7 @@ input, select, textarea {
 		-ms-transition: -ms-transform 0.5s ease;
 		transition: transform 0.5s ease;
 		-webkit-overflow-scrolling: touch;
-		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/ASTE_lores.jpg");
-		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/ASTE_lores.jpg");
-		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/ASTE_lores.jpg");
-		background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/ASTE_lores.jpg");
+		background-image: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.55)), url("../../images/ASTE_lores.jpg");
 		color: #ffffff;
 		height: 100%;
 		max-width: 80%;
@@ -3355,7 +3364,7 @@ input, select, textarea {
 		}
 
 			#menu ul > li {
-				border-top: solid 1px rgba(0, 0, 0, 0.125);
+				border-top: solid 1px rgba(255, 255, 255, 0.15);
 				margin: 0.5em 0 0 0;
 				padding: 0.5em 0 0 0;
 			}

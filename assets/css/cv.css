@@ -1,0 +1,148 @@
+/*
+	CV page styling — mirrors the layout language of the PDF CV
+	(small-caps accent section headers, bold titles with muted topics,
+	right-aligned dates, triangle bullets) using the Spectral theme accent.
+*/
+
+#cv {
+	max-width: 58em;
+	margin: 0 auto;
+}
+
+#cv .cv-top {
+	display: flex;
+	gap: 2.5em;
+	align-items: flex-start;
+	margin-bottom: 2em;
+}
+
+#cv .cv-summary {
+	flex: 1;
+}
+
+#cv .cv-name {
+	font-weight: 300;
+	color: #21b2a6;
+	margin-bottom: 0.5em;
+}
+
+#cv .cv-name .cv-initials {
+	font-size: 0.6em;
+	letter-spacing: 0.1em;
+	color: #8ec9c4;
+}
+
+#cv .cv-name strong {
+	font-weight: 700;
+	color: #21b2a6;
+}
+
+#cv .cv-summary p {
+	text-align: justify;
+	margin-bottom: 0;
+}
+
+#cv .cv-contact {
+	list-style: none;
+	padding: 0.25em 0 0 0;
+	margin: 0;
+	text-align: right;
+	color: #8e8892;
+	white-space: nowrap;
+}
+
+#cv .cv-contact li {
+	padding: 0;
+	margin: 0 0 0.35em 0;
+}
+
+#cv h3.cv-section {
+	font-size: 0.9em;
+	font-variant: small-caps;
+	text-transform: lowercase;
+	letter-spacing: 0.15em;
+	font-weight: 700;
+	color: #21b2a6;
+	border-bottom: solid 1px #dfdfdf;
+	padding-bottom: 0.3em;
+	margin: 2.2em 0 1em 0;
+}
+
+#cv .cv-entry {
+	margin-bottom: 1.6em;
+}
+
+#cv .cv-entry-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+
+#cv .cv-entry-head h4 {
+	margin: 0;
+	font-size: 1em;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+#cv .cv-topic {
+	font-weight: 400;
+	color: #8e8892;
+}
+
+#cv .cv-date {
+	color: #8e8892;
+	font-size: 0.9em;
+	white-space: nowrap;
+}
+
+#cv .cv-inst {
+	color: #8e8892;
+	font-size: 0.85em;
+	margin: 0 0 0.5em 0;
+}
+
+#cv .cv-desc {
+	text-align: justify;
+	margin-bottom: 0.5em;
+}
+
+#cv ul.cv-bullets {
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+#cv ul.cv-bullets li {
+	position: relative;
+	padding: 0 0 0 1.4em;
+	margin-bottom: 0.4em;
+	text-align: justify;
+}
+
+#cv ul.cv-bullets li::before {
+	content: "\2023";
+	position: absolute;
+	left: 0.2em;
+	color: #21b2a6;
+	font-size: 1.1em;
+	line-height: inherit;
+}
+
+#cv .cv-skills dt {
+	font-weight: 700;
+	color: #2e3842;
+}
+
+@media screen and (max-width: 736px) {
+	#cv .cv-top {
+		display: block;
+	}
+
+	#cv .cv-contact {
+		text-align: left;
+		margin-top: 1em;
+	}
+}

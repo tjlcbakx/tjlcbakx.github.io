@@ -4,13 +4,40 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang="en">
 	<head>
 		<title>Publications - Tom Bakx</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Peer-reviewed publications by astronomer Tom Bakx on dust-obscured star formation in the early Universe, including ALMA and JWST studies of distant galaxies." />
+		<meta name="author" content="Tom Bakx" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" href="images/tom_lores.jpg" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Collapsible abstracts / science highlights */
+			details.pub-detail { margin: 0.5em 0 1.5em 0; }
+			details.pub-detail > summary {
+				cursor: pointer;
+				display: inline-block;
+				font-weight: 600;
+				color: #e44c65;
+				list-style: none;
+			}
+			details.pub-detail > summary::-webkit-details-marker { display: none; }
+			details.pub-detail > summary::before { content: "\25B8\00a0"; }
+			details.pub-detail[open] > summary::before { content: "\25BE\00a0"; }
+			.pub-item { margin-bottom: 2em; }
+			.pub-item { scroll-margin-top: 1.5em; }
+			.pub-meta { color: #9fa3a6; }
+			/* Brief highlight flash when arriving via a deep link */
+			.pub-item:target > h5 a { color: #e44c65; }
+			/* compact co-author list */
+			ul.pub-coauthor { list-style: none; padding-left: 0; margin-bottom: 1.5em; }
+			ul.pub-coauthor li { padding-left: 0; margin-bottom: 0.4em; scroll-margin-top: 1.5em; }
+			ul.pub-coauthor li:target a { color: #e44c65; }
+			h5.pub-year { margin: 1.5em 0 0.75em 0; color: #9fa3a6; }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -28,6 +55,7 @@
 										<ul>
 											<li><a href="index.html">Home</a></li>
 											<li><a href="research.html">Research</a></li>
+											<li><a href="cv.html">CV</a></li>
 											<li><a href="presentations.html">Presentations</a></li>
 											<li><a href="publications.html">Publications</a></li>
 											<li><a href="photos.html">Photos</a></li>
@@ -43,93 +71,230 @@
 					<article id="main">
 						<header>
 							<h2>Publications</h2>
-							<p>A list of my published articles</p>
+							<p>18 first-author peer-reviewed papers &middot; main-author h-index 10 &middot; most-cited paper 164 citations</p>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
 
+								<p>
+									For the complete and always up-to-date list, see my
+									<a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-5268-2221&sort=date%20desc">ADS library</a>
+									or <a href="https://orcid.org/0000-0002-5268-2221">ORCID profile</a>. Below is a curated
+									selection with science highlights; click a highlight to expand it. Many of these papers
+									are discussed in context on my <a href="research.html">research page</a>.
+								</p>
+
 								<section>
 									<header>
-										<h4>First Author papers</h4>
+										<h3>First-author papers</h3>
 									</header>
 
+									<div class="pub-item" id="band2">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20ALMA%20Band%202%20line%20survey%20lensed&sort=date%20desc">ALMA Band 2 line survey of a z = 3.44 clumpy strongly-lensed submillimetre galaxy</a></h5>
+										<span class="pub-meta"><i>Monthly Notices of the Royal Astronomical Society, submitted &mdash; March 2026</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>Co-developed at Chalmers' GARD group, the ALMA Band 2 receiver opens a completely new way of using ALMA. Using the public commissioning data, I produced the first scientific paper with this receiver, comparing its capability to previous bands and paving the path for future upgrades including the Wideband Sensitivity Upgrade and <a href="https://www.euroalma2040.com/">ALMA2040</a>.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="breathless-bears">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Breathless%20BEARS%20OIII&sort=date%20desc">Breathless BEARS: [O III] 88&micro;m emission of dusty star-forming galaxies at z = 3&ndash;4</a></h5>
+										<span class="pub-meta"><i>Monthly Notices of the Royal Astronomical Society, Advanced Access (accepted) &mdash; January 2026</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>A systematic study of the bright [O III] 88&micro;m line in dusty star-forming galaxies at z = 3&ndash;4 from the BEARS sample, connecting the well-studied dusty population at cosmic noon to the [O III]-bright galaxies now routinely confirmed in the Epoch of Reionization.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2020MNRAS.493.4294B/abstract">
-ALMA uncovers the [C II] emission and warm dust continuum in a z = 8.31 Lyman break galaxy</a></h5>
-<i>2020: Monthly Notices of the Royal Astronomical Society, Volume 493, Issue 3, p.4294-4307</i> <br />
-In this paper <a href="https://arxiv.org/pdf/2001.02812.pdf">[pdf]</a>, we report on the emission of Carbon at redshift z = 8.3, and the non-detection of dust emission. To date, this is the most distant detection of Carbon, and together with the previously-observed Oxygen, we expect this galaxy to have an extremely hard radiation field, unlike galaxies at lower redshifts. The non-detection of dust suggests an unusually-warm dust component, perhaps due to the source's high redshift.
- <ul class="actions">
-												<li><a class="button primary" 
-													onclick="document.getElementById('text1123').style.visibility='visible';">Abstract</a></li></ul>
-<div id="text1123" style="visibility:hidden;"><blockquote>
-We report on the detection of the [C II] 157.7 μm emission from the Lyman break galaxy (LBG) MACS0416_Y1 at z = 8.3113, by using the Atacama Large Millimeter/submillimeter Array (ALMA). The luminosity ratio of [O III] 88 μm (from previous campaigns) to [C II] is 9.3 ± 2.6, indicative of hard interstellar radiation fields and/or a low covering fraction of photodissociation regions. The emission of [C II] is cospatial to the 850 μm dust emission (90 μm rest frame, from previous campaigns), however the peak [C II] emission does not agree with the peak [O III] emission, suggesting that the lines originate from different conditions in the interstellar medium. We fail to detect continuum emission at 1.5 mm (160 μm rest frame) down to 18 μJy (3σ). This non-detection places a strong limits on the dust spectrum, considering the 137 ± 26 μJy continuum emission at 850 μm. This suggests an unusually warm dust component (T > 80 K, 90 per cent confidence limit), and/or a steep dust-emissivity index (βdust > 2), compared to galaxy-wide dust emission found at lower redshifts (typically T ∼ 30-50 K, βdust ∼ 1-2). If such temperatures are common, this would reduce the required dust mass and relax the dust production problem at the highest redshifts. We therefore warn against the use of only single-wavelength information to derive physical properties, recommend a more thorough examination of dust temperatures in the early Universe, and stress the need for instrumentation that probes the peak of warm dust in the Epoch of Reionization.
-</blockquote></div>
+									<div class="pub-item" id="pixiedust">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Probing%20Infrared%20eXcess%20PIXIEDust&sort=date%20desc">Probing Infrared eXcess to Investigate Early-Universe Dust (PIXIEDust)</a></h5>
+										<span class="pub-meta"><i>Monthly Notices of the Royal Astronomical Society, Advanced Access (accepted) &mdash; December 2025</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>Combining ~200 hours of ALMA and NOEMA observations across ten spectroscopically confirmed z &gt; 8 galaxies, we performed the deepest dust-stacking experiment in the early Universe to date, finding no significant emission down to average dust masses below 10&#x2075; solar masses. These limits point to inefficient dust build-up in the first 600 million years of cosmic history.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="warm-ulirg">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20warm%20ultra-luminous%20infrared%20galaxy%20600%20million&sort=date%20desc">A warm ultra-luminous infrared galaxy just 600 million years after the Big Bang</a></h5>
+										<span class="pub-meta"><i>2025: Monthly Notices of the Royal Astronomical Society, Volume 544, p.1502</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>Using new ALMA Band 9 observations near the peak of the dust spectrum, we confirmed that MACS0416_Y1 at z = 8.3 harbours exceptionally warm dust (~91 K), making it an ultra-luminous infrared galaxy just 600 million years after the Big Bang &mdash; the most distant direct dust detection to date. Its high temperature, rather than a large dust reservoir, drives its extreme luminosity, with 93% of its star formation hidden from UV view. The press release reached over 1 billion people and ranked among the 1% most-viewed studies of 2025.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/#abs/2020arXiv200605992B/abstract">
-	IRAM 30m-EMIR Redshift Search of z = 3-4 Lensed Dusty Starbursts selected from the HerBS sample</a></h5>
-	<i>ArXiV preprint</i> <br />
-	In this paper <a href="https://arxiv.org/pdf/2006.05992.pdf">[pdf]</a>, we discuss the measurements of 4 spectroscopic redshifts, as part of a larger attempt to gather spectroscopic redshifts for all HerBS sources. They appear lensed by their velocity profile. Most importantly, perhaps, we present a new method for deriving spectroscopic redshifts -- away from tedious comparisons of tables -- with a graphical method.
-<li><a class="button primary" onclick="document.getElementById('text321').style.visibility='visible';">Abstract</a></li></ul><p><span class="image right"><img src="images/redshiftSearch.gif" alt="" /></span>
-<div id="text321" style="visibility:hidden;"><blockquote>
-Using the EMIR instrument on the IRAM 30m telescope, we conducted a spectroscopic redshift search of seven z phot ∼  4 sub-millimetre bright galaxies selected from the Herschel Bright Sources (HerBS) sample with fluxes at 500  μ m greater than 80 mJy. For four sources, we obtained spectroscopic redshifts between 3.4 < z < 4.1 through the detection of multiple CO-spectral lines with J  ≤  3. Later, we detected low-J transitions for two of these sources with the GBT including the CO(1-0) transition. For the remaining three sources, more data are needed to determine the spectroscopic redshift unambiguously. The measured CO luminosities and line widths suggest that all these sources are gravitationally lensed. These observations demonstrate that the 2 mm window is indispensable to confirm robust spectroscopic redshifts for z < 4 sources. Finally, we present an efficient graphical method to correctly identify spectroscopic redshifts.
-<br /></blockquote></div>
+									<div class="pub-item" id="angels">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20ANGELS%20efficient%20line%20survey%20ALMA%20bands&sort=date%20desc">A novel high-z submm galaxy efficient line survey in ALMA bands 3 through 8 &mdash; an ANGELS pilot</a></h5>
+										<span class="pub-meta"><i>2024: Monthly Notices of the Royal Astronomical Society, Volume 535, p.1533</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>This paper explored a novel and efficient spectral-line survey technique with ALMA, detecting 66 emission and absorption lines across 19 galaxies in six ALMA bands in just six and a half hours. Future studies will benefit strongly from the planned ALMA Wideband Sensitivity Upgrade.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="alma-receivers">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Conway%20Compilation%20Technical%20Papers%20ALMA%20Receivers&sort=date%20desc">Compilation of Technical Papers on ALMA Receivers</a></h5>
+										<span class="pub-meta"><i>2024: ALMA Memo 627 (with J. Conway)</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>I am committed to the instrumental groups that build the tools to study early galaxies. With the GARD group we uncovered a vast citation disparity across ALMA receiver papers; since publication, the citation rate of most receiver papers has doubled to quadrupled.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="gas-conditions">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Gas%20conditions%20star-formation%20selected%20first%20billion&sort=date%20desc">Gas conditions of a star-formation selected sample in the first billion years</a></h5>
+										<span class="pub-meta"><i>2024: Monthly Notices of the Royal Astronomical Society, Volume 532, Issue 2, p.2270&ndash;2288</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>Most distant galaxies are found through either UV or infrared selection, biasing our understanding. Taking a first step towards a "biasless" selection, I present 14 galaxies within the first billion years found through the robust star-formation tracer [C II]. Future SKA+LOFAR analysis will be key to extending such studies to earlier times.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2020MNRAS.493.4276B/abstract">
-A search for the lenses in the Herschel Bright Sources (HerBS) sample</a></h5>
-<i>2020: Monthly Notices of the Royal Astronomical Society, Volume 493, Issue 3, p.4276-4293</i> <br />
-In this paper <a href="https://arxiv.org/pdf/2002.08373.pdf">[pdf]</a>, we perform a statistical method onto Herschel sources, comparing them to both optical and near-infrared galaxies. While the Herschel-objects themselves will most likely remain invisible in these optical and near-infrared observations, we attempt to find the foreground galaxies, that are the cause of the gravitational lensing inside many of these Herschel Bright Sources. We find that the optical observations do not have the depth to even find most foreground sources, but the near-infrared survey appears much more succesful. Finally, we measured for the first time the relationship between the flux of a source and it's probability to be gravitationally lensed; something that was suggested by models, but only now has been measured.
- <ul class="actions">
-												<li><a class="button primary" 
-													onclick="document.getElementById('text1234').style.visibility='visible';">Abstract</a></li></ul>
-<div id="text1234" style="visibility:hidden;"><blockquote>
-Verifying that sub-mm galaxies are gravitationally lensed requires time-expensive observations with oversubscribed high-resolution observatories. Here, we aim to strengthen the evidence of gravitational lensing within the Herschel Bright Sources (HerBS) by cross-comparing their positions to optical (SDSS) and near-infrared (VIKING) surveys, in order to search for the foreground lensing galaxy candidates. Resolved observations of the brightest HerBS sources have already shown that most are lensed, and a galaxy evolution model predicts that ∼76 per cent of the total HerBS sources are lensed, although with the SDSS survey we are only able to identify the likely foreground lenses for 25 per cent of the sources. With the near-infrared VIKING survey, however, we are able to identify the likely foreground lenses for 57 per cent of the sources, and we estimate that 82 per cent of the HerBS sources have lenses on the VIKING images even if we cannot identify the lens in every case. We find that the angular offsets between lens and Herschel source are larger than that expected if the lensing is done by individual galaxies. We also find that the fraction of HerBS sources that are lensed falls with decreasing 500-micron flux density, which is expected from the galaxy evolution model. Finally, we apply our statistical VIKING cross-identification to the entire Herschel-ATLAS catalogue, where we also find that the number of lensed sources falls with decreasing 500-micron flux density.
-<br /></blockquote></div>
+									<div class="pub-item" id="herbs70">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20dusty%20protocluster%20binary%20galaxy%20HerBS-70&sort=date%20desc">A dusty protocluster surrounding the binary galaxy HerBS-70 at z = 2.3</a></h5>
+										<span class="pub-meta"><i>2024: Monthly Notices of the Royal Astronomical Society, Volume 530, Issue 4, p.4578&ndash;4596</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>The discovery of a cosmological overdensity surrounding one of the distant dusty galaxies from my PhD thesis. Spectroscopic follow-up grew into a 40+ hour ALMA project.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2018MNRAS.473.1751B/abstract">Herschel Bright Sources (HerBS): Sample definition and SCUBA-2 observations</a></h5>
-<i>2018: Monthly Notices of the Royal Astronomical Society, Volume 473, Issue 2, p.1751-1773</i> <br />
-In this paper <a href="https://arxiv.org/pdf/1709.01514.pdf">[pdf]</a>, we explore the brightest, distant galaxies found in the H-ATLAS survey. We define a sample, and provide its catalogue, together with observations from the James Clerk Maxwell Telescope.
- <ul class="actions">
-			<li><a class="button primary" 
-				onclick="document.getElementById('text1345').style.visibility='visible';">Abstract</a></li></ul>
-<div id="text1345" style="visibility:hidden;"> <blockquote>We present the Herschel Bright Sources (HerBS) sample, a sample of bright, high-redshift Herschel sources detected in the 616.4 deg2 Herschel Astrophysical Terahertz Large Area Survey. The HerBS sample contains 209 galaxies, selected with a 500 μm flux density greater than 80 mJy and an estimated redshift greater than 2. The sample consists of a combination of hyperluminous infrared galaxies and lensed ultraluminous infrared galaxies during the epoch of peak cosmic star formation. In this paper, we present Submillimetre Common-User Bolometer Array 2 (SCUBA-2) observations at 850 μm of 189 galaxies of the HerBS sample, 152 of these sources were detected. We fit a spectral template to the Herschel-Spectral and Photometric Imaging Receiver (SPIRE) and 850 μm SCUBA-2 flux densities of 22 sources with spectroscopically determined redshifts, using a two-component modified blackbody spectrum as a template. We find a cold- and hot-dust temperature of 21.29_{-1.66}^{+1.35} and 45.80_{-3.48}^{+2.88} K, a cold-to-hot dust mass ratio of 26.62_{-6.74}^{+5.61} and a β of 1.83_{-0.28}^{+0.14}. The poor quality of the fit suggests that the sample of galaxies is too diverse to be explained by our simple model. Comparison of our sample to a galaxy evolution model indicates that the fraction of lenses are high. Out of the 152 SCUBA-2 detected galaxies, the model predicts 128.4 ± 2.1 of those galaxies to be lensed (84.5 per cent). The SPIRE 500 μm flux suggests that out of all 209 HerBS sources, we expect 158.1 ± 1.7 lensed sources, giving a total lensing fraction of 76 per cent.<br /></blockquote></div>
+									<div class="pub-item" id="flash">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20FLASH%20Faint%20Lenses%20Associated%20Selection%20Herschel&sort=date%20desc">FLASH: Faint Lenses from Associated Selection with Herschel</a></h5>
+										<span class="pub-meta"><i>2024: Monthly Notices of the Royal Astronomical Society, Volume 527, Issue 3, p.8865&ndash;8885</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>Observational verification of the statistical lensing method developed in Bakx et al. 2020, extended to imply a total of ~3000 gravitational lenses across the Herschel fields. Sub-mm-selected lenses are selected purely on the background source, so they probe the foreground mass distribution and offer a complementary test of cosmology.</blockquote>
+										</details>
+									</div>
 
-									<header>
-										<h4>Notable co-Author</h4>
-									</header>
+									<div class="pub-item" id="jwst-mirrors">
+										<h5><a href="https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1143S/abstract">Objects in JWST's mirrors are closer than they appear</a></h5>
+										<span class="pub-meta"><i>2023: Nature Astronomy, Volume 7, p.1143&ndash;1144 (Serjeant &amp; Bakx; both authors contributed equally)</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>A fun two-page study of the small disagreement between photometric and spectroscopic results from JWST when finding distant galaxies, which can be attributed to the Eddington bias first described back in 1913.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="alma-z12">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Deep%20ALMA%20redshift%20search%20GLASS%20JWST%20candidate&sort=date%20desc">Deep ALMA redshift search of a z ~ 12 GLASS-JWST galaxy candidate</a></h5>
+										<span class="pub-meta"><i>2023: Monthly Notices of the Royal Astronomical Society</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>The first synergy between James Webb and ALMA: we find a robust line at z = 12.117, reporting one of the most distant confirmed galaxies known at the time, and carefully evaluate the statistical methods to pave the way for future JWST/ALMA collaborations.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="sudoku">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Dannerbauer%20High-z%20Sudoku%20diagnostic%20redshifts&sort=date%20desc">High-z Sudoku: a diagnostic tool for identifying robust (sub)mm redshifts</a></h5>
+										<span class="pub-meta"><i>2022: Monthly Notices of the Royal Astronomical Society (with H. Dannerbauer)</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>This study enabled the efficient use of ALMA for one of its key goals: measuring cosmological distances. Together with INFRAVIS and Yale-based sonification experts, I am extending it into an online tool and a sound-based experience that also supports neurodivergent collaborators.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2019NatAs...3..989E/abstract">
-First light demonstration of the integrated superconducting spectrometer</a></h5>
-<i>Endo et al. 2019: Nature Astronomy, Volume 3, p. 989-996</i> <br />
-In this paper <a href="https://arxiv.org/pdf/1906.10216.pdf">[pdf]</a>, Endo et al. report on the first astronomical observations using the revolutionary M-KID spectrometer on the ASTE telescope. In the precursor campaign, mapping on Orion, and targetted observations on a z = 0.05 Quasar showed DESHIMA's power as a redshift machine and in understanding ISM conditions.
-<br /><br />
+									<div class="pub-item" id="dust-temp">
+										<h5><a href="https://ui.adsabs.harvard.edu/search/q=Bakx%20Accurate%20dust%20temperature%20determination%207.13%20galaxy&sort=date%20desc">Accurate dust temperature determination in a z = 7.13 galaxy</a></h5>
+										<span class="pub-meta"><i>2021: Monthly Notices of the Royal Astronomical Society, Volume 508, Issue 1, p.L58&ndash;L63</i></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>The first direct measurement of dust temperature in the Epoch of Reionization. This study showed the power of short-wavelength ALMA observations to characterize dust temperature and reveal the total dust-obscured star formation hidden from HST &amp; JWST.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2020A%26A...635A...7N/abstract">NOEMA redshift measurements of bright Herschel galaxies</a></h5>
-<i>Neri et al. 2020: Astronomy & Astrophysics, Volume 635, id.A7, 17 pp.</i> <br />
-In this paper <a href="https://www.aanda.org/articles/aa/pdf/2020/03/aa36988-19.pdf">[pdf]</a>, Neri et al. report on the successful pilot project for finding spectroscopic redshifts using NOEMA. The large bandwidth, combined with the ability to adapt tunings between observations, enabled efficient observations at high resolution, showing a large fraction of intrinsically-luminous SMGs.
+									<div class="pub-item" id="iram-emir">
+										<h5><a href="https://ui.adsabs.harvard.edu/abs/2020arXiv200605992B/abstract">IRAM 30m-EMIR redshift search of z = 3&ndash;4 lensed dusty starbursts selected from the HerBS sample</a></h5>
+										<span class="pub-meta"><i>2020: Monthly Notices of the Royal Astronomical Society, Volume 496, Issue 2, p.2372&ndash;2390</i> &mdash; <a href="https://arxiv.org/pdf/2006.05992.pdf">[pdf]</a></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>A dedicated redshift hunt with the IRAM 30m telescope that confirmed distances for four dusty starbursts at z = 3.4&ndash;4.1, whose CO luminosities and line widths suggest all are gravitationally lensed. The efficient graphical method for identifying robust spectroscopic redshifts introduced here became the seed of the later High-z Sudoku tool.</blockquote>
+										</details>
+									</div>
 
-<br /><br />
+									<div class="pub-item" id="cii-z8">
+										<h5><a href="https://ui.adsabs.harvard.edu/abs/2020MNRAS.493.4294B/abstract">ALMA uncovers the [C II] emission and warm dust continuum in a z = 8.31 Lyman break galaxy</a></h5>
+										<span class="pub-meta"><i>2020: Monthly Notices of the Royal Astronomical Society, Volume 493, Issue 3, p.4294&ndash;4307</i> &mdash; <a href="https://arxiv.org/pdf/2001.02812.pdf">[pdf]</a> &middot; 164 citations &middot; <a href="data/NECO2020.pdf">[talk slides]</a></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>One of the most distant detections of ionized carbon. The galaxy shows a very high oxygen-to-carbon luminosity ratio, indicative of harsh radiation fields and/or high gas densities. We find unusually warm dust (&gt; 80 K), which became the starting point for many new studies of dust in the distant Universe.</blockquote>
+										</details>
+									</div>
 
+									<div class="pub-item" id="herbs-lenses">
+										<h5><a href="https://ui.adsabs.harvard.edu/abs/2020MNRAS.493.4276B/abstract">A search for the lenses in the Herschel Bright Sources (HerBS) sample</a></h5>
+										<span class="pub-meta"><i>2020: Monthly Notices of the Royal Astronomical Society, Volume 493, Issue 3, p.4276&ndash;4293</i> &mdash; <a href="https://arxiv.org/pdf/2002.08373.pdf">[pdf]</a> &middot; <a href="data/presGrav.pdf">[talk slides]</a></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>By cross-matching HerBS with optical (SDSS) and near-infrared (VIKING) surveys, we showed that ~82% of these bright sub-mm sources are gravitationally lensed &mdash; and measured, for the first time, that the lensed fraction falls with decreasing 500-&micro;m flux density, exactly as galaxy-evolution models predict.</blockquote>
+										</details>
+									</div>
 
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2019arXiv191010927H/abstract">
-Large Population of ALMA Galaxies at z>6 with Very High [OIII]88um to [CII]158um Flux Ratios: Evidence of Extremely High Ionization Parameter or PDR Deficit?</a></h5>
-<i>Harikane et al. 2020</i> <br />
-In this paper <a href="https://arxiv.org/pdf/1910.10927.pdf">[pdf]</a>, Harikane et al. report on three sources with Carbon, Oxygen and tentative Nitrogen lines. Their modelling using Cloudy to explain the nature of high-redshift sources is extensive, and well-written.
+									<div class="pub-item" id="herbs-sample">
+										<h5><a href="https://ui.adsabs.harvard.edu/abs/2018MNRAS.473.1751B/abstract">The Herschel Bright Sources (HerBS): sample definition and SCUBA-2 observations</a></h5>
+										<span class="pub-meta"><i>2018: Monthly Notices of the Royal Astronomical Society, Volume 473, Issue 2, p.1751&ndash;1773</i> &mdash; <a href="https://arxiv.org/pdf/1709.01514.pdf">[pdf]</a> &middot; <a href="data/JCMT_Conference_Cardiff.pdf">[talk slides]</a> &middot; <a href="images/poster2019.png">[poster]</a></span>
+										<details class="pub-detail"><summary>Science highlight</summary>
+											<blockquote>I produced a catalogue of the 209 brightest, most distant galaxies from the 660 deg&sup2; H-ATLAS survey. This catalogue underpins extensive large programs to characterize the redshifts of the Herschel legacy and is the basis of my PhD thesis. (See also the 2020 erratum, MNRAS 494, 10.)</blockquote>
+										</details>
+									</div>
 
+								</section>
 
-<br /><br />
-
-<h5><a href="https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3558N/abstract">The Herschel-ATLAS: a sample of 500 μm-selected lensed galaxies over 600 deg2</a></h5>
-<i>Negrello et al. 2017: Monthly Notices of the Royal Astronomical Society, Volume 465, Issue 3, p.3558-3580</i> <br />
-In this paper <a href="https://arxiv.org/pdf/1611.03922.pdf">[pdf]</a>, Negrello et al. report on the most likely lenses selected from the H-ATLAS survey, using both sub-mm and optical (Hubble) observations. Substantial overlap exists between this sample and HerBS, however this sample only selects > 100 mJy at 500 micron.
-
-
-
+								<hr />
+								<section>
+								<header>
+								<h3>Co-authored papers</h3>
+								</header>
+								<p class="pub-meta">35 peer-reviewed papers from international collaborations (compiled from <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-5268-2221&sort=date%20desc">ADS</a> / ORCID; each links to the journal version). My first-author work is above the line.</p>
+								<h5 class="pub-year">2026</h5>
+								<ul class="pub-coauthor">
+								<li><strong>Chen et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ae3683">A z ≃ 0.4 Galaxy Reflecting the High-redshift Little Red Dots: An Extended Starburst with an Overmassive Black Hole</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Eales et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/stag1000">COSMOS-Web: star formation along the early Hubble sequence and the evolution of dust over the redshift range 0‌‌‌‌ &lt;‌ z &lt; 12</a> <span class="pub-meta">(MNRAS)</span></li>
+								<li><strong>Prajapati et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4365/ae27d4">Vz-GAL: Probing Cold Molecular Gas in Dusty Star-forming Galaxies at z = 1–6</a> <span class="pub-meta">(ApJS)</span></li>
+								<li><strong>Witstok et al.</strong> &mdash; <a href="https://doi.org/10.33232/001c.155261">On the origins of oxygen: ALMA and JWST characterise the multi-phase, metal-enriched, star-bursting medium within a ‘normal’ z &gt; 11 galaxy</a> <span class="pub-meta">(Open J. Astrophys.)</span></li>
+								<li><strong>Zhu et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ae4ed1">A Potential Link between Nuclear Winds and Cold Gas Outflows on Kiloparsec Scales in Reionization-era Quasars</a> <span class="pub-meta">(ApJ)</span></li>
+								</ul>
+								<h5 class="pub-year">2025</h5>
+								<ul class="pub-coauthor">
+								<li><strong>Bendo et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/staf816">The dust emissivity index β in infrared-bright galaxies at 1.5 &lt; z &lt; 4.2</a> <span class="pub-meta">(MNRAS)</span></li>
+								<li><strong>Bhangal et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ae160d">The Photometric Analysis of the Environment Around Two Dusty Star-forming Galaxies at z ∼ 2</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Cano et al.</strong> &mdash; <a href="https://doi.org/10.1051/0004-6361/202555528">Candidate gravitationally lensed submillimeter galaxies in Herschel-ATLAS associated with WISE elliptical counterparts</a> <span class="pub-meta">(A&amp;A)</span></li>
+								<li id="carniani-z14"><strong>Carniani et al.</strong> &mdash; <a href="https://doi.org/10.1051/0004-6361/202452451">The eventful life of a luminous galaxy at z = 14: metal enrichment, feedback, and low gas fraction?</a> <span class="pub-meta">(A&amp;A)</span></li>
+								<li><strong>Cox et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/adf204">HerS-3: An Exceptional Einstein Cross Reveals a Massive Dark Matter Halo</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Hagimoto et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ade87e">Compact Ionized Gas Region Surrounded by Porous Neutral Gas in a Dusty Lyman Break Galaxy at Redshift z = 8.312</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Knudsen et al.</strong> &mdash; <a href="https://doi.org/10.1051/0004-6361/202453229">Early galaxy evolution: The complex interstellar medium distribution of the z ∼ 7 galaxy A1689-zD1</a> <span class="pub-meta">(A&amp;A)</span></li>
+								<li><strong>Tamura et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/adb1b9">Large Molecular and Dust Reservoir of a Gravitationally Lensed Submillimeter Galaxy behind the Lupus I Molecular Cloud</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>van Marrewijk et al.</strong> &mdash; <a href="https://doi.org/10.1051/0004-6361/202451927">Quantifying the detection likelihood of faint peaks in interferometric data through jackknifing</a> <span class="pub-meta">(A&amp;A)</span></li>
+								</ul>
+								<h5 class="pub-year">2024</h5>
+								<ul class="pub-coauthor">
+								<li><strong>Algera et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/stae1994">Accurate simultaneous constraints on the dust mass, temperature, and emissivity index of a galaxy at redshift 7.31</a> <span class="pub-meta">(MNRAS)</span></li>
+								<li><strong>Borsato et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/stad3381">Characterization of Herschel-selected strong lens candidates through HST and sub-mm/mm observations</a> <span class="pub-meta">(MNRAS)</span></li>
+								<li><strong>Calabrò et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ad7602">Evidence of Extreme Ionization Conditions and Low Metallicity in GHZ2/GLASS-Z12 from a Combined Analysis of NIRSpec and MIRI Observations</a> <span class="pub-meta">(ApJ)</span></li>
+								<li id="castellano-ghz2"><strong>Castellano et al.</strong> &mdash; <a href="https://ui.adsabs.harvard.edu/search/q=Castellano%20NIRSpec%20GHZ2%20GLASS%20z12%20redshift%2012.34&sort=date%20desc">JWST NIRSpec spectroscopy of the remarkable bright galaxy GHZ2/GLASS-z12 at z = 12.34</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Mitsuhashi et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ad5675">SERENADE. II. An ALMA Multiband Dust Continuum Analysis of 28 Galaxies at 5 &lt; z &lt; 8 and the Physical Origin of the Dust Temperature Evolution</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Salak et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ad0df5">Molecular Outflow in the Reionization-epoch Quasar J2054-0005 Revealed by OH 119 μm Observations</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Zhu et al.</strong> &mdash; <a href="https://doi.org/10.3847/2515-5172/ad91ad">Discovery of a Unique Close Quasar–DSFG Pair Linked by a [C II] Bridge at z = 5.63</a> <span class="pub-meta">(RNAAS)</span></li>
+								</ul>
+								<h5 class="pub-year">2023</h5>
+								<ul class="pub-coauthor">
+								<li><strong>Bendo et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/stac3771">The bright extragalactic ALMA redshift survey (BEARS) – II. Millimetre photometry of gravitational lens candidates</a> <span class="pub-meta">(MNRAS)</span></li>
+								<li><strong>Hagimoto et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/stad784">Bright extragalactic ALMA redshift survey (BEARS) III: detailed study of emission lines from 71 Herschel targets</a> <span class="pub-meta">(MNRAS)</span></li>
+								<li id="rioja-overdensity"><strong>Hashimoto et al.</strong> &mdash; <a href="https://ui.adsabs.harvard.edu/search/q=Hashimoto%20RIOJA%20highest%20redshift%20galaxy%20overdensity%207.88&sort=date%20desc">RIOJA I: the core of the highest-redshift galaxy overdensity at z = 7.88 confirmed by NIRSpec/JWST</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Stanley et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/acb6f7">Resolved CO(1–0) Emission and Gas Properties in Luminous Dusty Star-forming Galaxies at z = 2–4</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Tamura et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/acd637">The 300 pc Resolution Imaging of a z = 8.31 Galaxy: Turbulent Ionized Gas and Potential Stellar Feedback 600 Million Years after the Big Bang</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Zhu et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/aceef4">Probing Ultralate Reionization: Direct Measurements of the Mean Free Path over 5 &lt; z &lt; 6</a> <span class="pub-meta">(ApJ)</span></li>
+								</ul>
+								<h5 class="pub-year">2022</h5>
+								<ul class="pub-coauthor">
+								<li><strong>Akins et al.</strong> &mdash; <a href="https://doi.org/10.3847/1538-4357/ac795b">ALMA Reveals Extended Cool Gas and Hot Ionized Outflows in a Typical Star-forming Galaxy at Z = 7.13</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Taniguchi et al.</strong> &mdash; <a href="https://doi.org/10.1007/s10909-022-02888-5">DESHIMA 2.0: Development of an Integrated Superconducting Spectrometer for Science-Grade Astronomical Observations</a> <span class="pub-meta">(J. Low Temp. Phys.)</span></li>
+								<li><strong>Urquhart et al.</strong> &mdash; <a href="https://doi.org/10.1093/mnras/stac150">The bright extragalactic ALMA redshift survey (BEARS) I: redshifts of bright gravitationally lensed galaxies from the Herschel ATLAS</a> <span class="pub-meta">(MNRAS)</span></li>
+								</ul>
+								<h5 class="pub-year">2021</h5>
+								<ul class="pub-coauthor">
+								<li id="shirley-help"><strong>Shirley et al.</strong> &mdash; <a href="https://ui.adsabs.harvard.edu/search/q=Shirley%20HELP%20Herschel%20Extragalactic%20Legacy%20Project&sort=date%20desc">HELP: the Herschel Extragalactic Legacy Project</a> <span class="pub-meta">(MNRAS)</span></li>
+								</ul>
+								<h5 class="pub-year">2020</h5>
+								<ul class="pub-coauthor">
+								<li id="harikane"><strong>Harikane et al.</strong> &mdash; <a href="https://ui.adsabs.harvard.edu/abs/2019arXiv191010927H/abstract">Large population of ALMA galaxies at z &gt; 6 with very high [O III]/[C II] flux ratios</a> <span class="pub-meta">(ApJ)</span></li>
+								<li><strong>Takekoshi et al.</strong> &mdash; <a href="https://doi.org/10.1007/s10909-020-02338-0">DESHIMA on ASTE: On-Sky Responsivity Calibration of the Integrated Superconducting Spectrometer</a> <span class="pub-meta">(J. Low Temp. Phys.)</span></li>
+								</ul>
+								<h5 class="pub-year">2019</h5>
+								<ul class="pub-coauthor">
+								<li id="endo-deshima"><strong>Endo et al.</strong> &mdash; <a href="https://doi.org/10.1038/s41550-019-0850-8">First light demonstration of the integrated superconducting spectrometer</a> <span class="pub-meta">(Nat. Astron.)</span></li>
+								</ul>
+								<h5 class="pub-year">2017</h5>
+								<ul class="pub-coauthor">
+								<li id="negrello-hatlas"><strong>Negrello et al.</strong> &mdash; <a href="https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3558N/abstract">The Herschel-ATLAS: a sample of 500 µm-selected lensed galaxies over 600 deg²</a> <span class="pub-meta">(MNRAS)</span></li>
+								</ul>
 								</section>
 
 							</div>
@@ -138,11 +303,15 @@ In this paper <a href="https://arxiv.org/pdf/1611.03922.pdf">[pdf]</a>, Negrello
 
 				<!-- Footer -->
 					<footer id="footer">
+						<ul class="menu">
+							<li><a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-5268-2221&sort=date%20desc">ADS</a></li>
+							<li><a href="https://orcid.org/0000-0002-5268-2221">ORCID</a></li>
+							<li><a href="https://github.com/tjlcbakx">GitHub</a></li>
+						</ul>
 						<ul class="copyright">
-							<li>&copy; Tom Bakx</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>&copy; Tom Bakx</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 						</ul>
 					</footer>
-
 
 			</div>
 

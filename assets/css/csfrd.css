@@ -1,0 +1,279 @@
+/*
+	CSFRD homepage figure — "When did the Universe turn dark?"
+	Companion to assets/js/csfrd.js; colors match the Spectral theme
+	(#2e3842 surface, teal accent, red primary), series colors validated
+	for contrast and color-vision-deficiency separation on the dark surface.
+*/
+
+/* dark section text (style2 only sets the background color) */
+#darkdawn {
+	color: #a9b6c1;
+	/* let the fixed Milky Way banner photo (body.landing #page-wrapper)
+	   shine through faintly behind the figure — the data points light up
+	   among real stars, over the same dust lanes the science is about */
+	background-color: rgba(46, 56, 66, 0.86);
+}
+
+#darkdawn h2,
+#darkdawn strong {
+	color: #ffffff;
+}
+
+#darkdawn header.major p {
+	color: #c5cfd8;
+}
+
+/* full-screen welcome: the question section stays entirely below the fold
+   and the light-up triggers on scroll */
+.landing #banner {
+	height: 100vh;
+}
+
+.csfrd-figure {
+	max-width: 46em;
+	margin: 0 auto 2em auto;
+}
+
+.csfrd {
+	display: block;
+	width: 100%;
+	height: auto;
+	font-family: inherit;
+	overflow: visible;
+}
+
+.csfrd text {
+	fill: rgba(255, 255, 255, 0.55);
+	font-size: 12px;
+}
+
+.csfrd .axt {
+	font-size: 13px;
+	fill: rgba(255, 255, 255, 0.65);
+}
+
+.csfrd .ax line {
+	stroke: rgba(255, 255, 255, 0.35);
+	stroke-width: 1;
+}
+
+.csfrd .frame {
+	fill: none;
+	stroke: rgba(255, 255, 255, 0.25);
+	stroke-width: 1;
+}
+
+/* series curves */
+.csfrd .curve {
+	fill: none;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* obscured-SF uncertainty band (measured regime) */
+.csfrd .band {
+	opacity: 0.14;
+	stroke: none;
+}
+
+/* the unknown regime: dashed extrapolation fan */
+.csfrd .fan {
+	fill: none;
+	stroke: #ed4933;
+	stroke-width: 2;
+	stroke-dasharray: 7 6;
+	opacity: 0.75;
+}
+
+.csfrd .fanlab {
+	fill: #f4897b;
+	font-style: italic;
+	font-size: 13px;
+}
+
+.csfrd .qmark {
+	fill: #f4897b;
+	font-size: 54px;
+	font-weight: 700;
+	opacity: 0.9;
+}
+
+/* data points: small "stars" that light up */
+.csfrd .pt {
+	stroke: #2e3842;
+	stroke-width: 1;
+}
+
+.csfrd .pt.uv { fill: #20a89c; }
+.csfrd .pt.ir { fill: #ed4933; }
+
+.csfrd .pt:hover {
+	r: 5.5;
+}
+
+.csfrd .pt.uv:hover { filter: drop-shadow(0 0 6px #20a89c); }
+.csfrd .pt.ir:hover { filter: drop-shadow(0 0 6px #ed4933); }
+
+/* Bakx+21 anchor star */
+.csfrd .bakx {
+	fill: #ffd166;
+	stroke: #2e3842;
+	stroke-width: 1;
+	filter: drop-shadow(0 0 7px rgba(255, 209, 102, 0.9));
+}
+
+.csfrd .star-lab {
+	fill: #ffd166;
+	font-size: 12.5px;
+	font-style: italic;
+}
+
+/* direct series labels + legend */
+.csfrd .dlab {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.csfrd .dlab.uv { fill: #4cc4b9; }
+.csfrd .dlab.ir { fill: #f4897b; }
+
+.csfrd .legend text {
+	font-size: 12px;
+}
+
+/* f_obscured lower panel */
+.csfrd .fobs-title {
+	font-size: 12.5px;
+	font-style: italic;
+	fill: rgba(255, 255, 255, 0.65);
+}
+
+.csfrd .fobs-grid {
+	stroke: rgba(255, 255, 255, 0.12);
+	stroke-dasharray: 2 4;
+}
+
+.csfrd .fobs-wedge {
+	opacity: 0.08;
+	stroke: none;
+}
+
+.csfrd .fobs-anchor {
+	fill: #ffd166;
+	stroke: #2e3842;
+	stroke-width: 1;
+	filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.8));
+}
+
+.csfrd .fobs-limit line {
+	stroke: #ffd166;
+	stroke-width: 2;
+}
+
+.csfrd .fobs-limit path {
+	fill: #ffd166;
+}
+
+.csfrd .fobs-lab {
+	fill: #ffd166;
+	font-size: 11.5px;
+	font-style: italic;
+}
+
+.csfrd-caption {
+	font-size: 0.85em;
+	color: rgba(255, 255, 255, 0.55);
+	max-width: 46em;
+	margin: -0.5em auto 2em auto;
+}
+
+/* ---------- animation ----------
+   Default (no JS, reduced motion): everything visible.
+   JS adds .is-armed (hidden start state), then .is-lit to play. */
+
+.csfrd-figure.is-armed .curve {
+	stroke-dasharray: var(--len);
+	stroke-dashoffset: var(--len);
+}
+
+.csfrd-figure.is-armed .pt,
+.csfrd-figure.is-armed .bakx,
+.csfrd-figure.is-armed .fade {
+	opacity: 0;
+}
+
+/* phase timeline: points (0-2.4s) -> descriptors (1.8s) -> fits (2.4s)
+   -> uncertainty + benchmark (4.3s) -> f_obs panel (5.2s on) */
+.csfrd-figure.is-lit .curve {
+	transition: stroke-dashoffset 2s ease-out;
+	transition-delay: 2.4s;
+	stroke-dashoffset: 0;
+}
+
+.csfrd-figure.is-lit .curve.ir {
+	transition-delay: 2.7s;
+}
+
+.csfrd-figure.is-lit .curve.fobs-line {
+	transition-duration: 1.3s;
+	transition-delay: 5.4s;
+}
+
+@keyframes csfrd-lightup {
+	0%   { opacity: 0; filter: none; }
+	45%  { opacity: 1; filter: drop-shadow(0 0 8px currentColor) brightness(1.9); }
+	100% { opacity: 1; filter: none; }
+}
+
+.csfrd-figure.is-lit .pt.uv { color: #20a89c; }
+.csfrd-figure.is-lit .pt.ir { color: #ed4933; }
+
+.csfrd-figure.is-lit .pt {
+	animation: csfrd-lightup 0.7s ease-out forwards;
+	animation-delay: var(--d);
+}
+
+.csfrd-figure.is-lit .bakx {
+	color: #ffd166;
+	animation: csfrd-lightup 1.1s ease-out forwards;
+	animation-delay: var(--d);
+}
+
+.csfrd-figure.is-lit .fade {
+	transition: opacity 1s ease-in;
+	opacity: 1;
+}
+
+.csfrd-figure.is-lit .fade.d1 { transition-delay: 1.8s; }
+.csfrd-figure.is-lit .fade.d2 { transition-delay: 4.3s; }
+.csfrd-figure.is-lit .fade.d3 { transition-delay: 5.2s; }
+.csfrd-figure.is-lit .fade.d4 { transition-delay: 6.4s; }
+
+.csfrd-figure.is-lit .band {
+	opacity: 0.14;
+}
+
+.csfrd-figure.is-lit .fobs-wedge {
+	opacity: 0.08;
+}
+
+.csfrd-figure.is-lit .qmark {
+	opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.csfrd-figure.is-armed .curve,
+	.csfrd-figure.is-armed .pt,
+	.csfrd-figure.is-armed .bakx,
+	.csfrd-figure.is-armed .fade {
+		stroke-dashoffset: 0;
+		opacity: 1;
+		animation: none;
+		transition: none;
+	}
+
+	.csfrd-figure.is-armed .band { opacity: 0.14; }
+	.csfrd-figure.is-armed .fobs-wedge { opacity: 0.08; }
+	.csfrd-figure.is-armed .qmark { opacity: 0.9; }
+}
