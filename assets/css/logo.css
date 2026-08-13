@@ -1,0 +1,145 @@
+/* The mark.
+   Source and rules: ../../../logo/final/USAGE.md. Used sparingly - the fixed
+   header, the footer, and the CV. Both of the first two sit on ink, so they
+   take the dark file: white arcs, red x. */
+
+#header h1 a {
+	display: flex;
+	align-items: center;
+	gap: 0.55em;
+}
+
+#header h1 a .logo-mark {
+	display: block;
+	flex: 0 0 auto;
+	height: 1.7em;
+	width: auto;
+}
+
+@media screen and (max-width: 736px) {
+
+	#header h1 a {
+		gap: 0.45em;
+	}
+
+	#header h1 a .logo-mark {
+		height: 1.5em;
+	}
+
+}
+
+#footer .logo-mark {
+	display: block;
+	width: 3em;
+	height: auto;
+	margin: 0 auto 2.25em auto;
+	opacity: 0.85;
+}
+
+/* CV: the mark sits above the contact block, at the head of the document. */
+
+#cv .cv-aside {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.8em;
+}
+
+#cv .cv-aside .logo-mark {
+	display: block;
+	width: 4.25em;
+	height: auto;
+}
+
+@media screen and (max-width: 736px) {
+
+	#cv .cv-aside {
+		align-items: flex-start;
+		margin-top: 1em;
+	}
+
+}
+
+/* Banner: the name is the lockup itself, so the two white rules the template
+   draws above and below the heading now bracket the mark. The alt text keeps
+   the h2 a heading for anything that does not load images. */
+
+#banner h2 .banner-lockup {
+	display: block;
+	width: 20rem;
+	max-width: 62vw;
+	height: auto;
+	margin: 0.1em 0;
+}
+
+@media screen and (max-width: 736px) {
+
+	#banner h2 .banner-lockup {
+		width: 15rem;
+		max-width: 70vw;
+	}
+
+}
+
+/* Not the logo, but it has to live somewhere loaded on every page: ul.menu in
+   the footer has no rule anywhere in main.css, so it falls back to browser
+   defaults - bullets escaping to the left of a centred footer, one item per
+   line. This is the .copyright list's own styling, applied to its neighbour. */
+
+#footer .menu {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 1em 0;
+	font-size: 0.9em;
+}
+
+#footer .menu li {
+	border-left: solid 1px rgba(255, 255, 255, 0.35);
+	display: inline-block;
+	line-height: 1em;
+	margin-left: 1em;
+	padding-left: 1em;
+}
+
+#footer .menu li:first-child {
+	border-left: 0;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+@media screen and (max-width: 480px) {
+
+	#footer .menu li {
+		border: 0;
+		display: block;
+		line-height: 1.65em;
+		margin: 0;
+		padding: 0.4em 0;
+	}
+
+}
+
+/* 404: the one page where the mark gets to be the content. */
+
+.error-page {
+	text-align: center;
+}
+
+.error-page .error-mark {
+	display: block;
+	width: 7em;
+	height: auto;
+	margin: 0 auto 2em auto;
+}
+
+.error-page p {
+	max-width: 34em;
+	margin: 0 auto 2em auto;
+}
+
+.error-page .actions {
+	justify-content: center;
+}
+
+/* The slide-out menu carries no mark, and the toggle keeps the template's
+   three bars: one mark per bar, top-left, where the name is. */
