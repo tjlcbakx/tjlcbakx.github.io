@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Sky Puzzle — ALMA snapshots on the Herschel sky</title>
+<meta name="description" content="Drag magnified ALMA images of lensed galaxies back to their true positions on the Herschel/SPIRE survey fields.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0f'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%237fd8e8' stroke-width='7'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23e8f4ff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app" hidden>
+
+  <header id="topbar">
+    <a id="btnBack" href="../" hidden title="Back to where you came from">&larr;</a>
+    <h1>Sky&nbsp;Puzzle <span class="sub">ALMA snapshots on the Herschel sky</span></h1>
+    <div class="spacer"></div>
+    <div id="readout" aria-live="polite"></div>
+    <div id="progress"><strong id="nplaced">0</strong> / <span id="ntotal">0</span> placed</div>
+    <nav id="controls">
+      <button id="btnGhosts" type="button" aria-pressed="true" title="Faint preview of each unfound galaxy at its true position (P)">Previews</button>
+      <button id="btnHints" type="button" aria-pressed="false" title="Ring the remaining sky positions (H)">Positions</button>
+      <button id="btnGrid" type="button" aria-pressed="false" title="RA / Dec graticule (G)">Coordinates</button>
+      <button id="btnSound" type="button" aria-pressed="true" title="Sound on/off">Sound</button>
+      <button id="btnHelp" type="button" title="How to play">?</button>
+      <button id="btnReset" type="button" title="Clear all placed pieces">Reset</button>
+    </nav>
+  </header>
+
+  <main id="stage">
+    <canvas id="board"></canvas>
+
+    <div id="zoomctl">
+      <button id="btnZoomIn" type="button" title="Zoom in">+</button>
+      <button id="btnZoomOut" type="button" title="Zoom out">&minus;</button>
+      <button id="btnZoomFit" type="button" title="Fit the whole board">Fit</button>
+    </div>
+
+    <section id="inspector" hidden>
+      <button id="btnCloseInspector" type="button" class="close" title="Close">&times;</button>
+      <canvas id="inspectorCanvas"></canvas>
+      <div class="meta">
+        <div class="name" id="inspName">&nbsp;</div>
+        <div class="field" id="inspField">&nbsp;</div>
+        <label class="slider">
+          <span>dark</span>
+          <input id="stretch" type="range" min="0" max="1" step="0.005" value="0.15"
+                 aria-label="Brightness / stretch">
+          <span>bright</span>
+        </label>
+        <div class="coords" id="inspCoords">&nbsp;</div>
+        <p class="tip" id="inspTip">Brighten it until you can see the galaxy, then drag it onto the sky.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="trayWrap">
+    <div id="trayHead">
+      <span id="trayCount"></span>
+      <span class="hint">tap a piece to develop it &middot; drag it onto the sky</span>
+    </div>
+    <div id="tray"></div>
+  </footer>
+</div>
+
+<div id="loader">
+  <div class="lbox">
+    <div class="ring"></div>
+    <p id="loadMsg">Loading the sky&hellip;</p>
+    <div class="bar"><i id="loadBar"></i></div>
+  </div>
+</div>
+
+<div id="help" class="overlay" hidden>
+  <div class="sheet">
+    <h2>How to play</h2>
+    <p>Each piece is a real ALMA image of a gravitationally lensed galaxy, blown
+       up <strong>1300&times;</strong> so you can see it &mdash; and it starts
+       badly stretched, so slide it brighter until the ring or arc appears.</p>
+    <p>Every one of them sits on a source in the Herschel/SPIRE maps below &mdash;
+       but Herschel's beam is far too coarse to tell them apart, so the board
+       shows each unfound galaxy as a <em>faint preview</em> at its true spot.
+       Match the shape, drag the piece there, and it clicks into place.</p>
+    <p><em>Coordinates</em> draws the RA/Dec grid and puts each piece's sky
+       position in its panel &mdash; the astronomer's way to find it.
+       <em>Positions</em> just rings the spots that are still empty.
+       Scroll or pinch to zoom; drag empty sky to pan.</p>
+    <button id="btnHelpClose" type="button">Start hunting</button>
+  </div>
+</div>
+
+<div id="done" class="overlay" hidden>
+  <div class="sheet">
+    <h2>Board complete</h2>
+    <p id="doneMsg"></p>
+    <p>You have just rebuilt the ALMA snapshot survey on the Herschel sky &mdash;
+       every piece back where the telescope found it.</p>
+    <button id="btnDoneClose" type="button">Admire the board</button>
+  </div>
+</div>
+
+<noscript><p style="color:#ccc;font:16px system-ui;padding:2rem">This game needs JavaScript.</p></noscript>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

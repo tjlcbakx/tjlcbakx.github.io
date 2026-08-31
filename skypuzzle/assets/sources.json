@@ -1,0 +1,827 @@
+{
+ "sigma_lo": -2.0,
+ "sigma_hi": 40.0,
+ "magnification": 1300,
+ "sources": [
+  {
+   "name": "HELMS4",
+   "field": "HERMES",
+   "x_deg": 25.657,
+   "y_deg": 24.806,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HELMS4.png",
+   "px": 120,
+   "peak_sigma": 69.8
+  },
+  {
+   "name": "HELMS5",
+   "field": "HERMES",
+   "x_deg": 41.485,
+   "y_deg": 19.172,
+   "r_deg": 0.755,
+   "img": "assets/cutouts/HELMS5.png",
+   "px": 210,
+   "peak_sigma": 89.9
+  },
+  {
+   "name": "HELMS8",
+   "field": "HERMES",
+   "x_deg": 24.891,
+   "y_deg": 26.916,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HELMS8.png",
+   "px": 120,
+   "peak_sigma": 44.5
+  },
+  {
+   "name": "HELMS9",
+   "field": "HERMES",
+   "x_deg": 24.853,
+   "y_deg": 25.464,
+   "r_deg": 0.794,
+   "img": "assets/cutouts/HELMS9.png",
+   "px": 220,
+   "peak_sigma": 11.1
+  },
+  {
+   "name": "HELMS10",
+   "field": "HERMES",
+   "x_deg": 23.456,
+   "y_deg": 29.722,
+   "r_deg": 0.53,
+   "img": "assets/cutouts/HELMS10.png",
+   "px": 146,
+   "peak_sigma": 59.5
+  },
+  {
+   "name": "HELMS11",
+   "field": "HERMES",
+   "x_deg": 26.827,
+   "y_deg": 23.907,
+   "r_deg": 0.53,
+   "img": "assets/cutouts/HELMS11.png",
+   "px": 146,
+   "peak_sigma": 49.8
+  },
+  {
+   "name": "HELMS15",
+   "field": "HERMES",
+   "x_deg": 43.469,
+   "y_deg": 17.926,
+   "r_deg": 0.748,
+   "img": "assets/cutouts/HELMS15.png",
+   "px": 208,
+   "peak_sigma": 18.4
+  },
+  {
+   "name": "HELMS22",
+   "field": "HERMES",
+   "x_deg": 32.592,
+   "y_deg": 27.937,
+   "r_deg": 0.682,
+   "img": "assets/cutouts/HELMS22.png",
+   "px": 188,
+   "peak_sigma": 77.9
+  },
+  {
+   "name": "HELMS25",
+   "field": "HERMES",
+   "x_deg": 26.349,
+   "y_deg": 22.448,
+   "r_deg": 0.525,
+   "img": "assets/cutouts/HELMS25.png",
+   "px": 146,
+   "peak_sigma": 37.5
+  },
+  {
+   "name": "HELMS27",
+   "field": "HERMES",
+   "x_deg": 27.208,
+   "y_deg": 22.394,
+   "r_deg": 0.526,
+   "img": "assets/cutouts/HELMS27.png",
+   "px": 146,
+   "peak_sigma": 100.8
+  },
+  {
+   "name": "HELMS28",
+   "field": "HERMES",
+   "x_deg": 29.161,
+   "y_deg": 21.393,
+   "r_deg": 0.512,
+   "img": "assets/cutouts/HELMS28.png",
+   "px": 142,
+   "peak_sigma": 25.7
+  },
+  {
+   "name": "HELMS29",
+   "field": "HERMES",
+   "x_deg": 31.113,
+   "y_deg": 21.578,
+   "r_deg": 0.518,
+   "img": "assets/cutouts/HELMS29.png",
+   "px": 144,
+   "peak_sigma": 85.2
+  },
+  {
+   "name": "HELMS39",
+   "field": "HERMES",
+   "x_deg": 29.3,
+   "y_deg": 25.62,
+   "r_deg": 0.532,
+   "img": "assets/cutouts/HELMS39.png",
+   "px": 148,
+   "peak_sigma": 56.4
+  },
+  {
+   "name": "HELMS41",
+   "field": "HERMES",
+   "x_deg": 42.56,
+   "y_deg": 20.144,
+   "r_deg": 0.753,
+   "img": "assets/cutouts/HELMS41.png",
+   "px": 208,
+   "peak_sigma": 18.9
+  },
+  {
+   "name": "HELMS46",
+   "field": "HERMES",
+   "x_deg": 25.107,
+   "y_deg": 31.088,
+   "r_deg": 0.536,
+   "img": "assets/cutouts/HELMS46.png",
+   "px": 148,
+   "peak_sigma": 24.2
+  },
+  {
+   "name": "HELMS48",
+   "field": "HERMES",
+   "x_deg": 44.56,
+   "y_deg": 20.261,
+   "r_deg": 0.761,
+   "img": "assets/cutouts/HELMS48.png",
+   "px": 210,
+   "peak_sigma": 55.1
+  },
+  {
+   "name": "HELMS55",
+   "field": "HERMES",
+   "x_deg": 44.568,
+   "y_deg": 22.823,
+   "r_deg": 0.777,
+   "img": "assets/cutouts/HELMS55.png",
+   "px": 216,
+   "peak_sigma": 24.2
+  },
+  {
+   "name": "HERS1",
+   "field": "HERMES",
+   "x_deg": 4.278,
+   "y_deg": 23.766,
+   "r_deg": 1.259,
+   "img": "assets/cutouts/HERS1.png",
+   "px": 256,
+   "peak_sigma": 67.7
+  },
+  {
+   "name": "HERS2",
+   "field": "HERMES",
+   "x_deg": 16.526,
+   "y_deg": 23.048,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HERS2.png",
+   "px": 126,
+   "peak_sigma": 43.3
+  },
+  {
+   "name": "HERS4",
+   "field": "HERMES",
+   "x_deg": 17.533,
+   "y_deg": 23.419,
+   "r_deg": 0.511,
+   "img": "assets/cutouts/HERS4.png",
+   "px": 142,
+   "peak_sigma": 26.0
+  },
+  {
+   "name": "HERS11",
+   "field": "HERMES",
+   "x_deg": 22.003,
+   "y_deg": 22.496,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HERS11.png",
+   "px": 124,
+   "peak_sigma": 91.8
+  },
+  {
+   "name": "HERS13",
+   "field": "HERMES",
+   "x_deg": 15.363,
+   "y_deg": 24.79,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HERS13.png",
+   "px": 116,
+   "peak_sigma": 37.3
+  },
+  {
+   "name": "HERS15",
+   "field": "HERMES",
+   "x_deg": 16.421,
+   "y_deg": 24.082,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HERS15.png",
+   "px": 116,
+   "peak_sigma": 13.1
+  },
+  {
+   "name": "HERS16",
+   "field": "HERMES",
+   "x_deg": 3.056,
+   "y_deg": 24.49,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HERS16.png",
+   "px": 116,
+   "peak_sigma": 47.2
+  },
+  {
+   "name": "HerBS-4",
+   "field": "GAMA09",
+   "x_deg": 33.486,
+   "y_deg": 48.29,
+   "r_deg": 0.651,
+   "img": "assets/cutouts/HerBS-4.png",
+   "px": 180,
+   "peak_sigma": 80.3
+  },
+  {
+   "name": "HerBS-5",
+   "field": "NGP",
+   "x_deg": 13.882,
+   "y_deg": 37.708,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HerBS-5.png",
+   "px": 128,
+   "peak_sigma": 44.9
+  },
+  {
+   "name": "HerBS-6",
+   "field": "NGP",
+   "x_deg": 7.771,
+   "y_deg": 42.847,
+   "r_deg": 0.706,
+   "img": "assets/cutouts/HerBS-6.png",
+   "px": 196,
+   "peak_sigma": 37.1
+  },
+  {
+   "name": "HerBS-7",
+   "field": "NGP",
+   "x_deg": 6.778,
+   "y_deg": 43.491,
+   "r_deg": 0.705,
+   "img": "assets/cutouts/HerBS-7.png",
+   "px": 196,
+   "peak_sigma": 78.6
+  },
+  {
+   "name": "HerBS-9",
+   "field": "NGP",
+   "x_deg": 14.967,
+   "y_deg": 40.35,
+   "r_deg": 0.597,
+   "img": "assets/cutouts/HerBS-9.png",
+   "px": 166,
+   "peak_sigma": 46.2
+  },
+  {
+   "name": "HerBS-10",
+   "field": "GAMA12",
+   "x_deg": 32.34,
+   "y_deg": 37.362,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HerBS-10.png",
+   "px": 116,
+   "peak_sigma": 56.0
+  },
+  {
+   "name": "HerBS-12",
+   "field": "NGP",
+   "x_deg": 6.525,
+   "y_deg": 39.083,
+   "r_deg": 0.66,
+   "img": "assets/cutouts/HerBS-12.png",
+   "px": 182,
+   "peak_sigma": 64.3
+  },
+  {
+   "name": "HerBS-13",
+   "field": "GAMA15",
+   "x_deg": 45.541,
+   "y_deg": 49.264,
+   "r_deg": 0.962,
+   "img": "assets/cutouts/HerBS-13.png",
+   "px": 256,
+   "peak_sigma": 54.4
+  },
+  {
+   "name": "HerBS-14",
+   "field": "SGP",
+   "x_deg": 4.888,
+   "y_deg": 9.584,
+   "r_deg": 0.778,
+   "img": "assets/cutouts/HerBS-14.png",
+   "px": 216,
+   "peak_sigma": 61.3
+  },
+  {
+   "name": "HerBS-17",
+   "field": "SGP",
+   "x_deg": 33.255,
+   "y_deg": 7.523,
+   "r_deg": 0.532,
+   "img": "assets/cutouts/HerBS-17.png",
+   "px": 148,
+   "peak_sigma": 77.1
+  },
+  {
+   "name": "HerBS-18",
+   "field": "SGP",
+   "x_deg": 33.509,
+   "y_deg": 5.243,
+   "r_deg": 0.543,
+   "img": "assets/cutouts/HerBS-18.png",
+   "px": 150,
+   "peak_sigma": 68.2
+  },
+  {
+   "name": "HerBS-19",
+   "field": "GAMA09",
+   "x_deg": 25.402,
+   "y_deg": 47.402,
+   "r_deg": 0.89,
+   "img": "assets/cutouts/HerBS-19.png",
+   "px": 246,
+   "peak_sigma": 20.1
+  },
+  {
+   "name": "HerBS-20",
+   "field": "NGP",
+   "x_deg": 7.635,
+   "y_deg": 45.36,
+   "r_deg": 0.687,
+   "img": "assets/cutouts/HerBS-20.png",
+   "px": 190,
+   "peak_sigma": 17.1
+  },
+  {
+   "name": "HerBS-21",
+   "field": "SGP",
+   "x_deg": 29.254,
+   "y_deg": 7.24,
+   "r_deg": 1.127,
+   "img": "assets/cutouts/HerBS-21.png",
+   "px": 256,
+   "peak_sigma": 37.5
+  },
+  {
+   "name": "HerBS-22",
+   "field": "SGP",
+   "x_deg": 20.282,
+   "y_deg": 3.606,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HerBS-22.png",
+   "px": 128,
+   "peak_sigma": 36.2
+  },
+  {
+   "name": "HerBS-23",
+   "field": "SGP",
+   "x_deg": 8.701,
+   "y_deg": 9.499,
+   "r_deg": 0.73,
+   "img": "assets/cutouts/HerBS-23.png",
+   "px": 202,
+   "peak_sigma": 57.8
+  },
+  {
+   "name": "HerBS-25",
+   "field": "SGP",
+   "x_deg": 26.238,
+   "y_deg": 5.354,
+   "r_deg": 0.522,
+   "img": "assets/cutouts/HerBS-25.png",
+   "px": 144,
+   "peak_sigma": 22.0
+  },
+  {
+   "name": "HerBS-27",
+   "field": "SGP",
+   "x_deg": 10.059,
+   "y_deg": 4.295,
+   "r_deg": 0.728,
+   "img": "assets/cutouts/HerBS-27.png",
+   "px": 202,
+   "peak_sigma": 66.1
+  },
+  {
+   "name": "HerBS-28",
+   "field": "SGP",
+   "x_deg": 36.932,
+   "y_deg": 3.266,
+   "r_deg": 0.614,
+   "img": "assets/cutouts/HerBS-28.png",
+   "px": 170,
+   "peak_sigma": 48.9
+  },
+  {
+   "name": "HerBS-30",
+   "field": "NGP",
+   "x_deg": 8.083,
+   "y_deg": 48.38,
+   "r_deg": 0.736,
+   "img": "assets/cutouts/HerBS-30.png",
+   "px": 204,
+   "peak_sigma": 9.6
+  },
+  {
+   "name": "HerBS-34",
+   "field": "NGP",
+   "x_deg": 5.63,
+   "y_deg": 40.183,
+   "r_deg": 0.665,
+   "img": "assets/cutouts/HerBS-34.png",
+   "px": 184,
+   "peak_sigma": 35.5
+  },
+  {
+   "name": "HerBS-39",
+   "field": "SGP",
+   "x_deg": 32.511,
+   "y_deg": 5.604,
+   "r_deg": 0.562,
+   "img": "assets/cutouts/HerBS-39.png",
+   "px": 156,
+   "peak_sigma": 55.3
+  },
+  {
+   "name": "HerBS-47",
+   "field": "SGP",
+   "x_deg": 40.217,
+   "y_deg": 6.283,
+   "r_deg": 0.635,
+   "img": "assets/cutouts/HerBS-47.png",
+   "px": 176,
+   "peak_sigma": 21.1
+  },
+  {
+   "name": "HerBS-52",
+   "field": "NGP",
+   "x_deg": 15.001,
+   "y_deg": 39.925,
+   "r_deg": 0.677,
+   "img": "assets/cutouts/HerBS-52.png",
+   "px": 188,
+   "peak_sigma": 16.5
+  },
+  {
+   "name": "HerBS-60",
+   "field": "SGP",
+   "x_deg": 13.68,
+   "y_deg": 10.377,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HerBS-60.png",
+   "px": 126,
+   "peak_sigma": 18.6
+  },
+  {
+   "name": "HerBS-64",
+   "field": "NGP",
+   "x_deg": 12.841,
+   "y_deg": 39.719,
+   "r_deg": 0.485,
+   "img": "assets/cutouts/HerBS-64.png",
+   "px": 134,
+   "peak_sigma": 37.4
+  },
+  {
+   "name": "HerBS-67",
+   "field": "SGP",
+   "x_deg": 42.502,
+   "y_deg": 5.199,
+   "r_deg": 0.634,
+   "img": "assets/cutouts/HerBS-67.png",
+   "px": 176,
+   "peak_sigma": 34.2
+  },
+  {
+   "name": "HerBS-73",
+   "field": "SGP",
+   "x_deg": 6.973,
+   "y_deg": 4.445,
+   "r_deg": 0.748,
+   "img": "assets/cutouts/HerBS-73.png",
+   "px": 208,
+   "peak_sigma": 94.0
+  },
+  {
+   "name": "HerBS-82",
+   "field": "GAMA12",
+   "x_deg": 23.263,
+   "y_deg": 40.241,
+   "r_deg": 0.646,
+   "img": "assets/cutouts/HerBS-82.png",
+   "px": 180,
+   "peak_sigma": 13.8
+  },
+  {
+   "name": "HerBS-89",
+   "field": "NGP",
+   "x_deg": 9.58,
+   "y_deg": 42.305,
+   "r_deg": 0.735,
+   "img": "assets/cutouts/HerBS-89.png",
+   "px": 204,
+   "peak_sigma": 36.5
+  },
+  {
+   "name": "HerBS-90",
+   "field": "SGP",
+   "x_deg": 13.769,
+   "y_deg": 8.056,
+   "r_deg": 0.614,
+   "img": "assets/cutouts/HerBS-90.png",
+   "px": 170,
+   "peak_sigma": 58.5
+  },
+  {
+   "name": "HerBS-93",
+   "field": "SGP",
+   "x_deg": 28.5,
+   "y_deg": 2.408,
+   "r_deg": 0.473,
+   "img": "assets/cutouts/HerBS-93.png",
+   "px": 130,
+   "peak_sigma": 23.3
+  },
+  {
+   "name": "HerBS-96",
+   "field": "GAMA12",
+   "x_deg": 31.686,
+   "y_deg": 37.836,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HerBS-96.png",
+   "px": 116,
+   "peak_sigma": 9.2
+  },
+  {
+   "name": "HerBS-113",
+   "field": "NGP",
+   "x_deg": 10.456,
+   "y_deg": 46.744,
+   "r_deg": 0.743,
+   "img": "assets/cutouts/HerBS-113.png",
+   "px": 206,
+   "peak_sigma": 39.7
+  },
+  {
+   "name": "HerBS-121",
+   "field": "SGP",
+   "x_deg": 43.751,
+   "y_deg": 3.349,
+   "r_deg": 0.634,
+   "img": "assets/cutouts/HerBS-121.png",
+   "px": 176,
+   "peak_sigma": 14.5
+  },
+  {
+   "name": "HerBS-129",
+   "field": "NGP",
+   "x_deg": 12.929,
+   "y_deg": 40.15,
+   "r_deg": 0.487,
+   "img": "assets/cutouts/HerBS-129.png",
+   "px": 134,
+   "peak_sigma": 18.6
+  },
+  {
+   "name": "HerBS-149",
+   "field": "NGP",
+   "x_deg": 4.703,
+   "y_deg": 45.765,
+   "r_deg": 0.725,
+   "img": "assets/cutouts/HerBS-149.png",
+   "px": 200,
+   "peak_sigma": 21.8
+  },
+  {
+   "name": "HerBS-154",
+   "field": "NGP",
+   "x_deg": 8.096,
+   "y_deg": 46.948,
+   "r_deg": 0.707,
+   "img": "assets/cutouts/HerBS-154.png",
+   "px": 196,
+   "peak_sigma": 16.9
+  },
+  {
+   "name": "HerBS-155",
+   "field": "SGP",
+   "x_deg": 25.163,
+   "y_deg": 5.706,
+   "r_deg": 2.167,
+   "img": "assets/cutouts/HerBS-155.png",
+   "px": 256,
+   "peak_sigma": 11.4
+  },
+  {
+   "name": "HerBS-160",
+   "field": "SGP",
+   "x_deg": 10.945,
+   "y_deg": 6.096,
+   "r_deg": 0.717,
+   "img": "assets/cutouts/HerBS-160.png",
+   "px": 198,
+   "peak_sigma": 29.6
+  },
+  {
+   "name": "HerBS-168",
+   "field": "SGP",
+   "x_deg": 40.662,
+   "y_deg": 7.111,
+   "r_deg": 0.634,
+   "img": "assets/cutouts/HerBS-168.png",
+   "px": 176,
+   "peak_sigma": 26.4
+  },
+  {
+   "name": "HerBS-170",
+   "field": "SGP",
+   "x_deg": 24.861,
+   "y_deg": 4.763,
+   "r_deg": 0.471,
+   "img": "assets/cutouts/HerBS-170.png",
+   "px": 130,
+   "peak_sigma": 16.2
+  },
+  {
+   "name": "HerBS-177",
+   "field": "GAMA12",
+   "x_deg": 27.559,
+   "y_deg": 39.975,
+   "r_deg": 0.679,
+   "img": "assets/cutouts/HerBS-177.png",
+   "px": 126,
+   "peak_sigma": 70.7
+  },
+  {
+   "name": "HerBS-179",
+   "field": "GAMA12",
+   "x_deg": 27.362,
+   "y_deg": 36.905,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/HerBS-179.png",
+   "px": 120,
+   "peak_sigma": 30.4
+  },
+  {
+   "name": "HerBS-185",
+   "field": "GAMA09",
+   "x_deg": 20.163,
+   "y_deg": 45.912,
+   "r_deg": 0.781,
+   "img": "assets/cutouts/HerBS-185.png",
+   "px": 216,
+   "peak_sigma": 29.4
+  },
+  {
+   "name": "HerBS-191",
+   "field": "NGP",
+   "x_deg": 15.777,
+   "y_deg": 46.513,
+   "r_deg": 0.555,
+   "img": "assets/cutouts/HerBS-191.png",
+   "px": 154,
+   "peak_sigma": 13.9
+  },
+  {
+   "name": "Neg4",
+   "field": "NGP",
+   "x_deg": 13.564,
+   "y_deg": 36.866,
+   "r_deg": 0.469,
+   "img": "assets/cutouts/Neg4.png",
+   "px": 126,
+   "peak_sigma": 12.6
+  },
+  {
+   "name": "Neg5",
+   "field": "NGP",
+   "x_deg": 5.915,
+   "y_deg": 41.024,
+   "r_deg": 0.701,
+   "img": "assets/cutouts/Neg5.png",
+   "px": 194,
+   "peak_sigma": 54.2
+  },
+  {
+   "name": "Neg7",
+   "field": "NGP",
+   "x_deg": 6.416,
+   "y_deg": 39.958,
+   "r_deg": 0.698,
+   "img": "assets/cutouts/Neg7.png",
+   "px": 194,
+   "peak_sigma": 14.1
+  },
+  {
+   "name": "HerBS-59",
+   "field": "GAMA09",
+   "x_deg": 22.929,
+   "y_deg": 45.855,
+   "r_deg": 0.769,
+   "img": "assets/cutouts/HerBS-59.png",
+   "px": 212,
+   "peak_sigma": 19.8
+  },
+  {
+   "name": "HerBS-108",
+   "field": "GAMA09",
+   "x_deg": 31.627,
+   "y_deg": 46.057,
+   "r_deg": 0.65,
+   "img": "assets/cutouts/HerBS-108.png",
+   "px": 180,
+   "peak_sigma": 11.4
+  },
+  {
+   "name": "HerBS-188",
+   "field": "GAMA09",
+   "x_deg": 30.45,
+   "y_deg": 49.584,
+   "r_deg": 0.649,
+   "img": "assets/cutouts/HerBS-188.png",
+   "px": 180,
+   "peak_sigma": 35.2
+  },
+  {
+   "name": "HerBS-2",
+   "field": "GAMA12",
+   "x_deg": 29.541,
+   "y_deg": 38.938,
+   "r_deg": 1.117,
+   "img": "assets/cutouts/HerBS-2.png",
+   "px": 256,
+   "peak_sigma": 52.7
+  },
+  {
+   "name": "HerBS-61",
+   "field": "GAMA12",
+   "x_deg": 25.835,
+   "y_deg": 37.451,
+   "r_deg": 0.646,
+   "img": "assets/cutouts/HerBS-61.png",
+   "px": 178,
+   "peak_sigma": 49.2
+  },
+  {
+   "name": "HerBS-38",
+   "field": "GAMA15",
+   "x_deg": 40.065,
+   "y_deg": 49.205,
+   "r_deg": 0.752,
+   "img": "assets/cutouts/HerBS-38.png",
+   "px": 208,
+   "peak_sigma": 22.5
+  },
+  {
+   "name": "HerBS-72",
+   "field": "GAMA15",
+   "x_deg": 40.299,
+   "y_deg": 46.627,
+   "r_deg": 0.75,
+   "img": "assets/cutouts/HerBS-72.png",
+   "px": 208,
+   "peak_sigma": 31.3
+  },
+  {
+   "name": "HerBS-78",
+   "field": "GAMA15",
+   "x_deg": 43.131,
+   "y_deg": 48.951,
+   "r_deg": 0.931,
+   "img": "assets/cutouts/HerBS-78.png",
+   "px": 256,
+   "peak_sigma": 61.4
+  },
+  {
+   "name": "HerBS-203",
+   "field": "GAMA15",
+   "x_deg": 46.985,
+   "y_deg": 46.596,
+   "r_deg": 0.997,
+   "img": "assets/cutouts/HerBS-203.png",
+   "px": 256,
+   "peak_sigma": 21.8
+  }
+ ]
+}

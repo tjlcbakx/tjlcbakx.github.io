@@ -1,0 +1,99 @@
+{
+ "board_deg": [
+  53.300000000000004,
+  51.6
+ ],
+ "margin_deg": 0.6,
+ "fields": {
+  "SGP": {
+   "label": "H-ATLAS SGP",
+   "x_deg": 0.6,
+   "y_deg": 1.6,
+   "w_deg": 47.296204992354404,
+   "h_deg": 9.499999999999996,
+   "ra_c": 1.95,
+   "dec_c": -31.55,
+   "cosd": 0.85218387,
+   "img": "assets/fields/SGP.jpg",
+   "px": [
+    1800,
+    362
+   ]
+  },
+  "HERMES": {
+   "label": "HerMES HeLMS + HerS",
+   "x_deg": 0.6,
+   "y_deg": 14.5,
+   "w_deg": 47.69992734876387,
+   "h_deg": 17.8,
+   "ra_c": 12.25,
+   "dec_c": -0.1,
+   "cosd": 0.99999848,
+   "img": "assets/fields/HERMES.jpg",
+   "px": [
+    1800,
+    672
+   ]
+  },
+  "NGP": {
+   "label": "H-ATLAS NGP",
+   "x_deg": 0.6,
+   "y_deg": 35.7,
+   "w_deg": 16.992187178470513,
+   "h_deg": 14.5,
+   "ra_c": 199.6,
+   "dec_c": 28.85,
+   "cosd": 0.87588594,
+   "img": "assets/fields/NGP.jpg",
+   "px": [
+    1800,
+    1536
+   ]
+  },
+  "GAMA09": {
+   "label": "H-ATLAS GAMA09",
+   "x_deg": 19.1,
+   "y_deg": 44.300000000000004,
+   "w_deg": 14.799436461349732,
+   "h_deg": 5.9,
+   "ra_c": 134.7,
+   "dec_c": 0.5,
+   "cosd": 0.99996192,
+   "img": "assets/fields/GAMA09.jpg",
+   "px": [
+    1800,
+    718
+   ]
+  },
+  "GAMA12": {
+   "label": "H-ATLAS GAMA12",
+   "x_deg": 19.1,
+   "y_deg": 35.7,
+   "w_deg": 14.799458777344254,
+   "h_deg": 5.880000000000001,
+   "ra_c": 179.7,
+   "dec_c": -0.49,
+   "cosd": 0.99996343,
+   "img": "assets/fields/GAMA12.jpg",
+   "px": [
+    1800,
+    715
+   ]
+  },
+  "GAMA15": {
+   "label": "H-ATLAS GAMA15",
+   "x_deg": 36.6,
+   "y_deg": 44.4,
+   "w_deg": 14.999596992958244,
+   "h_deg": 5.8,
+   "ra_c": 217.5,
+   "dec_c": 0.42,
+   "cosd": 0.99997313,
+   "img": "assets/fields/GAMA15.jpg",
+   "px": [
+    1800,
+    696
+   ]
+  }
+ }
+}
