@@ -92,7 +92,7 @@ export const CFG = {
 //         default: it is the picture the game is *of*, and it wastes no screen
 // 'sky'   the real celestial sphere, pan through 0h, fields at their true
 //         RA/Dec, over the Milky Way and the constellations (key V)
-export const DEFAULT_VIEW = 'board';
+export const DEFAULT_VIEW = 'sky';
 
 // --- which pieces ------------------------------------------------------------
 // 'standout' the 82 curated stand-out sources (CURATED in export_assets.py) —
