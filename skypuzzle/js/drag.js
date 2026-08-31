@@ -51,8 +51,8 @@ export class Dragger {
     c.addEventListener('pointermove', (e) => {
       if (!this.state.drag) {
         const r = c.getBoundingClientRect();
-        const [bx, by] = this.board.toBoard(e.clientX - r.left, e.clientY - r.top);
-        this.hooks.onHover(this.board.fieldAt(bx, by), bx, by);
+        const [wx, wy] = this.board.toWorld(e.clientX - r.left, e.clientY - r.top);
+        this.hooks.onHover(this.board.fieldAt(wx, wy), wx, wy);
       }
       const p = this.pointers.get(e.pointerId);
       if (!p) return;
@@ -88,7 +88,7 @@ export class Dragger {
     };
     c.addEventListener('pointerup', end);
     c.addEventListener('pointercancel', end);
-    c.addEventListener('pointerleave', () => this.hooks.onHover(null, 0, 0));
+    c.addEventListener('pointerleave', () => this.hooks.onHover(null, null, null));
 
     c.addEventListener('wheel', (e) => {
       e.preventDefault();
@@ -177,17 +177,19 @@ export class Dragger {
                    e.clientY >= rect.top && e.clientY <= rect.bottom;
     if (!inside) { this.hooks.onMiss(d.piece); return; }
 
-    const [bx, by] = this.board.toBoard(e.clientX - rect.left, e.clientY - rect.top);
+    const [wx, wy] = this.board.toWorld(e.clientX - rect.left, e.clientY - rect.top);
+    const layout = this.board.layout;
     const p = d.piece;
-    const dist = Math.hypot(bx - p.x_deg, by - p.y_deg);
 
-    if (dist < snapRadius(p.r_deg)) { this.hooks.onPlace(p); return; }
+    if (layout.dist(wx, wy, p) < snapRadius(p.r_deg)) {
+      this.hooks.onPlace(p);
+      return;
+    }
 
-    // did they land on some *other* source's blob?
-    for (const s of this.state.sources) {
+    // did they land on some *other* source in play?
+    for (const s of this.state.active) {
       if (s === p || this.state.placed.has(s.name)) continue;
-      if (Math.hypot(bx - s.x_deg, by - s.y_deg) <
-          CFG.nearFactor * snapRadius(s.r_deg)) {
+      if (layout.dist(wx, wy, s) < CFG.nearFactor * snapRadius(s.r_deg)) {
         this.hooks.onNearMiss(p);
         return;
       }

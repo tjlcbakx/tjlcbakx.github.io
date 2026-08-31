@@ -1,0 +1,382 @@
+/* style.css — night-sky theme. One stylesheet for the whole game; every
+   interactive inherits these tokens rather than styling itself. */
+
+:root {
+  --bg: #0b0e1a;
+  --panel: #131829;
+  --panel2: #1a2038;
+  --ink: #e6e9f5;
+  --dim: #aab2d0;
+  --accent: #ffb554;   /* single-line orange */
+  --accent2: #61aeff;  /* multi-line blue */
+  --good: #7ee787;
+  --ghost: #ff7b72;
+  --band: #c792ea;
+  --ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 700px at 50% -10%, #17203c 0%, transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+/* --- top bar ------------------------------------------------------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(11, 14, 26, 0.82);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(170, 178, 208, 0.14);
+  font-family: var(--ui);
+  font-size: 0.85rem;
+}
+
+.brand { font-family: Georgia, serif; letter-spacing: 0.01em; }
+
+.backlink {
+  color: var(--dim);
+  text-decoration: none;
+  font-size: 0.82rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(170, 178, 208, 0.3);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.backlink:hover { color: var(--ink); border-color: var(--dim); }
+
+.progress { display: flex; gap: 5px; margin-left: auto; }
+
+.dot {
+  width: 10px; height: 10px; padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(170, 178, 208, 0.5);
+  background: transparent;
+  cursor: pointer;
+}
+.dot.on { background: var(--accent); border-color: var(--accent); }
+.dot.here { box-shadow: 0 0 0 3px rgba(255, 181, 84, 0.25); }
+.dot:disabled { cursor: default; opacity: 0.4; }
+
+.soundbtn {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(170, 178, 208, 0.4);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.soundbtn:hover { border-color: var(--accent); }
+
+/* --- chapters ------------------------------------------------------------ */
+
+main { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem 8rem; }
+
+/* One chapter at a time: only the current section is in the document flow. */
+.chapter { display: none; padding: 1.5rem 0 1rem; }
+.chapter.current { display: block; animation: fade 0.45s ease both; }
+.chapter:focus { outline: none; }
+
+@keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+h1 { font-size: 2.4rem; text-align: center; margin: 1rem 0 0.2rem; line-height: 1.15; }
+h2 { font-size: 1.6rem; margin: 0 0 1rem; }
+h3 { font-size: 1.15rem; margin: 2rem 0 0.5rem; color: var(--accent); }
+
+.subtitle { text-align: center; color: var(--dim); margin-top: 0; font-style: italic; }
+.center { text-align: center; }
+.note { color: var(--dim); font-size: 0.92rem; }
+
+main ol, main ul { padding-left: 1.4rem; }
+main li { margin: 0.45rem 0; }
+.big-numbers { font-size: 1.2rem; color: var(--ink); letter-spacing: 0.02em; }
+.ghost-word { color: var(--ghost); }
+.hl { color: var(--good); }
+.hl2 { color: var(--accent); }
+.hl3 { color: var(--dim); }
+
+a { color: var(--accent2); }
+
+details {
+  margin: 1.4rem 0;
+  padding: 0.6rem 1rem;
+  background: rgba(19, 24, 41, 0.7);
+  border-left: 2px solid rgba(97, 174, 255, 0.5);
+  border-radius: 0 8px 8px 0;
+}
+details summary { cursor: pointer; color: var(--accent2); font-family: var(--ui); font-size: 0.9rem; }
+details p { font-size: 0.95rem; margin: 0.7rem 0 0.2rem; }
+
+/* --- interactives -------------------------------------------------------- */
+
+.interactive {
+  background: var(--panel);
+  border: 1px solid rgba(170, 178, 208, 0.1);
+  border-radius: 14px;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+
+/* An interactive that has not been mounted yet reserves roughly the space it
+   will take, so the page length is stable and scrolling never yanks the
+   reader around. Once mounted, its content sets the height (and once it has
+   been mounted, base.js freezes the exact height it had). */
+.interactive:empty { min-height: 420px; }
+.interactive.celebrate { animation: pop 0.6s ease; }
+@keyframes pop { 50% { box-shadow: 0 0 0 6px rgba(126, 231, 135, 0.25); } }
+
+canvas.stage {
+  width: 100%;
+  height: 320px;
+  display: block;
+  touch-action: none;
+  border-radius: 8px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+  font-family: var(--ui);
+  font-size: 0.88rem;
+}
+.controls.stack { flex-direction: column; align-items: stretch; }
+.controls.extra { margin-top: 0.5rem; }
+
+.slider { display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 260px; }
+.slider-label { color: var(--dim); white-space: nowrap; }
+.slider input[type='range'] { flex: 1; min-width: 120px; accent-color: var(--accent); }
+.readout {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  min-width: 5.5ch;
+  text-align: right;
+}
+
+button {
+  font-family: var(--ui);
+  cursor: pointer;
+}
+
+.btn {
+  background: var(--accent);
+  color: #201200;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.88rem;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.small { padding: 0.35rem 0.6rem; }
+.btn.wide { flex: 1 1 40%; }
+.btn.big { font-size: 1.05rem; padding: 0.7rem 1.4rem; border-radius: 10px; }
+.btn.big.done { background: var(--good); }
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(170, 178, 208, 0.5);
+}
+.btn.ghost:hover { border-color: var(--accent); }
+.btn.danger { background: transparent; color: var(--ghost); border: 1px solid var(--ghost); }
+
+.status {
+  min-height: 3.2em;
+  color: var(--dim);
+  font-family: var(--ui);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-top: 0.7rem;
+}
+.status .cue { color: var(--accent); }
+
+/* the "what am I supposed to do here" line above a chapter's controls */
+.task {
+  flex: 1 1 100%;
+  margin: 0.4rem 0 0.1rem;
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.chip {
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(97, 174, 255, 0.15);
+  border: 1px solid rgba(97, 174, 255, 0.4);
+  color: var(--ink);
+}
+
+/* --- the sandbox score --------------------------------------------------- */
+
+.scorebar {
+  display: flex;
+  height: 30px;
+  margin-top: 0.9rem;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--panel2);
+  font-family: var(--ui);
+  font-size: 0.75rem;
+}
+.scorebar .seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b0e1a;
+  transition: width 0.25s ease;
+  white-space: nowrap;
+}
+.seg.robust { background: var(--good); }
+.seg.ambiguous { background: var(--accent); }
+.seg.silent { background: rgba(140, 148, 175, 0.55); color: var(--ink); }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin-top: 0.5rem;
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  color: var(--dim);
+}
+.legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 0.35rem; }
+.sw.robust { background: var(--good); }
+.sw.ambiguous { background: var(--accent); }
+.sw.silent { background: rgba(140, 148, 175, 0.55); }
+
+/* --- chapter navigation -------------------------------------------------- */
+
+.chapter-end {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.2rem 0 0.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(170, 178, 208, 0.12);
+}
+.chapter-end .continue { margin-left: auto; order: 2; }
+.chapter-end .skip { order: 3; }
+
+.back {
+  background: none;
+  border: 1px solid rgba(170, 178, 208, 0.3);
+  color: var(--dim);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  order: 1;
+}
+.back:hover { color: var(--ink); border-color: var(--dim); }
+.continue {
+  background: rgba(170, 178, 208, 0.16);
+  color: var(--ink);
+  border: 1px solid rgba(170, 178, 208, 0.35);
+  border-radius: 999px;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.95rem;
+}
+.continue.ready {
+  background: var(--accent);
+  color: #201200;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0 rgba(255, 181, 84, 0.5);
+  animation: nudge 2.4s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 181, 84, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 181, 84, 0); }
+}
+.continue:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.skip {
+  background: none;
+  border: none;
+  color: var(--dim);
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  opacity: 0.75;
+}
+.skip:hover { color: var(--ink); }
+
+/* --- small screens ------------------------------------------------------- */
+
+@media (max-width: 620px) {
+  body { font-size: 17px; }
+  main { padding: 1rem 0.8rem 6rem; }
+  h1 { font-size: 1.9rem; }
+  canvas.stage { height: 260px !important; }
+  .rsg-stage, .sandbox-stage { height: 320px !important; }
+  .slider { min-width: 100%; }
+  .btn.wide { flex: 1 1 100%; }
+  .brand { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .chapter, .continue.ready { animation: none; }
+}
+
+/* the sandbox's headline number */
+.bigscore {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.9rem;
+  font-family: var(--ui);
+}
+.score-value { font-size: 2rem; color: var(--good); font-variant-numeric: tabular-nums; }
+.score-unit { color: var(--dim); font-size: 0.9rem; }
+.score-note { color: var(--dim); font-size: 0.78rem; flex: 1 1 100%; }
+
+
+/* --- served-over-file:// warning ----------------------------------------- */
+
+.filewarn {
+  margin: 3rem auto;
+  max-width: 640px;
+  padding: 1.2rem 1.4rem;
+  background: #1a1226;
+  border: 1px solid var(--ghost);
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.filewarn h2 { font-family: Georgia, serif; font-size: 1.2rem; margin: 0 0 0.6rem; }
+.filewarn code {
+  display: block;
+  margin: 0.7rem 0;
+  padding: 0.7rem 0.9rem;
+  background: #0b0e1a;
+  border-radius: 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  user-select: all;
+}
+.filewarn p { margin: 0.5rem 0; }

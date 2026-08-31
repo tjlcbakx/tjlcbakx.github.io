@@ -85,19 +85,117 @@ body { overflow: hidden; }
   font-size: 12px;
   font-variant-numeric: tabular-nums;
   min-width: 0;
+  flex: 0 1 auto;          /* the transient message yields space first ... */
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis; /* ... and says so, instead of cutting mid-word */
 }
 
 #progress {
   font-size: 12px;
   color: var(--dim);
+  flex: 0 0 auto;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 #progress strong { color: var(--ink); font-size: 14px; }
 
-#controls { display: flex; gap: 6px; }
+/* the streak counter: quiet next to the progress, loud for a moment when a
+   run ends, so a broken streak is felt without a dialog */
+#streak {
+  font-size: 12px;
+  flex: 0 0 auto;
+  color: var(--dim);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #16161f;
+  transition: color 200ms, border-color 200ms, background 200ms;
+}
+#streak strong { color: #7fd8e8; font-size: 14px; }
+#streak #streakBest { color: #6a6a75; }
+#streak #streakBest:not(:empty)::before { content: ' \00b7 '; }
+#streak.hot { border-color: #2f6f7d; background: #16232a; }
+#streak.hot strong { color: #a8ecf7; }
+#streak.lost { animation: streakLost 900ms ease-out; }
+@keyframes streakLost {
+  0%   { color: #e88f8f; border-color: #6d3333; background: #26171a; }
+  100% { color: var(--dim); border-color: var(--line); background: #16161f; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #streak.lost { animation: none; }
+}
+
+#controls { display: flex; gap: 6px; flex: 0 0 auto; }
+
+/* --- options menu --------------------------------------------------------
+   The header used to carry every switch in the game, which on a laptop left
+   no room for the readout and on a phone wrapped to two rows. Only the view
+   toggle, help and reset stay outside; the rest live in here. */
+
+#optWrap { position: relative; }
+
+#options {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  min-width: 246px;
+  max-width: calc(100vw - 20px);
+  padding: 6px;
+  background: #14141c;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+}
+
+#options .grp {
+  margin: 6px 8px 3px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6a6a75;
+}
+#options .grp:first-child { margin-top: 2px; }
+
+#options .opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  padding: 6px 8px;
+  color: var(--dim);
+}
+#options .opt .lab { flex: 1; }
+#options .opt:hover { background: #20202b; color: var(--ink); }
+#options .opt kbd {
+  font: inherit;
+  font-size: 10px;
+  color: #5f5f6b;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+  min-width: 16px;
+  text-align: center;
+}
+/* a fixed tick slot, so the labels line up whatever their state */
+#options .opt::before {
+  content: '';
+  width: 12px;
+  font-size: 11px;
+  color: #7fd8e8;
+}
+#options .opt[aria-pressed="true"] { color: var(--ink); }
+#options .opt[aria-pressed="true"]::before { content: '\2713'; }
+/* the piece-set row is a choice, not a checkbox: its label carries the state */
+#options .opt.cycle::before { content: '\203a'; color: #6a6a75; }
+#options .opt.cycle .lab { color: var(--ink); }
 
 button {
   font: inherit;
@@ -344,7 +442,12 @@ button.warn { color: #ffb4a8; border-color: #4a2a26; }
 #topbar h1 { font-size: 13px; }
   #topbar h1 .sub { display: none; }
   #readout { order: 5; flex-basis: 100%; }
+  #streak { font-size: 11px; padding: 1px 7px; }
+  #streak strong { font-size: 13px; }
+  #streak .word { display: none; }      /* just "7 · best 11" on a phone */
+  #streak #streakBest:not(:empty)::before { content: ' \00b7 '; }
   #controls { gap: 5px; }
+  #options { min-width: 0; }
   #controls button { padding: 5px 8px; }
   #inspector {
     left: 8px;

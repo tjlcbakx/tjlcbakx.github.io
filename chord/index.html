@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listening for a Cosmic Chord</title>
+<meta name="description" content="Find a galaxy's redshift by ear. A playable explanation of the (sub)mm redshift-search method of Bakx &amp; Dannerbauer (2022).">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Link preview. Absolute URLs, as the scrapers require. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tombak.xyz/chord/">
+<meta property="og:title" content="Listening for a Cosmic Chord">
+<meta property="og:description" content="Find a galaxy's redshift by ear. A playable explanation of the (sub)mm redshift-search method of Bakx &amp; Dannerbauer (2022).">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- inline favicon: a tuning-fork-ish glyph, no file to lose in a copy -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0e1a'/%3E%3Cg stroke='%23ffb554' stroke-width='2.4' fill='none' stroke-linecap='round'%3E%3Cpath d='M11 6v9a5 5 0 0 0 10 0V6'/%3E%3Cpath d='M16 20v6'/%3E%3C/g%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ES modules are blocked over file:// by every browser, so opening this file
+     directly leaves every canvas blank. This script is deliberately NOT a
+     module, so it still runs there and says what to do about it. -->
+<script>
+if (location.protocol === 'file:') {
+  document.addEventListener('DOMContentLoaded', function () {
+    // the folder this file sits in, so the instructions are copy-pasteable
+    var dir = decodeURIComponent(location.pathname).replace(/\/[^/]*$/, '');
+    document.body.innerHTML =
+      '<div class="filewarn">'
+      + '<h2>This page has to be served, not opened.</h2>'
+      + '<p>Everything you should be seeing is drawn by JavaScript modules, and '
+      + 'every browser refuses to load modules from a file:// address — so opening '
+      + 'index.html directly leaves the panels empty. Nothing is broken.</p>'
+      + '<p>In a terminal, run:</p>'
+      + '<code>cd "' + dir + '" &amp;&amp; python3 serve.py</code>'
+      + '<p>then open <b>http://localhost:8000</b> — that address works in Safari '
+      + 'and Chrome alike. Any static file server will do; once the game is on '
+      + 'GitHub Pages, this warning can never appear again.</p>'
+      + '</div>';
+  });
+}
+</script>
+
+<header class="topbar">
+  <a id="backlink" class="backlink" hidden>← back</a>
+  <span class="brand">Listening for a Cosmic Chord</span>
+  <nav id="progress" class="progress" aria-label="chapter progress"></nav>
+  <button id="soundbtn" class="soundbtn" aria-pressed="false">🔈 sound off</button>
+</header>
+
+<main>
+
+<!-- ==================== Ch. 0 ==================== -->
+<section class="chapter" data-chapter="0" data-title="Turn your sound on">
+  <h1>Listening for a Cosmic Chord</h1>
+  <p class="subtitle">Find a galaxy by ear.</p>
+
+  <p><strong>This game makes sound.</strong> Not decoration — the sound <em>is</em>
+  the science. Every tone you hear is a real spectral line at its real frequency.
+  Put on headphones if you can.</p>
+
+  <p class="center"><button class="btn big" data-action="start-audio">🔊 I’m ready</button></p>
+
+  <p>Hear that? That’s a wave. Light is one too. Now stretch the space it
+  travels through:</p>
+
+  <div class="interactive" data-interactive="stretch-slider"></div>
+
+  <p>Longer wave, deeper note. Astronomers call this <strong>redshift</strong>,
+  and the universe has been doing it to starlight for 13.8 billion years.
+  Everything else in this game is that one idea, taken seriously.</p>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 1 ==================== -->
+<section class="chapter" data-chapter="1" data-title="Everything is running away">
+  <h2>1 · Everything is running away</h2>
+
+  <p>Galaxies far away aren’t sitting still. Space itself grows, and the light
+  crossing it grows with it. The farther the galaxy, the more its light has
+  stretched by the time it reaches you.</p>
+
+  <p>Here’s the useful part: light from a galaxy isn’t a smooth hum. Atoms and
+  molecules glow at <em>exact</em> frequencies — a barcode, identical in every
+  galaxy in the universe.</p>
+
+  <div class="interactive" data-interactive="spectrum-stretch"></div>
+
+  <p>Stretch it, and notice what does <em>not</em> change: the pattern. Every
+  line moves by the same factor. That factor is (1&nbsp;+&nbsp;z), and z is the
+  redshift. Recognise even part of the barcode and you can read off z — and with
+  it the distance, the epoch, the age of the light.</p>
+
+  <details>
+    <summary>for the curious: why not just use a ruler?</summary>
+    <p>Distance in astronomy is brutal. Almost nothing out there carries a label
+    saying how far away it is, and the tricks that work nearby (parallax,
+    standard candles) run out long before these galaxies. Redshift is
+    different: it is measured from frequencies, which we can measure
+    exquisitely well, and it converts to a distance and an age through
+    cosmology. That is why redshift, not distance, is the currency.</p>
+  </details>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 2 ==================== -->
+<section class="chapter" data-chapter="2" data-title="The galaxy is a chord">
+  <h2>2 · The galaxy is a chord</h2>
+
+  <p>The galaxies in this game are monsters: dusty factories building stars a
+  thousand times faster than the Milky Way, so wrapped in dust that visible
+  light barely escapes. But their cold gas glows in the radio — carbon
+  monoxide, of all things — and it glows at a <em>ladder</em> of frequencies:</p>
+
+  <p class="center big-numbers">115 GHz &nbsp;·&nbsp; 231 &nbsp;·&nbsp; 346
+  &nbsp;·&nbsp; 461 &nbsp;·&nbsp; 576 …</p>
+
+  <p>Every rung an (almost) exact multiple of the first. Click them. (The
+  galaxy starts at redshift 1, where the whole ladder sits comfortably in
+  earshot; the off-ladder notes need a lot more stretch before they come down
+  into the clear.)</p>
+
+  <div class="interactive" data-interactive="ladder-chord"></div>
+
+  <p>Multiples of one frequency — a musician calls those <em>overtones</em>. A
+  galaxy’s cold gas is literally a chord. Stretch it with redshift and it stays
+  a chord, just deeper. And a few other atoms sing off-ladder notes in a
+  different voice: ionised carbon, water. Remember that timbre. It saves you
+  later.</p>
+
+  <details>
+    <summary>for the curious: is the ladder really exact?</summary>
+    <p>Almost. CO’s rotating molecule has energy levels that grow slightly
+    faster than a perfect ladder, so the higher rungs drift a little from exact
+    multiples. The method — and this game — uses the linear approximation, which
+    is more than good enough at the precision a redshift search needs. The
+    rigidity is what matters: whatever the exact spacing, <em>all</em> the lines
+    shift together.</p>
+  </details>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 3 ==================== -->
+<section class="chapter" data-chapter="3" data-title="You are a radio telescope">
+  <h2>3 · You are a radio telescope</h2>
+
+  <p>Congratulations. You are now a millimetre-wave observatory in the Chilean
+  desert. You may listen to two narrow frequency windows — the purple bars on
+  the left. The galaxy’s chord is out there somewhere, stretched by an unknown
+  amount.</p>
+
+  <p>Two windows is not stinginess, and it is not a budget cut. It is what
+  spectroscopy <em>is</em>: a receiver measures a range of frequencies, never
+  all of them. You point it at a slice of the spectrum, you record that slice,
+  and everything outside it is simply not observed. Wanting a wider slice is
+  the entire history of receiver engineering — and, as you will see at the end,
+  it is where this field is going next.</p>
+
+  <p>The curves are where each rung of the ladder would appear at each possible
+  redshift. The horizontal line is a <em>real detection</em>: 155.772 GHz. It
+  never moves — it’s the data. The moving tones are your model of the galaxy.</p>
+
+  <p><strong>How to play:</strong> drag the redshift. When a predicted rung
+  approaches the detected line you’ll hear <em>beats</em> — a wobble that slows
+  as you close in and vanishes at the match, exactly the way a guitarist tunes
+  a string. Let go on a match to lock it in. (The cursor pulses at the same
+  rate, so it works with the sound off.)</p>
+
+  <div class="interactive" data-interactive="rsg" data-config="ch3"></div>
+
+  <p>Keep going and the problem announces itself: the beats stop again. And
+  again. One tone fits <em>thirteen</em> different identifications in this
+  tuning — nine of them rungs of the CO ladder, the rest off-ladder lines. Your
+  single number could mean a galaxy seen 5 billion years after the Big Bang, or
+  1. We need another note.</p>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 4 ==================== -->
+<section class="chapter" data-chapter="4" data-title="Two notes are (almost) a song">
+  <h2>4 · Two notes are (almost) a song</h2>
+
+  <p>Your other window catches something: 93.463 GHz. Two steady tones now. And
+  a candidate redshift has to lock <em>both</em> — the whole chord shifts
+  together, remember?</p>
+
+  <div class="interactive" data-interactive="rsg" data-config="ch4"></div>
+
+  <p>Feel the difference. Nearly everywhere, one tone locks and the other beats
+  angrily against the model. Almost every impostor dies.</p>
+
+  <p>Almost. There are two survivors: z&nbsp;=&nbsp;2.70, where the lines are
+  CO(3-2) and CO(5-4) — and z&nbsp;=&nbsp;6.40, where the very same two
+  frequencies are CO(6-5) and CO(10-9). Both fit perfectly. Huh.</p>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 5 ==================== -->
+<section class="chapter" data-chapter="5" data-title="The impostor">
+  <h2>5 · The impostor</h2>
+
+  <p>Here is the dirty secret of ladders: they are <em>too</em> regular. If two
+  detections are rungs 2 and 3 at one redshift, then somewhere deeper there is a
+  redshift where the same two frequencies are rungs 4 and 6. Double every rung
+  number, stretch space to compensate, and the music is identical.</p>
+
+  <p>A different galaxy this time, with lines at 107.229 and 160.844 GHz. Three
+  redshifts fit both lines. Hear each one — then answer, using one of the two
+  buttons at the bottom of the panel. <strong>That choice is the chapter:</strong>
+  you are being asked whether the evidence lets you name a redshift, and one of
+  those two answers is honest here.</p>
+
+  <p>Solution C is worth your attention first, because it is the one the data
+  can actually throw out: z = 5.45 explains both detections (rungs 6 and 9) but
+  it also insists on CO(5-4) at 89.36 GHz and CO(8-7) at 142.97 GHz — both
+  sitting inside your windows, both silent. A redshift that predicts lines you
+  did not see is dead. Now notice that you cannot say anything like that about
+  A or B.</p>
+
+  <div class="interactive" data-interactive="rsg" data-config="ch5"></div>
+
+  <p>There is none, because there is none to hear. Both are exact. The universe
+  is not going to tell you which. An astronomer who publishes one of these as
+  certain is guessing — and this exact trap is why redshift papers have erratum
+  sections.</p>
+
+  <p>(You may have spotted a third marker, at z&nbsp;=&nbsp;5.45. It fits these
+  two lines as well — rungs 6 and 9, the same ladder times three. Hold that
+  thought: it is the one impostor here that <em>can</em> be killed, and the next
+  chapter shows you how.)</p>
+
+  <details>
+    <summary>for the curious: when does the twin exist?</summary>
+    <p>Whenever the two transition numbers share a common factor. Rungs 2 and 3
+    share nothing, so a 2+3 pair is safe; rungs 4 and 6 share a factor of 2, and
+    that factor is exactly the multiplication that builds the impostor. The
+    paper writes the resulting redshift offset as Δz/(1+z) = (b−a)/a — which is
+    just "how far apart the rungs are, in units of the ladder spacing". Wide
+    spacing, distant twin, easy to tell apart. Narrow spacing, close twin,
+    trouble.</p>
+  </details>
+
+  <p>So how do you break a perfect tie? You cheat. Three ways.</p>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 6 ==================== -->
+<section class="chapter" data-chapter="6" data-title="Listen for the silence">
+  <h2>6 · Listen for the silence</h2>
+
+  <h3>Cheat #1 — the dog that didn’t bark</h3>
+
+  <p>Back to the galaxy from chapter 4, sitting at its impostor redshift of
+  6.40. That redshift doesn’t only explain your two detections. It
+  <em>predicts more lines</em>: CO(7-6) at 109.04 GHz and CO(9-8) at 140.195
+  GHz — both inside your windows, both loud, if the galaxy were really there.</p>
+
+  <p>They show up as hollow, fluttering <span class="ghost-word">ghost
+  notes</span> — the red dashed rings on the graph. <strong>You have to point
+  the telescope at one to find out that nothing is there:</strong> click a ring,
+  or use the 🔭 button under the slider, which does the same thing and names
+  the line it is checking. The panel tells you what is still to do.</p>
+
+  <div class="interactive" data-interactive="rsg" data-config="ch6a"></div>
+
+  <p>Nothing. A galaxy at z&nbsp;=&nbsp;6.40 would be singing there. It isn’t.
+  Silence is data, and the impostor dies of it — z&nbsp;=&nbsp;2.70 stands
+  alone.</p>
+
+  <h3>Cheat #2 — a rough guess is still a guess</h3>
+
+  <p>Before pointing a single antenna, we photograph these galaxies in other
+  light. The colours of their dust give a fuzzy redshift: z ≈ 3, give or take a
+  lot. Useless for precision, perfect for tie-breaking.</p>
+
+  <p>Here’s a different galaxy: one loud line at 144.089 GHz, and a photometric
+  redshift near 3. The green glow is that prior — you can <em>hear</em> it as a
+  warm hiss that swells as you drag through it.</p>
+
+  <p><strong>Three things to do here</strong>, and the panel keeps score:</p>
+  <ol>
+    <li>Drag to a candidate that predicts a second line — z = 2.20 and z = 1.40
+    both do — and press the 🔭 button. Nothing is there; that candidate dies.</li>
+    <li>Do it once more at another candidate.</li>
+    <li>Then drag to z = 3.00, the one identification that predicts nothing you
+    failed to see, and release to lock it.</li>
+  </ol>
+  <p>(A candidate can also be struck off by the photometry alone, if it lies
+  more than five sigma outside the glow: click its circle on the graph. At this
+  prior that only reaches the very deep ones, which is itself the lesson —
+  a photometric redshift is a weak weapon, so use it only where it is
+  decisive.)</p>
+
+  <div class="interactive" data-interactive="rsg" data-config="ch6b"></div>
+
+  <h3>Cheat #3 — the off-ladder note</h3>
+
+  <p>Remember the atoms with a different voice? They are not on the CO ladder,
+  so the multiply-everything trick fails on them: there is no "double every rung
+  number" that also works for ionised carbon. One off-ladder note locking
+  together with one CO note kills every ladder impostor at once. It is the
+  cleanest kill in the business — when you are lucky enough to get one.</p>
+
+  <details>
+    <summary>for the curious: when can you <em>not</em> trust the silence?</summary>
+    <p>When the line you expected would have been too faint to see anyway. The
+    argument "this redshift predicts a line, I see nothing, therefore no" only
+    works if your observation was deep enough that the line would have been
+    obvious. That is why this game’s exclusions use the bright CO rungs and the
+    strong atomic lines, and why the faint ones — [CI], water — are drawn and
+    heard but never used as evidence unless the survey is deep. Silence from a
+    shallow observation means nothing at all.</p>
+  </details>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 7 ==================== -->
+<section class="chapter" data-chapter="7" data-title="Three real galaxies">
+  <h2>7 · Three real galaxies</h2>
+
+  <p>Enough training. Three observations, the full toolkit, no hand-holding.
+  Drag, listen, click ghosts, strike off what the photometry forbids — then
+  answer.</p>
+
+  <h3>Galaxy A</h3>
+  <div class="interactive" data-interactive="rsg" data-config="ch7a"></div>
+
+  <h3>Galaxy B</h3>
+  <div class="interactive" data-interactive="rsg" data-config="ch7b"></div>
+
+  <h3>Galaxy C</h3>
+  <div class="interactive" data-interactive="rsg" data-config="ch7c"></div>
+
+  <p>That third answer — "we don’t know yet, give me more time" — is the most
+  important thing this game has to teach. Real astronomers say it for a living,
+  and the ones who don’t end up writing errata.</p>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 8 ==================== -->
+<section class="chapter" data-chapter="8" data-title="Design the search">
+  <h2>8 · Design the search</h2>
+
+  <p>Final promotion. You’re not the observer any more — you’re the one writing
+  the telescope proposal. Thousands of dusty galaxies are waiting, and you
+  choose the frequency windows everyone else will listen through.</p>
+
+  <p>Below: your two windows (drag them), the real redshift distribution of a
+  real survey, and a live score — the paper’s own metric, computed on every
+  galaxy in the sample every time you move. <span class="hl">Robust</span>
+  means the redshift is pinned down. <span class="hl2">Ambiguous</span> means
+  you got lines but more than one answer fits. <span class="hl3">Silent</span>
+  means the galaxy said nothing at all: a night of telescope time for
+  nothing.</p>
+
+  <div class="interactive" data-interactive="tuning-sandbox" data-config="ch8"></div>
+
+  <p>You start with both windows crammed into the 3&nbsp;mm band, which is
+  exactly the tempting mistake: cheap, contiguous, and it leaves half the
+  population ambiguous. Chase the score. Notice what happens when you cluster
+  the windows together, and what happens when you split them across the two
+  bands. Then ask the paper for its answer.</p>
+
+  <details>
+    <summary>for the curious: what the score actually counts</summary>
+    <p>It is the figure of merit the paper optimises: every galaxy in the survey
+    is classified by what your windows would catch, and a galaxy whose redshift
+    you could pin down counts 1, one that gives you lines but more than one
+    possible answer counts ½, and a silent one counts 0. The classification is
+    the same code that judged your answers in the earlier chapters.</p>
+    <p>One simplification: a real ALMA tuning is a handful of narrow spectral
+    windows in two sidebands, not one clean block. This sandbox slides one
+    contiguous block per band, the same total bandwidth the paper used, so a
+    block that scores a point or two above the paper's tuning does exist here.
+    The shape of the answer — one window per band — is what survives.</p>
+  </details>
+
+  <p>The real version of this puzzle was solved in the paper this game is built
+  on, and the answer — you need both the 3&nbsp;mm and the 2&nbsp;mm band —
+  now steers real time on the largest array on Earth.</p>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 9 ==================== -->
+<section class="chapter" data-chapter="9" data-title="This was real">
+  <h2>9 · This was real</h2>
+
+  <p>Every number you just played with is real. The galaxies are real: Herschel
+  and South Pole Telescope surveys of dusty star-forming galaxies. The windows
+  are ALMA’s. The method is
+  <a href="https://doi.org/10.1093/mnras/stac1766">Bakx &amp; Dannerbauer
+  (2022), MNRAS 515, 678</a> — nicknamed "High-z Sudoku". The code scoring your
+  sandbox is the paper’s own
+  <a href="https://github.com/tjlcbakx/redshift-search-graphs">redshift-search-graphs</a>,
+  ported to JavaScript and checked line by line against the original.</p>
+
+  <p>Astronomers: the sandbox accepts real tunings and scores them with the real
+  metric. Steal it for your next proposal.</p>
+
+  <h3>With thanks</h3>
+
+  <p>This game was built with the support of
+  <a href="https://infravis.se"><strong>INFRAVIS</strong></a>, the Swedish
+  National Infrastructure for Data Visualization. Turning a diagnostic
+  figure from a paper into something a stranger can play is a visualization
+  problem before it is a coding one, and INFRAVIS is the reason it was treated
+  as one.</p>
+
+  <p>That support is also why the sound is not decoration. A method that exists
+  as one dense graph is a method some people simply cannot read; rendering the
+  same physics as pitch, beats and silence gives it a second door. Every audio
+  cue in this game is written out in text as well, and the whole thing is
+  designed to be playable with the sound off — or with the graph ignored
+  entirely.</p>
+
+  <h3>And the windows are about to get wider</h3>
+
+  <p>Everything you just played with assumes today’s receivers: a slice of
+  frequency at a time, and a puzzle because of it. That assumption is the part
+  that is changing.</p>
+
+  <ul>
+    <li><strong>ALMA Band 2</strong> opens the 67–116 GHz window, the lowest
+    rungs of the CO ladder for the redshifts these galaxies actually live at —
+    its redshift-search power is worked out in <strong>Bakx et al. (2026)</strong>.
+    Put that band into the sandbox’s logic and the ambiguous fraction is a
+    different number.</li>
+    <li>The <strong>Wideband Sensitivity Upgrade (WSU)</strong> widens what a
+    single tuning can record. Every extra GHz of instantaneous bandwidth turns
+    "one line, thirteen answers" into "two lines, one answer" for more of the
+    sky — the impostors in this game die of bandwidth.</li>
+    <li><strong>ALMA2040</strong> is the long view: the development roadmap that
+    decides which of these puzzles our successors still have to solve by hand.</li>
+  </ul>
+
+  <p>Which is the honest ending for a game about a graphical trick: the trick
+  exists because our windows are narrow. Widen them and the sudoku gets easier —
+  and the galaxies we cannot reach today start answering.</p>
+
+  <p class="note">Made with sound on purpose. The universe is a chord; someone
+  had to play it. — Built as an outreach project; no trackers, no accounts,
+  no dependencies. Code under MIT, words under CC&nbsp;BY&nbsp;4.0 — take
+  either.
+  <button id="restart" class="btn ghost small">start over</button></p>
+
+  <div class="chapter-end"></div>
+</section>
+
+</main>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

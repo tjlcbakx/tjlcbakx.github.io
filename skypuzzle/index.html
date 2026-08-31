@@ -18,11 +18,23 @@
     <div class="spacer"></div>
     <div id="readout" aria-live="polite"></div>
     <div id="progress"><strong id="nplaced">0</strong> / <span id="ntotal">0</span> placed</div>
+    <div id="streak" hidden title="Pieces placed in a row without a wrong drop"><strong id="streakN">0</strong><span class="word"> in a row</span><span id="streakBest"></span></div>
     <nav id="controls">
-      <button id="btnGhosts" type="button" aria-pressed="true" title="Faint preview of each unfound galaxy at its true position (P)">Previews</button>
-      <button id="btnHints" type="button" aria-pressed="false" title="Ring the remaining sky positions (H)">Positions</button>
-      <button id="btnGrid" type="button" aria-pressed="false" title="RA / Dec graticule (G)">Coordinates</button>
-      <button id="btnSound" type="button" aria-pressed="true" title="Sound on/off">Sound</button>
+      <button id="btnView" type="button" aria-pressed="true" title="Switch between the real sky and the composite board (V)">Whole sky</button>
+      <div id="optWrap">
+        <button id="btnOptions" type="button" aria-expanded="false" aria-controls="options" title="Options (O)">Options</button>
+        <div id="options" hidden role="group" aria-label="Options">
+          <p class="grp">Pieces</p>
+          <button id="btnSet" class="opt cycle" type="button" aria-pressed="false"><span class="lab">Stand-outs</span><kbd>A</kbd></button>
+          <p class="grp">Finding aids</p>
+          <button id="btnGhosts" class="opt" type="button" aria-pressed="true"><span class="lab">Previews of unfound galaxies</span><kbd>P</kbd></button>
+          <button id="btnHints" class="opt" type="button" aria-pressed="false"><span class="lab">Rings on empty positions</span><kbd>H</kbd></button>
+          <button id="btnGrid" class="opt" type="button" aria-pressed="false"><span class="lab">RA / Dec coordinates</span><kbd>G</kbd></button>
+          <p class="grp">Display</p>
+          <button id="btnStreak" class="opt" type="button" aria-pressed="true"><span class="lab">Streak counter</span><kbd>K</kbd></button>
+          <button id="btnSound" class="opt" type="button" aria-pressed="true"><span class="lab">Sound</span><kbd></kbd></button>
+        </div>
+      </div>
       <button id="btnHelp" type="button" title="How to play">?</button>
       <button id="btnReset" type="button" title="Clear all placed pieces">Reset</button>
     </nav>
@@ -82,10 +94,25 @@
        but Herschel's beam is far too coarse to tell them apart, so the board
        shows each unfound galaxy as a <em>faint preview</em> at its true spot.
        Match the shape, drag the piece there, and it clicks into place.</p>
+    <p>You start with the <em>stand-outs</em>: 82 curated pieces, the ones with
+       a ring, an arc or multiple images worth looking at. The button in the
+       <em>Options</em> menu (or the <kbd>A</kbd> key) swaps them for <em>all 297</em> ALMA
+       snapshots of the survey &mdash; the same puzzle at full length, most of
+       the extra pieces faint blobs rather than showpieces. Whatever you have
+       already placed stays placed when you switch.</p>
+    <p><em>Streak</em> counts how many you place in a row: every piece that
+       clicks home adds one, and any drop that does not lands you back at zero.
+       Your best run is kept.</p>
     <p><em>Coordinates</em> draws the RA/Dec grid and puts each piece's sky
        position in its panel &mdash; the astronomer's way to find it.
        <em>Positions</em> just rings the spots that are still empty.
        Scroll or pinch to zoom; drag empty sky to pan.</p>
+    <p><em>Whole sky</em> (or the <kbd>V</kbd> key) swaps the packed board for
+       the real celestial sphere: the same six fields at their true right
+       ascension and declination, over the Milky Way, the constellations and
+       every star down to naked-eye magnitude 6. It is worth a look &mdash; the
+       fields hug the galactic poles because that is where the Galaxy's own dust
+       is thinnest, and Fomalhaut sits inside the SGP field.</p>
     <button id="btnHelpClose" type="button">Start hunting</button>
   </div>
 </div>
@@ -96,6 +123,10 @@
     <p id="doneMsg"></p>
     <p>You have just rebuilt the ALMA snapshot survey on the Herschel sky &mdash;
        every piece back where the telescope found it.</p>
+    <p class="tip">Star, constellation and Milky Way data:
+       <a href="https://github.com/ofrohn/d3-celestial" target="_blank"
+          rel="noopener">d3-celestial</a> (Hipparcos / Yale BSC), MIT licence.
+       Everything else is Herschel/SPIRE and ALMA data.</p>
     <button id="btnDoneClose" type="button">Admire the board</button>
   </div>
 </div>
