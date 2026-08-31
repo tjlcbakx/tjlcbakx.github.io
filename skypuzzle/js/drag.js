@@ -17,7 +17,7 @@ export class Dragger {
   /**
    * hooks: { onPlace(piece), onNearMiss(piece), onMiss(piece),
    *          onHover(fieldName|null), onDragStart(piece), onDragEnd(),
-   *          redraw() }
+   *          onBoardTap(wx, wy), redraw() }
    */
   constructor(board, state, hooks) {
     this.board = board;
@@ -81,13 +81,21 @@ export class Dragger {
       }
     });
 
-    const end = (e) => {
+    const end = (e, tapped) => {
+      // a single pointer put down and lifted without panning is a tap on the
+      // sky itself: that is how a placed galaxy is asked about again
+      if (tapped && this.pointers.size === 1 && !this.pinch &&
+          this.pan && !this.pan.moved && this.hooks.onBoardTap) {
+        const r = c.getBoundingClientRect();
+        const [wx, wy] = this.board.toWorld(e.clientX - r.left, e.clientY - r.top);
+        this.hooks.onBoardTap(wx, wy);
+      }
       this.pointers.delete(e.pointerId);
       if (this.pointers.size < 2) this.pinch = null;
       if (this.pointers.size === 0) this.pan = null;
     };
-    c.addEventListener('pointerup', end);
-    c.addEventListener('pointercancel', end);
+    c.addEventListener('pointerup', (e) => end(e, true));
+    c.addEventListener('pointercancel', (e) => end(e, false));
     c.addEventListener('pointerleave', () => this.hooks.onHover(null, null, null));
 
     c.addEventListener('wheel', (e) => {

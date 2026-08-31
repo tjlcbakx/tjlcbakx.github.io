@@ -8,12 +8,13 @@
  * Tuning lives in config.js and nowhere else.
  */
 
-import { CFG, DEFAULT_VIEW, DEFAULT_SET, STORE_KEY } from './config.js';
+import { CFG, DEFAULT_VIEW, DEFAULT_SET, STORE_KEY, VIEW_REV } from './config.js';
 import * as P from './pieces.js';
 import { Board, fmtDeg, fmtSign } from './board.js';
 import { boardLayout, skyLayout, boardToRaDec } from './layout.js';
 import { SkyFeatures } from './skyfeatures.js';
 import { Dragger, snapRadius } from './drag.js';
+import { EGGS, PAPERS, MILESTONES, eggTotal } from './eggs.js';
 import * as Audio from './audio.js';
 
 const $ = (id) => document.getElementById(id);
@@ -32,6 +33,9 @@ const state = {
   hints: false,
   ghosts: true,          // previews on by default: they are how the puzzle
   grid: false,           // is actually solvable (see config.js)
+  notes: true,           // "did you know?" notes on the studied galaxies
+  seenNotes: new Set(),  // which ones have been read (a collection, kept
+                         // across a reset)
   drag: null,
   selected: null,
 };
@@ -78,7 +82,15 @@ let store = loadStore() || { seed: (Math.random() * 1e9) | 0, placed: {},
                              hints: false, ghosts: true, grid: false,
                              view: DEFAULT_VIEW, set: DEFAULT_SET,
                              streak: 0, best: 0, showStreak: true,
-                             sound: true, seenHelp: false };
+                             sound: true, seenHelp: false, viewRev: VIEW_REV,
+                             notes: true, seenNotes: [] };
+
+// the default view has moved since this save was written: start it on the new
+// one, once, and leave the rest of the save alone
+if (store.viewRev !== VIEW_REV) {
+  store.view = DEFAULT_VIEW;
+  store.viewRev = VIEW_REV;
+}
 
 function save() {
   store.placed = {};
@@ -89,10 +101,13 @@ function save() {
   store.ghosts = state.ghosts;
   store.grid = state.grid;
   store.view = board ? board.layout.id : DEFAULT_VIEW;
+  store.viewRev = VIEW_REV;
   store.set = state.set;
   store.streak = state.streak;
   store.best = state.best;
   store.showStreak = state.showStreak;
+  store.notes = state.notes;
+  store.seenNotes = [...state.seenNotes];
   store.sound = Audio.isEnabled();
   try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) { /* ignore */ }
 }
@@ -336,6 +351,7 @@ function updateProgress() {
   $('ntotal').textContent = state.active.length;
   const left = state.active.length - n;
   $('trayCount').textContent = left + (left === 1 ? ' piece left' : ' pieces left');
+  $('helpNoteCount').textContent = eggTotal(state.active);
 }
 
 // --- streak ---------------------------------------------------------------------
@@ -374,6 +390,66 @@ function breakStreak() {
   save();
 }
 
+// --- "did you know?" notes ------------------------------------------------------
+// Some of these galaxies have a paper of their own. Placing one of those brings
+// up a short note and a link; the rest place in silence. Tapping a galaxy that
+// is already on the board opens its note again, which is also the only way back
+// to one that was dismissed.
+
+let noteKey = null;
+
+function showNote(key, note) {
+  noteKey = key;
+  const paper = PAPERS[note.p];
+  $('noteTitle').textContent = note.t;
+  $('noteBody').textContent = note.d;
+  const cite = $('noteCite');
+  cite.textContent = paper.c;
+  cite.href = paper.u;
+  $('noteTag').textContent = paper.mine ? 'my paper' : paper.ext ? '' : 'co-authored';
+  state.seenNotes.add(key);
+  $('note').hidden = false;
+  save();
+}
+
+function closeNote() {
+  noteKey = null;
+  $('note').hidden = true;
+}
+
+/** The note a placement has earned: the galaxy's own, else a pending milestone. */
+function noteFor(p) {
+  if (!state.notes) return;
+  if (EGGS[p.name]) { showNote(p.name, EGGS[p.name]); return; }
+  const n = state.placed.size;
+  for (const m of MILESTONES) {
+    const key = 'milestone:' + m.at;
+    if (n >= m.at && !state.seenNotes.has(key)) { showNote(key, m); return; }
+  }
+}
+
+/** Reading a note again: tap the galaxy on the board. */
+function noteAt(wx, wy) {
+  if (!state.notes) return;
+  let best = null;
+  let bestD = Infinity;
+  for (const p of state.active) {
+    if (!state.placed.has(p.name) || !EGGS[p.name]) continue;
+    const d = board.layout.dist(wx, wy, p);
+    if (d < snapRadius(p.r_deg) && d < bestD) { best = p; bestD = d; }
+  }
+  if (best) showNote(best.name, EGGS[best.name]);
+}
+
+/** "37 of 80" — what the completion sheet reports. */
+function notesFound() {
+  let n = 0;
+  for (const k of state.seenNotes) {
+    if (EGGS[k] || k.startsWith('milestone:')) n++;
+  }
+  return n;
+}
+
 // --- placing --------------------------------------------------------------------
 
 function place(p, silent) {
@@ -396,6 +472,7 @@ function place(p, silent) {
     say(p.name + ' — home.' +
         (state.streak >= CFG.streakHot ? '  ' + state.streak + ' in a row.' : ''),
         2200);
+    noteFor(p);
     save();
     if (placedCount() === state.active.length) complete();
   }
@@ -406,6 +483,12 @@ function complete() {
   $('doneMsg').textContent = 'All ' + state.active.length + ' ' +
     (state.set === 'all' ? 'ALMA snapshots' : 'stand-out snapshots') +
     ' are back where ALMA found them.';
+  const total = eggTotal(state.active);
+  const found = notesFound();
+  const dn = $('doneNotes');
+  dn.hidden = !state.notes;
+  dn.textContent = 'You uncovered ' + found + ' of the ' + total +
+    ' notes in this set — tap any galaxy on the board to read its one again.';
   $('done').hidden = false;
 }
 
@@ -440,6 +523,8 @@ async function boot() {
   state.streak = store.streak | 0;
   state.best = store.best | 0;
   state.showStreak = store.showStreak !== false;
+  state.notes = store.notes !== false;
+  state.seenNotes = new Set(Array.isArray(store.seenNotes) ? store.seenNotes : []);
   Audio.setEnabled(store.sound !== false);
 
   // the pieces themselves: the stand-outs unless a saved game says otherwise
@@ -451,6 +536,7 @@ async function boot() {
     onHover: (f, bx, by) => setHover(f, bx, by),
     onDragStart: (p) => {
       if (p._thumb) p._thumb.classList.add('dragging');
+      $('note').classList.add('dragging');
       $('inspector').classList.add('dragging');
       $('board').classList.add('dropping');
     },
@@ -459,6 +545,7 @@ async function boot() {
         el.classList.remove('dragging');
       }
       $('inspector').classList.remove('dragging');
+      $('note').classList.remove('dragging');
       $('board').classList.remove('dropping');
     },
     onPlace: (p) => place(p),
@@ -471,13 +558,14 @@ async function boot() {
       breakStreak();
       say('Not there. Try the bright blobs.', 1800);
     },
+    onBoardTap: (wx, wy) => noteAt(wx, wy),
   });
 
   wireUI();
 
   // Debug/QC handle: lets a console session (or a screenshot script) drive the
   // view and inspect state without touching game internals.
-  window.skyPuzzle = { state, board, CFG, place, save };
+  window.skyPuzzle = { state, board, CFG, place, save, EGGS };
 
   window.addEventListener('resize', () => {
     board.resize(false);
@@ -528,6 +616,7 @@ function syncToggles() {
   $('btnGhosts').setAttribute('aria-pressed', String(state.ghosts));
   $('btnGrid').setAttribute('aria-pressed', String(state.grid));
   $('btnStreak').setAttribute('aria-pressed', String(state.showStreak));
+  $('btnNotes').setAttribute('aria-pressed', String(state.notes));
   $('btnSound').setAttribute('aria-pressed', String(Audio.isEnabled()));
   updateStreak();
 }
@@ -616,6 +705,13 @@ function wireUI() {
   toggle('btnGhosts', 'ghosts');
   toggle('btnGrid', 'grid');
   toggle('btnStreak', 'showStreak');
+  $('btnNotes').addEventListener('click', () => {
+    state.notes = !state.notes;
+    if (!state.notes) closeNote();
+    syncToggles();
+    save();
+  });
+  $('btnCloseNote').addEventListener('click', closeNote);
 
   $('btnSet').addEventListener('click', async () => {
     if (state.busy) return;                  // a switch is already loading
@@ -695,12 +791,14 @@ function wireUI() {
     else if (e.key === 'v' || e.key === 'V') $('btnView').click();
     else if (e.key === 'a' || e.key === 'A') $('btnSet').click();
     else if (e.key === 'k' || e.key === 'K') $('btnStreak').click();
+    else if (e.key === 'd' || e.key === 'D') $('btnNotes').click();
     else if (e.key === 'o' || e.key === 'O') $('btnOptions').click();
     else if (e.key === '?') $('help').hidden = false;
     else if (e.key === 'Escape') {
       if (!$('options').hidden) openOptions(false);
       else if (!$('help').hidden) $('help').hidden = true;
       else if (!$('done').hidden) $('done').hidden = true;
+      else if (!$('note').hidden) closeNote();
       else deselect();
     }
   });
@@ -715,6 +813,7 @@ function doReset() {
     p._boardB = undefined;
   }
   deselect();
+  closeNote();
   buildTray();
   updateStreak();
   board.dirty = true;

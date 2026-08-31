@@ -124,6 +124,165 @@ details {
 details summary { cursor: pointer; color: var(--accent2); font-family: var(--ui); font-size: 0.9rem; }
 details p { font-size: 0.95rem; margin: 0.7rem 0 0.2rem; }
 
+/* --- the RSG bench (bench.html) ------------------------------------------
+   A control surface rather than a chapter: denser, monospace where numbers
+   are meant to be compared, and laid out in panels that collapse to one
+   column on a phone. Everything it draws inside the graph is the chapter
+   component's own CSS. */
+
+.bench-intro { padding-bottom: 0; }
+
+.bench-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+}
+
+.bench-panel {
+  background: var(--panel);
+  border: 1px solid rgba(170, 178, 208, 0.1);
+  border-radius: 14px;
+  padding: 0.4rem 1rem 1rem;
+}
+
+.bench-panel h3 { font-size: 0.82rem; margin: 0.9rem 0 0.7rem; letter-spacing: 0.04em;
+  text-transform: uppercase; font-family: var(--ui); color: var(--dim); }
+
+.bench-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.bench-row-wide { gap: 0.6rem; }
+
+.bench-num, .bench-text, .bench-sel {
+  background: var(--panel2);
+  color: var(--ink);
+  border: 1px solid rgba(170, 178, 208, 0.18);
+  border-radius: 7px;
+  padding: 0.32rem 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.86rem;
+}
+.bench-num { width: 6.6rem; }
+.bench-text { flex: 1; min-width: 7rem; font-family: var(--ui); }
+.bench-sel { font-family: var(--ui); max-width: 100%; }
+.bench-num:focus, .bench-text:focus, .bench-sel:focus { outline: 2px solid var(--accent); }
+
+.bench-label { font-family: var(--ui); font-size: 0.84rem; color: var(--dim); }
+
+/* The RSG.py argument name, riding along behind the plain-English label. */
+.bench-argname {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  color: rgba(170, 178, 208, 0.5);
+  margin-left: 0.45rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.bench-hint {
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--dim);
+  margin: 0 0 0.8rem;
+}
+
+/* The worked cases: the way in for anyone who arrived without data. */
+.bench-cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.8rem;
+  margin: 1.5rem 0 0;
+}
+
+.bench-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+  background: var(--panel);
+  border: 1px solid rgba(170, 178, 208, 0.14);
+  border-radius: 12px;
+  padding: 0.9rem 1rem 1rem;
+  cursor: pointer;
+  color: var(--ink);
+  font: inherit;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.bench-case:hover { border-color: var(--accent); transform: translateY(-2px); }
+.bench-case:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.bench-case-title { font-family: Georgia, serif; font-size: 1.02rem; color: var(--accent); }
+.bench-case-blurb { font-family: var(--ui); font-size: 0.8rem; line-height: 1.5; color: var(--dim); }
+.bench-unit {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem; color: var(--dim);
+}
+
+.bench-verdict { margin: 0 0 2.5rem; }
+
+/* Candidate chips are buttons here: the verdict is also the navigation. */
+/* `font: inherit` would pull in the body serif; .chip already sets the UI face. */
+.chip.chip-btn { cursor: pointer; font-size: 0.78rem; line-height: 1.5; }
+.chip.chip-btn:hover { filter: brightness(1.15); }
+.chip.chip-robust { border-color: var(--good); background: rgba(126, 231, 135, 0.18); color: var(--ink); }
+.chip.chip-ambiguous { border-color: var(--accent); background: rgba(255, 181, 84, 0.18); color: var(--ink); }
+.chip.chip-silent { border-color: rgba(140, 148, 175, 0.55); color: var(--dim); }
+.chip.chip-excluded {
+  border-color: rgba(255, 123, 114, 0.5);
+  background: rgba(255, 123, 114, 0.1);
+  color: var(--dim);
+  text-decoration: line-through;
+}
+.sw.excluded { background: var(--ghost); }
+.bench-num.bad { border-color: var(--ghost); }
+
+/* The last panel spans the row rather than sitting half-width and alone. */
+.bench-panel:last-child { grid-column: 1 / -1; }
+.bench-panel:last-child .bench-row { display: inline-flex; margin-right: 1.4rem; }
+
+.bench-code {
+  background: var(--panel2);
+  border: 1px solid rgba(170, 178, 208, 0.12);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* --- explanatory figures -------------------------------------------------
+   Static diagrams that carry an idea the prose cannot. Same panel treatment as
+   an interactive, so a figure and a canvas read as the same kind of object;
+   the SVG inside scales with the column and inherits the theme tokens. */
+
+figure.diagram {
+  background: var(--panel);
+  border: 1px solid rgba(170, 178, 208, 0.1);
+  border-radius: 14px;
+  padding: 1rem 1rem 0.8rem;
+  margin: 2rem 0;
+}
+
+figure.diagram svg { display: block; width: 100%; height: auto; }
+
+figure.diagram figcaption {
+  margin-top: 0.7rem;
+  color: var(--dim);
+  font-family: var(--ui);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
 /* --- interactives -------------------------------------------------------- */
 
 .interactive {

@@ -114,8 +114,364 @@ if (location.protocol === 'file:') {
 </section>
 
 <!-- ==================== Ch. 2 ==================== -->
-<section class="chapter" data-chapter="2" data-title="The galaxy is a chord">
-  <h2>2 · The galaxy is a chord</h2>
+<section class="chapter" data-chapter="2" data-title="Sixty-six dishes in a desert">
+  <h2>2 · Sixty-six dishes in a desert</h2>
+
+  <p>You have a barcode to look for. Now meet the machine that has to hear it —
+  because the shape of the machine is the reason every graph in the rest of this
+  game looks the way it does.</p>
+
+  <p><a href="https://www.almaobservatory.org/"><strong>ALMA</strong></a>, the
+  Atacama Large Millimeter/submillimeter Array, is sixty-six dishes on the
+  Chajnantor plateau in northern Chile, five kilometres above sea level. The
+  altitude is not for the view. Water vapour in the air drinks up millimetre
+  waves — broadly, and worse the higher in frequency you go — so the stretches
+  ALMA can see through at all are the gaps between water’s absorption lines, and
+  they are only gaps if the air above you is dry. Chajnantor is one of the driest
+  places on the planet. You climb until the sky goes transparent.</p>
+
+  <p>What comes back down is not a photograph — and for a redshift search you are
+  barely using ALMA as sixty-six telescopes at all. The sharp images it is famous
+  for come from playing the dishes off against each other; here that is beside the
+  point. You are using them as one enormous bucket, poured into a machine that
+  answers a single question: how much signal arrived, at each
+  <strong>frequency</strong>?</p>
+
+  <p>Frequency is just the other way of counting the wave you stretched in
+  Chapter 0. More waves past you each second is a higher note, so a bigger number
+  of GHz is a higher note — and stretching a wave, which is exactly what redshift
+  does, always pushes it <em>down</em> the scale. Hold on to that one: here,
+  redshift moves lines downward.</p>
+
+  <p>Getting it takes a trick. A wave at 100 GHz is far too fast for any
+  electronics to follow, so the receiver plays the incoming signal against a
+  steady reference tone of its own and keeps only the difference — the same
+  arithmetic that makes two nearly-tuned guitar strings throb against each other,
+  and worth remembering, because that throb is the main mechanic of this game. It
+  drops the whole band to a few GHz without disturbing one interval inside it.
+  Then the correlator slices what is left into thousands of channels, each a
+  fraction of a megahertz wide.</p>
+
+  <p>That list — how much signal in every one of those channels, right across the
+  slice you recorded — is a <strong>spectrum</strong>. It is the thing an
+  observation actually produces. Almost every sentence in the rest of this game
+  is about reading one, so it is worth looking at:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 300" role="img" aria-labelledby="specfig-t specfig-d"
+         style="font-family: var(--ui); font-size: 11px">
+      <title id="specfig-t">A spectrum: signal against frequency, with one
+      detected line and noise everywhere else</title>
+      <desc id="specfig-d">A narrow strip at the top represents the whole
+      observing window, 139.9 to 162.7 gigahertz, with a small stretch near 154
+      to 158 gigahertz highlighted. Below it, that stretch is drawn large: a
+      jagged, roughly flat trace — the noise — running the width of the panel,
+      with one clear peak rising well above it at 155.772 gigahertz. The peak has
+      a visible width. Elsewhere the trace stays inside a shaded noise band, and
+      one such empty spot is labelled: nothing here, which is also a
+      measurement.</desc>
+
+      <!-- the whole window, with the sliver below highlighted in it -->
+      <text x="60" y="18" fill="var(--dim)">one observing window · 139.9–162.7 GHz</text>
+      <rect x="60" y="26" width="630" height="13" rx="2" fill="var(--band)"
+            fill-opacity="0.18" stroke="var(--band)" stroke-opacity="0.4"/>
+      <rect x="449.6" y="26" width="110.5" height="13" rx="2" fill="var(--band)"
+            fill-opacity="0.55"/>
+      <g stroke="var(--dim)" stroke-opacity="0.3" stroke-dasharray="3 3">
+        <line x1="449.6" y1="39" x2="60" y2="70"/>
+        <line x1="560.1" y1="39" x2="690" y2="70"/>
+      </g>
+      <text x="690" y="18" text-anchor="end" fill="var(--dim)">↓ a slice of it, close up</text>
+
+      <!-- the noise band: the depth of this observation, drawn to scale -->
+      <rect x="60" y="203" width="630" height="19" fill="var(--dim)" fill-opacity="0.1"/>
+
+      <!-- axes -->
+      <line x1="60" y1="70" x2="60" y2="240" stroke="var(--dim)" stroke-opacity="0.6"/>
+      <line x1="60" y1="240" x2="690" y2="240" stroke="var(--dim)" stroke-opacity="0.6"/>
+      <g stroke="var(--dim)" stroke-opacity="0.6">
+        <line x1="60" y1="240" x2="60" y2="245"/>
+        <line x1="217.5" y1="240" x2="217.5" y2="245"/>
+        <line x1="375" y1="240" x2="375" y2="245"/>
+        <line x1="532.5" y1="240" x2="532.5" y2="245"/>
+        <line x1="690" y1="240" x2="690" y2="245"/>
+      </g>
+      <g fill="var(--dim)" text-anchor="middle">
+        <text x="60" y="258">154</text>
+        <text x="217.5" y="258">155</text>
+        <text x="375" y="258">156</text>
+        <text x="532.5" y="258">157</text>
+        <text x="690" y="258">158</text>
+      </g>
+      <text x="375" y="278" text-anchor="middle" fill="var(--dim)">observed frequency [GHz]</text>
+      <text transform="rotate(-90 22 155)" x="22" y="155" text-anchor="middle"
+            fill="var(--dim)">how much signal</text>
+
+      <!-- the measurement itself, one step per channel -->
+      <polyline fill="none" stroke="var(--accent)" stroke-width="1.4"
+                stroke-linejoin="round" points="60.0,203.0 70.0,203.0 70.0,203.7 80.0,203.7 80.0,213.2 90.0,213.2 90.0,209.5 100.0,209.5 100.0,206.7 110.0,206.7 110.0,206.3 120.0,206.3 120.0,212.4 130.0,212.4 130.0,212.8 140.0,212.8 140.0,203.8 150.0,203.8 150.0,207.8 160.0,207.8 160.0,205.4 170.0,205.4 170.0,208.7 180.0,208.7 180.0,212.9 190.0,212.9 190.0,204.0 200.0,204.0 200.0,209.2 210.0,209.2 210.0,212.4 220.0,212.4 220.0,203.8 230.0,203.8 230.0,218.9 240.0,218.9 240.0,211.1 250.0,211.1 250.0,213.9 260.0,213.9 260.0,215.4 270.0,215.4 270.0,215.8 280.0,215.8 280.0,205.9 290.0,205.9 290.0,209.2 300.0,209.2 300.0,214.4 310.0,214.4 310.0,209.0 320.0,209.0 320.0,158.4 330.0,158.4 330.0,89.2 340.0,89.2 340.0,102.5 350.0,102.5 350.0,166.7 360.0,166.7 360.0,199.8 370.0,199.8 370.0,217.4 380.0,217.4 380.0,206.5 390.0,206.5 390.0,210.5 400.0,210.5 400.0,207.7 410.0,207.7 410.0,205.7 420.0,205.7 420.0,210.2 430.0,210.2 430.0,210.5 440.0,210.5 440.0,210.5 450.0,210.5 450.0,207.8 460.0,207.8 460.0,215.8 470.0,215.8 470.0,216.5 480.0,216.5 480.0,217.4 490.0,217.4 490.0,215.8 500.0,215.8 500.0,212.7 510.0,212.7 510.0,215.0 520.0,215.0 520.0,204.7 530.0,204.7 530.0,216.2 540.0,216.2 540.0,215.8 550.0,215.8 550.0,212.3 560.0,212.3 560.0,205.0 570.0,205.0 570.0,208.3 580.0,208.3 580.0,210.2 590.0,210.2 590.0,216.6 600.0,216.6 600.0,219.6 610.0,219.6 610.0,207.6 620.0,207.6 620.0,210.5 630.0,210.5 630.0,213.9 640.0,213.9 640.0,214.6 650.0,214.6 650.0,217.3 660.0,217.3 660.0,209.0 670.0,209.0 670.0,206.8 680.0,206.8 680.0,211.3 690.0,211.3"/>
+
+      <!-- what is in it -->
+      <g stroke="var(--good)" stroke-opacity="0.55">
+        <line x1="392" y1="96" x2="352" y2="100"/>
+        <line x1="596" y1="153" x2="556" y2="199"/>
+      </g>
+      <g fill="var(--good)">
+        <text x="398" y="93">a line. Something is there,</text>
+        <text x="398" y="107">far above the noise —</text>
+        <text x="398" y="121">and it has a width.</text>
+      </g>
+      <g fill="var(--dim)" text-anchor="end">
+        <text x="712" y="148">nothing here.</text>
+        <text x="712" y="162">Also a measurement.</text>
+      </g>
+      <text x="66" y="199" fill="var(--dim)">the noise: how deep you looked</text>
+    </svg>
+    <figcaption>A spectrum is what comes back: signal against frequency, one
+    channel at a time. Nearly all of it is noise, and the height of that noise is
+    the <em>depth</em> of the observation — stare for longer and the band
+    narrows, and fainter lines climb out of it. The peak is real: CO(5-4) from a
+    galaxy at z&nbsp;=&nbsp;2.70, the same 155.772 GHz detection you will be
+    handed in two chapters. Everywhere else is silence — which, if you looked
+    deep enough, is a measurement too, and later in this game it is the thing
+    that settles the answer.</figcaption>
+  </figure>
+
+  <p>Three things to carry forward, because all three words come back. A spectrum
+  is something you <em>have</em>: one measurement, of one patch of sky, over one
+  range of frequency, made once. It has a <strong>depth</strong>, which is just
+  the height of that noise. And it can be <strong>silent</strong> — most of any
+  spectrum is nothing at all, and how deep the nothing goes is the whole
+  difference between evidence and an absence of evidence.</p>
+
+  <p>ALMA counts those frequencies against a hydrogen maser — a clock perhaps a
+  million times better than this job needs, which is the interesting part, because
+  it means the instrument is never your limit. Chapter 1 said atoms glow at
+  <em>exact</em> frequencies, and they do; but a galaxy’s gas is in orbit,
+  hundreds of kilometres a second, some of it toward you and some away. Every one
+  of those motions shifts its light a little, so what arrives is not a spike but a
+  smear a few hundred km/s wide. How well you can find the middle of it depends on
+  how far it stands above the noise. The galaxy sets your error bar, not the
+  clock.</p>
+
+  <p>Which is why redshift here is <em>measured</em> rather than estimated — not
+  because radio beats optical at this, it does not, but because for these
+  galaxies the optical route is shut. They are wrapped in so much dust that
+  almost nothing visible escapes, as you will see next chapter. This is the light
+  there is.</p>
+
+  <p><strong>They come in bands.</strong> No single receiver covers the
+  millimetre spectrum, so ALMA splits it into ten. This game lives in two of
+  them: Band&nbsp;3, 84–116 GHz, and Band&nbsp;4, 125–163 GHz. The gap between
+  them is not an oversight. Oxygen has a line at 118.75 GHz, and oxygen is a
+  fifth of the air on the best night there has ever been — so unlike the water,
+  that gap does not open on a dry night, and no amount of altitude climbs above
+  it.</p>
+
+  <p><strong>And they are narrow.</strong> Inside a band you pick a setting — a
+  <em>tuning</em> — and one tuning records about 7.5 GHz at once. String a few
+  together and you have a <strong>window</strong>: the stretch of frequency you
+  actually came away with. This game searches two of them, 89.1–112.0 GHz inside
+  Band&nbsp;3 and 139.9–162.7 GHz inside Band&nbsp;4, about 23 GHz apiece. So the
+  nesting runs: the whole millimetre spectrum, then ten bands, then the two
+  windows you chose, then the tunings that build them.</p>
+
+  <p>And everything outside a window is not faint, not noisy, not hard to see: it
+  is simply <em>not observed</em>. Wanting more is the entire history of receiver
+  engineering, and it is where this field is going — but not today.</p>
+
+  <p>So an observation is a slice of frequency. Draw the slice, and you have
+  drawn the axis:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 344" role="img" aria-labelledby="almafig-t almafig-d"
+         style="font-family: var(--ui); font-size: 11px">
+      <title id="almafig-t">ALMA’s receiver bands, stood on end, are the vertical
+      axis of the redshift search graph</title>
+      <desc id="almafig-d">On the left, ALMA Band 4 (125 to 163 GHz) and Band 3
+      (84 to 116 GHz) are drawn as blocks on a vertical frequency axis. On the
+      right, that same axis is the vertical axis of a graph whose horizontal axis
+      is redshift. Two purple stripes mark the search windows this game observes
+      with, 139.9 to 162.7 and 89.1 to 112.0 GHz. A curve shows where a line
+      emitted at 346 GHz arrives as redshift increases: it slides steadily
+      downward, and crosses each stripe exactly once.</desc>
+
+      <!-- The panels share an axis but are not one plot: without a break the
+           band blocks read as data plotted at negative redshift. -->
+      <line x1="152" y1="24" x2="152" y2="312" stroke="var(--dim)"
+            stroke-opacity="0.22" stroke-dasharray="2 4"/>
+
+      <!-- panel headers -->
+      <text x="84" y="19" text-anchor="middle" fill="var(--dim)">what the receivers reach</text>
+      <text x="451" y="19" text-anchor="middle" fill="var(--dim)">the graph you are about to live in</text>
+
+      <!-- the shared vertical axis -->
+      <text transform="rotate(-90 20 165)" x="20" y="165" text-anchor="middle"
+            fill="var(--dim)">frequency [GHz]</text>
+
+      <!-- The searched windows run the full width of the figure: the same
+           height means the same frequency on both sides of the axis, and where
+           a stripe crosses a band block you can see the window is a slice of
+           the band rather than all of it. Drawn first, so everything else
+           sits on top. -->
+      <rect x="44" y="101.9" width="656" height="44.0" fill="var(--band)" fill-opacity="0.16"/>
+      <rect x="44" y="199.7" width="656" height="44.2" fill="var(--band)" fill-opacity="0.16"/>
+
+      <!-- ALMA receiver bands, on that axis -->
+      <rect x="44" y="101.4" width="80" height="73.2" rx="3" fill="var(--band)"
+            fill-opacity="0.20" stroke="var(--band)" stroke-opacity="0.55"/>
+      <text x="84" y="134" text-anchor="middle" fill="var(--ink)">ALMA Band 4</text>
+      <text x="84" y="148" text-anchor="middle" fill="var(--dim)">125–163 GHz</text>
+      <rect x="44" y="191.9" width="80" height="61.8" rx="3" fill="var(--band)"
+            fill-opacity="0.20" stroke="var(--band)" stroke-opacity="0.55"/>
+      <text x="84" y="219" text-anchor="middle" fill="var(--ink)">ALMA Band 3</text>
+      <text x="84" y="233" text-anchor="middle" fill="var(--dim)">84–116 GHz</text>
+      <text x="84" y="186" text-anchor="middle" fill="var(--dim)" font-size="9"
+            opacity="0.85">O₂ · 118.75 GHz</text>
+
+
+      <!-- The same purple marker the real graph draws beside its axis, so this
+           figure doubles as a legend for the graph in Ch. 4. -->
+      <g stroke="var(--band)" stroke-width="5">
+        <line x1="204.5" y1="101.9" x2="204.5" y2="145.9"/>
+        <line x1="204.5" y1="199.7" x2="204.5" y2="243.9"/>
+      </g>
+
+      <!-- plot frame -->
+      <line x1="202" y1="30" x2="202" y2="300" stroke="var(--dim)" stroke-opacity="0.6"/>
+      <line x1="202" y1="300" x2="700" y2="300" stroke="var(--dim)" stroke-opacity="0.6"/>
+
+      <!-- frequency ticks: the same numbers on both sides of the axis -->
+      <g stroke="var(--dim)" stroke-opacity="0.6">
+        <line x1="197" y1="30" x2="202" y2="30"/>
+        <line x1="197" y1="68.6" x2="202" y2="68.6"/>
+        <line x1="197" y1="107.1" x2="202" y2="107.1"/>
+        <line x1="197" y1="145.7" x2="202" y2="145.7"/>
+        <line x1="197" y1="184.3" x2="202" y2="184.3"/>
+        <line x1="197" y1="222.9" x2="202" y2="222.9"/>
+        <line x1="197" y1="261.4" x2="202" y2="261.4"/>
+        <line x1="197" y1="300" x2="202" y2="300"/>
+      </g>
+      <g fill="var(--dim)" text-anchor="end">
+        <text x="189" y="34">200</text>
+        <text x="189" y="72.6">180</text>
+        <text x="189" y="111.1">160</text>
+        <text x="189" y="149.7">140</text>
+        <text x="189" y="188.3">120</text>
+        <text x="189" y="226.9">100</text>
+        <text x="189" y="265.4">80</text>
+        <text x="189" y="303">60</text>
+      </g>
+
+      <!-- redshift ticks -->
+      <g stroke="var(--dim)" stroke-opacity="0.6">
+        <line x1="202" y1="300" x2="202" y2="305"/>
+        <line x1="285" y1="300" x2="285" y2="305"/>
+        <line x1="368" y1="300" x2="368" y2="305"/>
+        <line x1="451" y1="300" x2="451" y2="305"/>
+        <line x1="534" y1="300" x2="534" y2="305"/>
+        <line x1="617" y1="300" x2="617" y2="305"/>
+        <line x1="700" y1="300" x2="700" y2="305"/>
+      </g>
+      <g fill="var(--dim)" text-anchor="middle">
+        <text x="202" y="318">0</text>
+        <text x="285" y="318">1</text>
+        <text x="368" y="318">2</text>
+        <text x="451" y="318">3</text>
+        <text x="534" y="318">4</text>
+        <text x="617" y="318">5</text>
+        <text x="700" y="318">6</text>
+      </g>
+      <text x="451" y="338" text-anchor="middle" fill="var(--dim)">redshift z — the thing you do not know</text>
+
+      <g fill="var(--band)" text-anchor="end">
+        <text x="694" y="128">searched · 139.9–162.7 GHz</text>
+        <text x="694" y="226">searched · 89.1–112.0 GHz</text>
+      </g>
+
+      <!-- f0 / (1+z) for one line of the barcode, f0 = 346 GHz -->
+      <polyline fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"
+                points="262.6,30 285,82.1 305.8,119.2 326.5,148.8 347.3,173.1 368,193.3
+                        388.8,210.4 409.5,225 430.3,237.8 451,248.9 492.5,267.5 534,282.4
+                        575.5,294.5 598,300"/>
+      <!-- the only stretches of redshift where that line is inside a window -->
+      <polyline fill="none" stroke="var(--good)" stroke-width="3.6" stroke-linecap="round"
+                points="295.5,101.9 305.8,119.2 314.1,131.8 324.3,145.9"/>
+      <polyline fill="none" stroke="var(--good)" stroke-width="3.6" stroke-linecap="round"
+                points="375.4,199.7 388.8,210.4 409.5,225 426.1,235.4 441.3,243.9"/>
+
+      <text x="262.6" y="26" text-anchor="middle" fill="var(--accent)" font-size="9">▲</text>
+      <g fill="var(--accent)">
+        <text x="300" y="48">one line of the barcode: 346 GHz,</text>
+        <text x="300" y="62">off the top of this axis at z = 0</text>
+      </g>
+
+      <!-- 5. leaders, so the label points at the two green stretches -->
+      <g stroke="var(--good)" stroke-opacity="0.45">
+        <line x1="452" y1="159" x2="327" y2="147"/>
+        <line x1="452" y1="181" x2="410" y2="223"/>
+      </g>
+      <g fill="var(--good)">
+        <text x="458" y="163">the only redshifts at which</text>
+        <text x="458" y="177">you would ever see it</text>
+      </g>
+    </svg>
+    <figcaption>Left: two of ALMA’s ten receiver bands on a vertical frequency
+    axis, with the oxygen line that shuts the gap between them. Right: the same
+    axis, turned on its side to become the y axis of a redshift search graph. The
+    purple stripes are the two windows searched here — the real graph marks them
+    the same way, in the same purple, at the axis. The orange curve is one line of
+    the barcode arriving at f<sub>0</sub>/(1&nbsp;+&nbsp;z), sliding downward as
+    redshift grows; green is where it lands inside a window, and so is the only
+    place it would ever have shown up in your data.</figcaption>
+  </figure>
+
+  <p>There it is. <strong>The vertical axis is frequency, in GHz</strong>, and
+  those numbers are hardware — no amount of clever analysis moves them. The
+  horizontal axis is the thing you do not know. And the curve is one line of the
+  barcode at every redshift it could have: emitted at f<sub>0</sub>, arriving at
+  <strong>f<sub>0</sub> / (1&nbsp;+&nbsp;z)</strong>, sliding downward as the
+  universe stretches. It is <em>data</em> only where it crosses a window.
+  Everywhere else it is a prediction about a place you never looked.</p>
+
+  <p>One last thing, and it is why this game has sound. You cannot hear 155 GHz;
+  nothing can. So the game divides every frequency by 250 million, which drops the
+  whole searched range to roughly 360–650 Hz — a little under an octave, sitting
+  in the middle of a piano. It <em>divides</em> rather than squashes, and that is
+  the part that matters: dividing leaves every ratio between frequencies exactly
+  as it was, so a chord in the sky is still the same chord in your headphones.
+  Your ear is a frequency meter, and it is now pointed at the y axis. Height on
+  this graph is pitch. Everything you are about to do by eye, you can do by
+  ear.</p>
+
+  <details>
+    <summary>for the curious: how wide is one tuning, really?</summary>
+    <p>About 7.5 GHz — and not in one piece. Differencing against the reference
+    tone leaves two copies of the sky, one from just above that tone and one from
+    just below (the two <em>sidebands</em>), and ALMA records both: four slices of
+    1.875 GHz, in two pairs, with a gap in the middle. So a 23 GHz window is not
+    three tunings laid end to end so much as three tunings placed with some
+    care.</p>
+    <p>Why these two windows in particular? Because a pair spaced like this
+    catches two rungs of the ladder at once across the widest span of redshift —
+    which will not sound like much until Chapter 5, and which you get to try to
+    beat in Chapter 9. Every extra tuning costs telescope time, and that fixed
+    budget is the constraint you will be handed there.</p>
+    <p>It is also the assumption about to expire. ALMA’s Wideband Sensitivity
+    Upgrade will at least double what a single tuning can record, and every extra
+    GHz turns some of the ambiguity in the next few chapters into a plain answer.
+    The last chapter comes back to this.</p>
+  </details>
+
+  <div class="chapter-end">
+    <button class="continue">Onward →</button>
+    <button class="skip">skip ahead</button>
+  </div>
+</section>
+
+<!-- ==================== Ch. 3 ==================== -->
+<section class="chapter" data-chapter="3" data-title="The galaxy is a chord">
+  <h2>3 · The galaxy is a chord</h2>
 
   <p>The galaxies in this game are monsters: dusty factories building stars a
   thousand times faster than the Milky Way, so wrapped in dust that visible
@@ -154,25 +510,23 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 3 ==================== -->
-<section class="chapter" data-chapter="3" data-title="You are a radio telescope">
-  <h2>3 · You are a radio telescope</h2>
+<!-- ==================== Ch. 4 ==================== -->
+<section class="chapter" data-chapter="4" data-title="You are a radio telescope">
+  <h2>4 · You are a radio telescope</h2>
 
-  <p>Congratulations. You are now a millimetre-wave observatory in the Chilean
-  desert. You may listen to two narrow frequency windows — the purple bars on
-  the left. The galaxy’s chord is out there somewhere, stretched by an unknown
-  amount.</p>
+  <p>Congratulations. You are now
+  <a href="https://www.almaobservatory.org/">ALMA</a> — or at least the two
+  windows of it you talked a time allocation committee into. The axes are the
+  ones from Chapter 2: frequency up the side, the unknown redshift across, and
+  the purple bars on the left are your windows. The galaxy’s chord is out there
+  somewhere, stretched by an unknown amount.</p>
 
-  <p>Two windows is not stinginess, and it is not a budget cut. It is what
-  spectroscopy <em>is</em>: a receiver measures a range of frequencies, never
-  all of them. You point it at a slice of the spectrum, you record that slice,
-  and everything outside it is simply not observed. Wanting a wider slice is
-  the entire history of receiver engineering — and, as you will see at the end,
-  it is where this field is going next.</p>
-
-  <p>The curves are where each rung of the ladder would appear at each possible
-  redshift. The horizontal line is a <em>real detection</em>: 155.772 GHz. It
-  never moves — it’s the data. The moving tones are your model of the galaxy.</p>
+  <p>Chapter 2 drew one line of the barcode sliding down the frequency axis as z
+  grows. A galaxy hands you the whole ladder at once, so you get a whole family
+  of those curves, sliding together: each is where a rung would appear at each
+  possible redshift. The horizontal line is a <em>real detection</em>: 155.772
+  GHz. It never moves — it’s the data. The moving tones are your model of the
+  galaxy.</p>
 
   <p><strong>How to play:</strong> drag the redshift. When a predicted rung
   approaches the detected line you’ll hear <em>beats</em> — a wobble that slows
@@ -180,7 +534,7 @@ if (location.protocol === 'file:') {
   a string. Let go on a match to lock it in. (The cursor pulses at the same
   rate, so it works with the sound off.)</p>
 
-  <div class="interactive" data-interactive="rsg" data-config="ch3"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch4"></div>
 
   <p>Keep going and the problem announces itself: the beats stop again. And
   again. One tone fits <em>thirteen</em> different identifications in this
@@ -194,15 +548,15 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 4 ==================== -->
-<section class="chapter" data-chapter="4" data-title="Two notes are (almost) a song">
-  <h2>4 · Two notes are (almost) a song</h2>
+<!-- ==================== Ch. 5 ==================== -->
+<section class="chapter" data-chapter="5" data-title="Two notes are (almost) a song">
+  <h2>5 · Two notes are (almost) a song</h2>
 
   <p>Your other window catches something: 93.463 GHz. Two steady tones now. And
   a candidate redshift has to lock <em>both</em> — the whole chord shifts
   together, remember?</p>
 
-  <div class="interactive" data-interactive="rsg" data-config="ch4"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch5"></div>
 
   <p>Feel the difference. Nearly everywhere, one tone locks and the other beats
   angrily against the model. Almost every impostor dies.</p>
@@ -217,9 +571,9 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 5 ==================== -->
-<section class="chapter" data-chapter="5" data-title="The impostor">
-  <h2>5 · The impostor</h2>
+<!-- ==================== Ch. 6 ==================== -->
+<section class="chapter" data-chapter="6" data-title="The impostor">
+  <h2>6 · The impostor</h2>
 
   <p>Here is the dirty secret of ladders: they are <em>too</em> regular. If two
   detections are rungs 2 and 3 at one redshift, then somewhere deeper there is a
@@ -239,7 +593,7 @@ if (location.protocol === 'file:') {
   did not see is dead. Now notice that you cannot say anything like that about
   A or B.</p>
 
-  <div class="interactive" data-interactive="rsg" data-config="ch5"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch6"></div>
 
   <p>There is none, because there is none to hear. Both are exact. The universe
   is not going to tell you which. An astronomer who publishes one of these as
@@ -270,9 +624,9 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 6 ==================== -->
-<section class="chapter" data-chapter="6" data-title="Listen for the silence">
-  <h2>6 · Listen for the silence</h2>
+<!-- ==================== Ch. 7 ==================== -->
+<section class="chapter" data-chapter="7" data-title="Listen for the silence">
+  <h2>7 · Listen for the silence</h2>
 
   <h3>Cheat #1 — the dog that didn’t bark</h3>
 
@@ -287,7 +641,7 @@ if (location.protocol === 'file:') {
   or use the 🔭 button under the slider, which does the same thing and names
   the line it is checking. The panel tells you what is still to do.</p>
 
-  <div class="interactive" data-interactive="rsg" data-config="ch6a"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch7a"></div>
 
   <p>Nothing. A galaxy at z&nbsp;=&nbsp;6.40 would be singing there. It isn’t.
   Silence is data, and the impostor dies of it — z&nbsp;=&nbsp;2.70 stands
@@ -317,7 +671,7 @@ if (location.protocol === 'file:') {
   a photometric redshift is a weak weapon, so use it only where it is
   decisive.)</p>
 
-  <div class="interactive" data-interactive="rsg" data-config="ch6b"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch7b"></div>
 
   <h3>Cheat #3 — the off-ladder note</h3>
 
@@ -344,22 +698,22 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 7 ==================== -->
-<section class="chapter" data-chapter="7" data-title="Three real galaxies">
-  <h2>7 · Three real galaxies</h2>
+<!-- ==================== Ch. 8 ==================== -->
+<section class="chapter" data-chapter="8" data-title="Three real galaxies">
+  <h2>8 · Three real galaxies</h2>
 
   <p>Enough training. Three observations, the full toolkit, no hand-holding.
   Drag, listen, click ghosts, strike off what the photometry forbids — then
   answer.</p>
 
   <h3>Galaxy A</h3>
-  <div class="interactive" data-interactive="rsg" data-config="ch7a"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch8a"></div>
 
   <h3>Galaxy B</h3>
-  <div class="interactive" data-interactive="rsg" data-config="ch7b"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch8b"></div>
 
   <h3>Galaxy C</h3>
-  <div class="interactive" data-interactive="rsg" data-config="ch7c"></div>
+  <div class="interactive" data-interactive="rsg" data-config="ch8c"></div>
 
   <p>That third answer — "we don’t know yet, give me more time" — is the most
   important thing this game has to teach. Real astronomers say it for a living,
@@ -371,9 +725,9 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 8 ==================== -->
-<section class="chapter" data-chapter="8" data-title="Design the search">
-  <h2>8 · Design the search</h2>
+<!-- ==================== Ch. 9 ==================== -->
+<section class="chapter" data-chapter="9" data-title="Design the search">
+  <h2>9 · Design the search</h2>
 
   <p>Final promotion. You’re not the observer any more — you’re the one writing
   the telescope proposal. Thousands of dusty galaxies are waiting, and you
@@ -387,7 +741,7 @@ if (location.protocol === 'file:') {
   means the galaxy said nothing at all: a night of telescope time for
   nothing.</p>
 
-  <div class="interactive" data-interactive="tuning-sandbox" data-config="ch8"></div>
+  <div class="interactive" data-interactive="tuning-sandbox" data-config="ch9"></div>
 
   <p>You start with both windows crammed into the 3&nbsp;mm band, which is
   exactly the tempting mistake: cheap, contiguous, and it leaves half the
@@ -419,9 +773,9 @@ if (location.protocol === 'file:') {
   </div>
 </section>
 
-<!-- ==================== Ch. 9 ==================== -->
-<section class="chapter" data-chapter="9" data-title="This was real">
-  <h2>9 · This was real</h2>
+<!-- ==================== Ch. 10 ==================== -->
+<section class="chapter" data-chapter="10" data-title="This was real">
+  <h2>10 · This was real</h2>
 
   <p>Every number you just played with is real. The galaxies are real: Herschel
   and South Pole Telescope surveys of dusty star-forming galaxies. The windows
@@ -432,8 +786,17 @@ if (location.protocol === 'file:') {
   <a href="https://github.com/tjlcbakx/redshift-search-graphs">redshift-search-graphs</a>,
   ported to JavaScript and checked line by line against the original.</p>
 
-  <p>Astronomers: the sandbox accepts real tunings and scores them with the real
-  metric. Steal it for your next proposal.</p>
+  <p>If you want to keep playing, there is one more thing:
+  <a href="bench.html"><strong>the redshift search bench</strong></a> is this graph with the
+  guard rails off. Four real galaxies from the paper are waiting there with their
+  answers not written down, and you can also build your own — any lines, any
+  windows, the redshift under your finger and the beats in your ears. You do not
+  need data of your own to use it.</p>
+
+  <p>And if you do have data: the sandbox above accepts real tunings and scores
+  them with the real metric, and the bench prints the <code>RSGplot()</code> call
+  for whatever you build in it. Astronomers, steal either for your next
+  proposal.</p>
 
   <h3>With thanks</h3>
 

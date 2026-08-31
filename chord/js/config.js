@@ -14,13 +14,13 @@ const FIG3 = [144.089];
 const FIG4 = [107.229, 160.844];
 
 export const CONFIGS = {
-  ch3: {
+  ch4: {
     bands: BANDS, detected: [FIG1[1]], mode: 'count', startZ: 0.25, goalCount: 4,
   },
-  ch4: {
+  ch5: {
     bands: BANDS, detected: FIG1, mode: 'joint', startZ: 0.4, showSolutions: true,
   },
-  ch5: {
+  ch6: {
     bands: BANDS, detected: FIG4, mode: 'ab', startZ: 0.4, ab: [1.150, 3.300],
     // the same two frequencies also fit at 5.45 (rungs 6 and 9) — but that one
     // predicts CO(5-4) at 89.358 and CO(8-7) at 142.972 GHz, and neither was
@@ -28,14 +28,14 @@ export const CONFIGS = {
     third: { z: 5.450 },
     showSolutions: true,
   },
-  ch6a: {
+  ch7a: {
     bands: BANDS, detected: FIG1, mode: 'exclude', startZ: 6.4, showSolutions: true,
   },
-  ch6b: {
+  ch7b: {
     bands: BANDS, detected: FIG3, mode: 'exclude', startZ: 0.6,
     photz: { z: 3.0, dz: 0.13 }, goalExclude: 2, requireZ: 3.0,
   },
-  ch7a: {
+  ch8a: {
     bands: BANDS, detected: FIG1, mode: 'case', startZ: 2.0,
     prompt: 'Two lines: 93.463 and 155.772 GHz. No photometric redshift. Your call.',
     answers: [
@@ -52,7 +52,7 @@ export const CONFIGS = {
           + 'and two predicted lines that never showed up. Go and use the silence.' },
     ],
   },
-  ch7b: {
+  ch8b: {
     bands: BANDS, detected: FIG3, mode: 'case', startZ: 1.0,
     photz: { z: 3.0, dz: 0.13 },
     prompt: 'One line: 144.089 GHz. Photometric redshift: 3.0, give or take 0.5. Your call.',
@@ -73,7 +73,7 @@ export const CONFIGS = {
           + 'neighbouring rung, and the photometry rules out the far ones.' },
     ],
   },
-  ch7c: {
+  ch8c: {
     bands: BANDS, detected: FIG4, mode: 'case', startZ: 1.0,
     photz: { z: 2.3, dz: 0.13 },
     prompt: 'Two lines: 107.229 and 160.844 GHz. Photometric redshift: 2.3 ± 0.4. Your call.',
@@ -97,5 +97,5 @@ export const CONFIGS = {
           + 'The right move is another observation, not a braver guess.' },
     ],
   },
-  ch8: {},
+  ch9: {},
 };

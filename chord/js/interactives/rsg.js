@@ -31,15 +31,21 @@ export class RSG extends Interactive {
     this.bands = cfg.bands;
     this.detected = cfg.detected ?? [];
     this.mode = cfg.mode ?? 'count';
+    // The bench hands in its own line set and redshift range; the chapters
+    // take the defaults, which are the paper's.
+    this.LINES = cfg.lines ?? LINES;
+    this.CLASSIFY = cfg.classifyLines ?? CLASSIFY;
+    this.zMin = cfg.zMin ?? 0;
+    this.zMax = cfg.zMax ?? 7;
     this.z = cfg.startZ ?? 0.6;
     this.found = [];
     this.excluded = [];
     this.answered = false;
 
     this.cands = candidateRedshifts(this.detected, this.bands,
-      { zMax: 7, lines: LINES, classifyLines: CLASSIFY });
+      { zMin: this.zMin, zMax: this.zMax, lines: this.LINES, classifyLines: this.CLASSIFY });
     this.solutions = this.detected.length > 1
-      ? jointSolutions(this.detected, this.bands, { zMax: 7 })
+      ? jointSolutions(this.detected, this.bands, { zMin: this.zMin, zMax: this.zMax })
       : this.cands.map((c) => ({ z: c.z, nLines: c.nLines, members: [c] }));
     // what a lock has to land on: joint solutions when there are two lines,
     // every ladder crossing when there is only one
@@ -48,13 +54,14 @@ export class RSG extends Interactive {
     this.canvasEl = this.canvas('stage rsg-stage');
     this.canvasEl.style.height = '420px';
     this.graph = new RSGGraph(this.canvasEl, {
-      bands: this.bands, zMin: 0, zMax: 7, lines: LINES, classifyLines: CLASSIFY,
+      bands: this.bands, zMin: this.zMin, zMax: this.zMax,
+      lines: this.LINES, classifyLines: this.CLASSIFY,
     });
     this.graph.setDetected(this.detected);
 
     this.zSlider = slider({
       label: 'redshift &nbsp;z',
-      min: 0, max: 7, step: 0.001, value: this.z,
+      min: this.zMin, max: this.zMax, step: 0.001, value: this.z,
       format: (v) => v.toFixed(3),
       oninput: (v) => this.setZ(v),
       onchange: () => this.release(),
@@ -119,7 +126,9 @@ export class RSG extends Interactive {
       this.status.set('Listen to each fit, then answer with one of the two buttons at '
         + 'the bottom. This chapter is asking you to make a judgement, not to find a number.');
     }
-    if (this.mode === 'exclude' || this.mode === 'case') this.addProbeButton();
+    if (this.mode === 'exclude' || this.mode === 'case' || this.mode === 'free') {
+      this.addProbeButton();
+    }
     if (this.mode === 'exclude') {
       this.objective = el('p', { class: 'task' });
       this.extra.prepend(this.objective);
@@ -185,6 +194,13 @@ export class RSG extends Interactive {
     if (!this.probeBtn) return;
     const g = this.ghostList().filter((x) => !x.excluded);
     this.probeBtn.disabled = g.length === 0;
+    if (this.mode === 'free') {
+      this.probeBtn.textContent = g.length
+        ? `🔭 listen at ${g[0].obsFreq.toFixed(2)} GHz — this redshift predicts `
+          + `${g[0].name} there, and it is not in your list`
+        : 'go to a candidate redshift to check the lines it predicts';
+      return;
+    }
     this.probeBtn.textContent = g.length
       ? `🔭 point the telescope at ${g[0].name} (${g[0].obsFreq.toFixed(2)} GHz)`
       : 'drag to a candidate redshift to point the telescope';
@@ -231,7 +247,7 @@ export class RSG extends Interactive {
   goTo(z, tag) {
     this.setZ(z);
     this.zSlider.set(z);
-    this.audio.lockChime(z, LINES, this.bands);
+    this.audio.lockChime(z, this.LINES, this.bands);
     this.heard = this.heard || new Set();
     this.heard.add(tag);
     this.status.cue(`Solution ${tag}: z = ${z.toFixed(2)} — both detected lines lock, `
@@ -245,7 +261,7 @@ export class RSG extends Interactive {
     if (!wasOwner) this.audio.setDetectedLines(this.detected); // taking over
 
     const ghosts = this.ghostNames();
-    this.audio.updateModel(z, LINES, this.bands, { ghosts: new Set(ghosts) });
+    this.audio.updateModel(z, this.LINES, this.bands, { ghosts: new Set(ghosts) });
     if (this.config.photz) this.audio.updatePhotZ(z);
     this.updateProbe();
     this.updateObjective();
@@ -268,7 +284,7 @@ export class RSG extends Interactive {
     // meaningless as a summary, which is exactly how you miss that a redshift
     // has to satisfy both.
     const beats = this.detected.map((f) => ({
-      f, hz: this.audio.beatRate(f, this.z, LINES, this.bands),
+      f, hz: this.audio.beatRate(f, this.z, this.LINES, this.bands),
     }));
     const locked = beats.filter((b) => b.hz < 0.5);
     const loose = beats.filter((b) => b.hz >= 0.5).sort((a, b) => a.hz - b.hz);
@@ -309,7 +325,7 @@ export class RSG extends Interactive {
     const label = hit.members
       ? hit.members.map((m) => m.line.name).join(' + ')
       : hit.line.name;
-    this.audio.lockChime(hit.z, LINES, this.bands);
+    this.audio.lockChime(hit.z, this.LINES, this.bands);
     if (!already) {
       this.chips.append(el('span', { class: 'chip' },
         [`${label} → z = ${hit.z.toFixed(2)}`]));
@@ -331,7 +347,7 @@ export class RSG extends Interactive {
         + 'That is the problem with one line.');
     }
     if (this.mode === 'joint' && this.found.length >= this.solutions.length) {
-      this.audio.robustChord(this.found[0], LINES, this.bands);
+      this.audio.robustChord(this.found[0], this.LINES, this.bands);
       this.status.cue(`Both survivors found: z = ${this.found.map((z) => z.toFixed(2)).join(' and ')}. `
         + 'Two lines killed almost everything — but not quite everything.');
       this.complete();
@@ -344,10 +360,12 @@ export class RSG extends Interactive {
   // Which lines does redshift z put in a window with no detection to match
   // them? That set *is* the exclusion argument, and it is the same test
   // wherever the game makes it.
-  predictedButUndetected(z) {
+  predictedButUndetected(z, { includeFaint = false } = {}) {
     const out = [];
-    for (const line of LINES) {
-      if (line.kind === 'faint') continue; // too faint to be evidence (§2.3.2)
+    for (const line of this.LINES) {
+      // §2.3.2: [CI] and H2O are only evidence in a survey deep enough to have
+      // seen them. The chapters assume a normal-depth survey and skip them.
+      if (line.kind === 'faint' && !includeFaint) continue;
       const f = observedFreq(line.freq, z);
       if (!inBands(f, this.bands)) continue;
       if (this.detected.some((d) => Math.abs(d - f) < MATCH_GHZ)) continue;
@@ -359,14 +377,14 @@ export class RSG extends Interactive {
   // Which line each detection would be, if z were the answer.
   identify(z) {
     return this.detected.map((d) => {
-      const hit = LINES.find((l) => Math.abs(observedFreq(l.freq, z) - d) < MATCH_GHZ);
+      const hit = this.LINES.find((l) => Math.abs(observedFreq(l.freq, z) - d) < MATCH_GHZ);
       return hit ? hit.name : `${d.toFixed(3)} GHz`;
     });
   }
 
   // At the current redshift, the ghosts the player can point a telescope at.
   ghostNames() {
-    if (!(this.mode === 'exclude' || this.mode === 'case')) return [];
+    if (!(this.mode === 'exclude' || this.mode === 'case' || this.mode === 'free')) return [];
     const atCandidate = this.targets.some((c) => Math.abs(c.z - this.z) < CAPTURE);
     if (!atCandidate) return [];
     return this.predictedButUndetected(this.z).map((g) => g.name);
@@ -375,7 +393,7 @@ export class RSG extends Interactive {
   ghostList() {
     const dead = this.excluded.some((z) => Math.abs(z - this.z) < 0.03);
     return this.ghostNames().map((name) => {
-      const line = LINES.find((l) => l.name === name);
+      const line = this.LINES.find((l) => l.name === name);
       return { name, obsFreq: observedFreq(line.freq, this.z), excluded: dead };
     });
   }
@@ -394,7 +412,7 @@ export class RSG extends Interactive {
     if (this.excluded.some((e) => Math.abs(e - z) < 0.03)) return;
     this.excluded.push(z);
     this.audio.exclusionThud();
-    this.audio.updateModel(z, LINES, this.bands,
+    this.audio.updateModel(z, this.LINES, this.bands,
       { ghosts: new Set(this.ghostNames()), silent: new Set([ghost.name]) });
     this.updateProbe();
     this.updateObjective();
@@ -436,7 +454,7 @@ export class RSG extends Interactive {
       const locked = this.found.some(
         (z) => Math.abs(z - this.config.requireZ) < 0.05);
       if (this.excluded.length >= need && locked) {
-        this.audio.robustChord(this.config.requireZ, LINES, this.bands);
+        this.audio.robustChord(this.config.requireZ, this.LINES, this.bands);
         this.status.cue(`z = ${this.config.requireZ.toFixed(2)} survives: it is inside the `
           + 'photometric prior, and it is the identification that predicts nothing '
           + 'you failed to see. One line, one answer — if you are careful.');
@@ -450,7 +468,7 @@ export class RSG extends Interactive {
     const alive = this.solutions.filter(
       (s) => !this.excluded.some((z) => Math.abs(z - s.z) < 0.05));
     if (this.solutions.length > 1 && alive.length === 1) {
-      this.audio.robustChord(alive[0].z, LINES, this.bands);
+      this.audio.robustChord(alive[0].z, this.LINES, this.bands);
       this.status.cue(`One survivor: z = ${alive[0].z.toFixed(2)}. `
         + 'The impostor was killed by a line that wasn’t there.');
       this.complete();
@@ -494,7 +512,7 @@ export class RSG extends Interactive {
         + 'have listened to both.');
       return;
     }
-    this.audio.lockChime(this.config.ab[0], LINES, this.bands);
+    this.audio.lockChime(this.config.ab[0], this.LINES, this.bands);
     this.complete('Correct. Two exact fits, nothing in the data between them '
       + (this.config.third ? '(unlike the third one, which the missing lines killed). ' : '. ')
       + 'Now let’s go and get some evidence.');
@@ -509,9 +527,9 @@ export class RSG extends Interactive {
       if (a.z != null) {
         this.setZ(a.z);
         this.zSlider.set(a.z);
-        this.audio.robustChord(a.z, LINES, this.bands);
+        this.audio.robustChord(a.z, this.LINES, this.bands);
       } else {
-        this.audio.lockChime(this.z, LINES, this.bands);
+        this.audio.lockChime(this.z, this.LINES, this.bands);
         this.root.classList.add('celebrate');
       }
       this.status.cue(a.response);
@@ -527,7 +545,7 @@ export class RSG extends Interactive {
   beatHz() {
     if (!this.detected.length) return Infinity;
     return Math.min(...this.detected.map(
-      (f) => this.audio.beatRate(f, this.z, LINES, this.bands)));
+      (f) => this.audio.beatRate(f, this.z, this.LINES, this.bands)));
   }
 
   frame(t) {

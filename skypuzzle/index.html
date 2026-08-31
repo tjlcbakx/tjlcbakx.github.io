@@ -32,6 +32,7 @@
           <button id="btnGrid" class="opt" type="button" aria-pressed="false"><span class="lab">RA / Dec coordinates</span><kbd>G</kbd></button>
           <p class="grp">Display</p>
           <button id="btnStreak" class="opt" type="button" aria-pressed="true"><span class="lab">Streak counter</span><kbd>K</kbd></button>
+          <button id="btnNotes" class="opt" type="button" aria-pressed="true"><span class="lab">Did you know? notes</span><kbd>D</kbd></button>
           <button id="btnSound" class="opt" type="button" aria-pressed="true"><span class="lab">Sound</span><kbd></kbd></button>
         </div>
       </div>
@@ -65,6 +66,14 @@
         <p class="tip" id="inspTip">Brighten it until you can see the galaxy, then drag it onto the sky.</p>
       </div>
     </section>
+
+    <aside id="note" hidden>
+      <button id="btnCloseNote" type="button" class="close" title="Close (Esc)">&times;</button>
+      <p class="kicker">Did you know?</p>
+      <h3 id="noteTitle"></h3>
+      <p id="noteBody"></p>
+      <p class="cite"><a id="noteCite" href="#" target="_blank" rel="noopener"></a><span id="noteTag"></span></p>
+    </aside>
   </main>
 
   <footer id="trayWrap">
@@ -103,16 +112,23 @@
     <p><em>Streak</em> counts how many you place in a row: every piece that
        clicks home adds one, and any drop that does not lands you back at zero.
        Your best run is kept.</p>
+    <p>Some of these galaxies have been studied one by one, and placing one of
+       those pops up a short note about what was found and a link to the paper.
+       There are <span id="helpNoteCount">80</span> of them hidden across the board. Tap a galaxy you have
+       already placed to read its note again, or switch the notes off in
+       <em>Options</em> (<kbd>D</kbd>).</p>
     <p><em>Coordinates</em> draws the RA/Dec grid and puts each piece's sky
        position in its panel &mdash; the astronomer's way to find it.
        <em>Positions</em> just rings the spots that are still empty.
        Scroll or pinch to zoom; drag empty sky to pan.</p>
-    <p><em>Whole sky</em> (or the <kbd>V</kbd> key) swaps the packed board for
-       the real celestial sphere: the same six fields at their true right
-       ascension and declination, over the Milky Way, the constellations and
-       every star down to naked-eye magnitude 6. It is worth a look &mdash; the
-       fields hug the galactic poles because that is where the Galaxy's own dust
-       is thinnest, and Fomalhaut sits inside the SGP field.</p>
+    <p>The game opens on the <em>whole sky</em>: the six fields at their true
+       right ascension and declination, over the Milky Way, the constellations
+       and every star down to naked-eye magnitude 6. The fields hug the
+       galactic poles because that is where the Galaxy's own dust is thinnest,
+       and Fomalhaut sits inside the SGP field. That same button (or the
+       <kbd>V</kbd> key) swaps it for the <em>composite</em> board &mdash; the
+       six fields packed side by side, tighter on screen with no sky around
+       them.</p>
     <button id="btnHelpClose" type="button">Start hunting</button>
   </div>
 </div>
@@ -123,6 +139,7 @@
     <p id="doneMsg"></p>
     <p>You have just rebuilt the ALMA snapshot survey on the Herschel sky &mdash;
        every piece back where the telescope found it.</p>
+    <p id="doneNotes" hidden></p>
     <p class="tip">Star, constellation and Milky Way data:
        <a href="https://github.com/ofrohn/d3-celestial" target="_blank"
           rel="noopener">d3-celestial</a> (Hipparcos / Yale BSC), MIT licence.

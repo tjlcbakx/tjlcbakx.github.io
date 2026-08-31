@@ -29,6 +29,33 @@ last page clears it.
 Sound is the point — headphones if you have them. Every cue is also written
 out in the status line under each interactive, so it is playable muted.
 
+## The bench
+
+`bench.html` is the same graph with the guard rails off: your own detected
+frequencies, your own windows (typed as ranges, or built from `giveALMA`
+tunings you can slide along a band), the redshift slider and the sound. It is
+`interactives/rsg.js` in its `free` mode plus an editor, so it cannot drift
+from the game or from the paper.
+
+For each candidate it runs the chapters' own chain of reasoning — does this
+identification demand lines you never saw; is it inside the photometric prior;
+is anything else still standing — and prints the `RSGplot()` call for whatever
+you have built, so it round-trips to the original Python. State lives in the
+URL, so a setup is a link.
+
+The depth control is the paper's §2.3.2 made playable: silence at a predicted
+line is only evidence if the observation could have seen it. On *a quick look*
+nothing is excluded by silence at all, so Fig. 1's two lines give two answers
+instead of one; on *a deep survey* even [CI] and H2O count, and more candidates
+die. Same data, different amount of looking, different conclusion.
+
+Four cases from the paper load from cards at the top, with the answers kept out
+of their names — the page is usable by someone who has no data of their own,
+which is most of the people arriving from the game.
+
+Deliberately *not* `RSGquality` — that scores a tuning against a population and
+would call the Fig. 4 twins robust. Population scoring is Ch. 9's sandbox.
+
 ## The code
 
 No frameworks, no build step, no dependencies. ES modules loaded directly.
@@ -39,6 +66,7 @@ No frameworks, no build step, no dependencies. ES modules loaded directly.
 | `js/audio.js` | the sonification engine (Web Audio). Every pitch comes from `physics.js`; the contract is `SONIFICATION.md`. |
 | `js/graph.js` | the Redshift Search Graph, drawn on canvas (the paper's Fig. 1) |
 | `js/main.js` | chapter engine: shows one chapter, mounts/unmounts its interactives |
+| `js/bench.js` | `bench.html`: the free-form RSG — an editor around the `free`-mode component |
 | `js/config.js` | every real frequency the game quotes, per chapter |
 | `js/interactives/` | one class per chapter interactive, `{ mount, unmount }` |
 | `js/data/samples.js` | the real HerBS and SPT redshift samples |

@@ -29,9 +29,9 @@ song" — this is scientifically honest and emotionally right.)
 | **Detected line** | A line actually observed (fixed f_obs) | Steady sine + faint 2nd harmonic, gain 0.15. It never moves. It is *the data*. |
 | **Model rung (CO)** | Predicted CO line in-band at candidate z | Low-passed sawtooth (cutoff 4×f), gain 0.08. Moves with the slider. |
 | **Model line (atomic/faint)** | Predicted non-CO line in-band | Triangle wave, slight detune-free "bell" envelope — audibly a different *family* from CO. |
-| **Ghost note** | Predicted in-band line with no detected partner (exclusion mode, Ch. 6+) | Model timbre + 6 Hz tremolo + heavy low-pass: hollow, wrong. The dog that didn't bark. |
-| **Phot-z halo** | Photometric prior (Ch. 6+) | Band-filtered noise, gain ∝ exp(−Δz²/2σ²), σ = 0.13(1+z): a warm hiss that swells near z_phot. |
-| **Population chorus** | Sandbox galaxies (Ch. 8) | ~12 sampled galaxies from the redshift histogram, each a quiet 2-note voice: robust → locked/consonant, ambiguous → beating, silent → absent. The *mix* is the score. |
+| **Ghost note** | Predicted in-band line with no detected partner (exclusion mode, Ch. 7+) | Model timbre + 6 Hz tremolo + heavy low-pass: hollow, wrong. The dog that didn't bark. |
+| **Phot-z halo** | Photometric prior (Ch. 7+) | Band-filtered noise, gain ∝ exp(−Δz²/2σ²), σ = 0.13(1+z): a warm hiss that swells near z_phot. |
+| **Population chorus** | Sandbox galaxies (Ch. 9) | ~12 sampled galaxies from the redshift histogram, each a quiet 2-note voice: robust → locked/consonant, ambiguous → beating, silent → absent. The *mix* is the score. |
 
 ## 3. Beats are the mechanic — and they are physical
 
@@ -53,7 +53,7 @@ crossing point (same Hz, capped at 12 Hz for display); lock → glow solidifies
 + arrow appears; ghost note → hollow flickering marker; phot-z halo →
 soft gradient band on the z-axis; chorus mix → the stacked quality bar.
 A muted player loses charm, not information. Conversely every visual state
-change must be audible: the game should be playable eyes-closed by Ch. 4
+change must be audible: the game should be playable eyes-closed by Ch. 5
 (this is a test, not an aspiration — see O5 in SCOPE.md).
 
 ## 5. UI confirmations (the only non-physical sounds)

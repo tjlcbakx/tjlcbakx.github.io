@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The redshift search bench — Listening for a Cosmic Chord</title>
+<meta name="description" content="Four real galaxies with their answers left out, or your own lines and tunings: drag the redshift and hear which identifications fit. Built on Bakx &amp; Dannerbauer (2022).">
+<link rel="stylesheet" href="css/style.css">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tombak.xyz/chord/bench.html">
+<meta property="og:title" content="The redshift search bench">
+<meta property="og:description" content="Four real galaxies with the answers left out, or your own lines and tunings — with the sound.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0e1a'/%3E%3Cg stroke='%23ffb554' stroke-width='2.4' fill='none' stroke-linecap='round'%3E%3Cpath d='M11 6v9a5 5 0 0 0 10 0V6'/%3E%3Cpath d='M16 20v6'/%3E%3C/g%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- Same trap as the game: ES modules do not load over file://, so opening this
+     file directly leaves every panel blank with no error in sight. -->
+<script>
+if (location.protocol === 'file:') {
+  document.addEventListener('DOMContentLoaded', function () {
+    var dir = decodeURIComponent(location.pathname).replace(/\/[^/]*$/, '');
+    document.body.innerHTML =
+      '<div class="filewarn">'
+      + '<h2>This page has to be served, not opened.</h2>'
+      + '<p>The bench is drawn by JavaScript modules, and every browser refuses to '
+      + 'load modules from a file:// address. Nothing is broken.</p>'
+      + '<p>In a terminal, run:</p>'
+      + '<code>cd "' + dir + '" &amp;&amp; python3 serve.py</code>'
+      + '<p>then open <b>http://localhost:8000/bench.html</b>.</p>'
+      + '</div>';
+  });
+}
+</script>
+
+<header class="topbar">
+  <a class="backlink" href="index.html">← the game</a>
+  <span class="brand">the redshift search bench</span>
+  <nav class="progress"></nav>
+  <button id="copylink" class="soundbtn">copy link</button>
+  <button id="soundbtn" class="soundbtn" aria-pressed="false">🔈 sound off</button>
+</header>
+
+<main>
+  <section class="chapter current bench-intro">
+    <h1>The redshift search bench</h1>
+    <p class="subtitle">The graph from the game, with the guard rails off.</p>
+
+    <p><strong>You do not need data of your own to be here.</strong> Pick one of
+    the four cases below and it loads a real galaxy from the study this game is
+    built on, with its real
+    frequencies and the real windows it was observed through — then drag the
+    redshift until something locks. Nothing is scored, nothing is unlocked, and
+    the answer is not written down anywhere: it is the thing you are looking
+    for.</p>
+
+    <p>If you <em>do</em> have data, that is what the panels are for: type in the
+    frequencies you detected, build the tuning you have (or the one you are
+    thinking of proposing), and read off what fits. Every tone, candidate and
+    colour comes from the same engine the chapters use — a port of the paper's
+    own Python, <a href="https://github.com/tjlcbakx/redshift-search-graphs"><code>RSG.py</code></a>,
+    checked value by value against the original. <b>Copy link</b> puts your whole
+    setup in the URL, so a question is something you can send to someone.</p>
+
+    <p class="note">Turn the sound on — the button is at the top right — and
+    drag. A predicted line approaching a detected one <em>beats</em> against it,
+    slower and slower, and goes still at the match; release there to lock it.
+    Once you are on a candidate, the button under the graph offers to check the
+    other lines that redshift predicts. If it predicts something loud and you
+    never saw it, that candidate has just died.</p>
+  </section>
+
+  <div id="bench"></div>
+
+  <section class="chapter current">
+    <h3>What this does not check</h3>
+
+    <p>The bench trusts you, and the things it trusts you about are most of what
+    an observer actually has to know. It does not check that your frequencies are
+    real. It does not check that your windows could be recorded in one pass —
+    a receiver can only be tuned so many ways, and a set of windows that looks
+    fine here may be several separate observations, or impossible. It does not
+    check that the atmosphere would let you: the game's oxygen line at 118.75 GHz
+    is one closed door among many, and above about 350 GHz the sky is only open
+    on good nights. And it does not know how faint your galaxy is, which is why
+    it asks you how deep the observation was rather than working it out.</p>
+
+    <p>Somebody has to carry all of that, and that somebody is the astronomer.
+    Which is roughly the job: the tool does the arithmetic, and you are
+    responsible for whether the question was sane.</p>
+
+    <h3>And afterwards</h3>
+
+    <p>Say you pin a redshift down here. In real life that is a beginning, not an
+    end: it tells you where in the history of the universe this galaxy sits, which
+    is what makes every later measurement of it mean anything — and it is usually
+    the argument for asking for more telescope time, which is a written proposal,
+    judged against everyone else's by a committee, for a telescope that is
+    oversubscribed several times over. The <code>RSGplot()</code> line above is
+    genuinely how a figure in that argument gets made.</p>
+
+    <p class="note">Method: Bakx &amp; Dannerbauer (2022),
+    <a href="https://doi.org/10.1093/mnras/stac1766">MNRAS 515, 678</a> — the
+    paper this game is built on, and yes, astronomers publish the code alongside
+    the writing. Line frequencies, the CO ladder, the candidate search and the
+    exclusion argument are the paper's; the ALMA tunings come from its
+    <code>giveALMA</code>. Scoring a tuning against a whole population of galaxies
+    is a different question, and that one is
+    <a href="index.html#9">Chapter 9</a> of the game.</p>
+  </section>
+</main>
+
+<script type="module" src="js/bench.js"></script>
+</body>
+</html>

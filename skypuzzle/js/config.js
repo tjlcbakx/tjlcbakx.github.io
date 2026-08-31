@@ -88,10 +88,11 @@ export const CFG = {
 };
 
 // --- which map ---------------------------------------------------------------
-// 'board' the reference figure's packed composite of the six fields — the
-//         default: it is the picture the game is *of*, and it wastes no screen
 // 'sky'   the real celestial sphere, pan through 0h, fields at their true
-//         RA/Dec, over the Milky Way and the constellations (key V)
+//         RA/Dec, over the Milky Way and the constellations — the default: it
+//         is what the survey actually looks like, and it says where it is
+// 'board' the reference figure's packed composite of the six fields: tighter on
+//         screen, no sky around it (key V)
 export const DEFAULT_VIEW = 'sky';
 
 // --- which pieces ------------------------------------------------------------
@@ -104,3 +105,9 @@ export const DEFAULT_SET = 'standout';
 // v2: the default view changed to 'board' and the sky gained real stars, so
 // old saved state would otherwise keep sending people back to the old default.
 export const STORE_KEY = 'onlineGame2.skypuzzle.v2';
+
+// A save remembers the view it was left in, which would otherwise keep
+// returning players on the *previous* default for ever. Bump this whenever
+// DEFAULT_VIEW changes: the stored view is reset once, on the next boot, and
+// nothing else in the save (placed pieces, streak, options) is touched.
+export const VIEW_REV = 2;

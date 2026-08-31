@@ -4,7 +4,7 @@
 > lives in `game/index.html`; edit it there. This file is kept as the design
 > draft — it records the intended beat of each chapter, which is still the
 > thing to check a rewrite against. Where the two differ, the built game wins
-> (e.g. Ch. 3's "seven candidate redshifts" is thirteen in the real tuning).
+> (e.g. Ch. 4's "seven candidate redshifts" is thirteen in the real tuning).
 
 Chapter-by-chapter prose for the game. Voice: warm, second person, Nicky Case
 register. Text in `>` blocks is player-visible copy; *(stage directions)* are
@@ -55,7 +55,78 @@ single warm tone fades in.)*
 *(fold-out: "why not just use a ruler?" — one paragraph on why distances are
 hard and redshift is the currency of cosmology.)*
 
-## Ch. 2 — The galaxy is a chord
+## Ch. 2 — Sixty-six dishes in a desert
+
+> ALMA: sixty-six dishes on Chajnantor, 5 km up. Water vapour absorbs
+> *broadly* across the mm range — the bands are the gaps between its lines, and
+> only gaps when the air is dry. **The 116–125 GHz hole between Bands 3 and 4 is
+> the O₂ line at 118.75 GHz, not water**: it never opens, at any altitude.
+>
+> For a redshift search you are not using the array as an interferometer at all
+> — sixty-six dishes as one bucket, feeding a spectrometer. (Cashes the title,
+> and supports "not a photograph".)
+>
+> Plant the direction of frequency early: more waves per second = higher note,
+> so redshift moves lines *down* this axis. Without it, f₀/(1+z) reads as
+> contradicting Ch. 1's "multiply by (1+z)".
+>
+> Heterodyne in plain words — difference against a reference tone — which
+> doubles as the first mention of **beats**, the Ch. 4 mechanic. Then the
+> correlator as channeliser.
+>
+> Name the object before leaning on it: the channelised output **is a
+> spectrum**, and the word is used five times across the game without ever
+> being defined. Playtest finding: a newcomer knows it is something you *have*,
+> that has a *depth*, and that can be *silent* — three properties of a thing
+> they have never seen a picture of. So: show one.
+>
+> *(figure: `diagram` — a real spectrum. A strip showing the whole 139.9–162.7
+> window with a 4 GHz sliver highlighted, then that sliver full width: stepped
+> channels, a shaded noise band, CO(5-4) at 155.772 GHz standing well clear of
+> it with a visible width, and one labelled empty patch. Deliberately the same
+> 155.772 GHz the player is handed in Ch. 4, so the detection there is already
+> an old friend. Seeded noise, so the art is reproducible.)*
+>
+> Then the three words, explicitly: you *have* a spectrum; its *depth* is the
+> height of the noise; most of it is *silent*, and how deep the silence goes is
+> the difference between evidence and an absence of evidence. That last clause
+> is what Ch. 7's exclusion argument and the bench's depth control both stand on.
+>
+> Precision: the maser is ~10⁶ better than needed, so the instrument never
+> limits you; the line has *width* because the gas orbits, and the error bar is
+> width ÷ signal-to-noise. This has to be said explicitly or it reads as
+> contradicting Ch. 1's "*exact* frequencies". "Measured, not estimated" needs
+> "for these galaxies the optical route is shut" or it sounds like radio
+> chauvinism.
+>
+> Vocabulary ladder, stated as a nesting: spectrum → ten **bands** → two
+> **windows** (~23 GHz, what you searched) → **tunings** (7.5 GHz each). Define
+> *window* in the prose, never only in the caption. Do not reuse "window" for
+> ALMA's 1.875 GHz spectral windows — say sub-bands or sidebands.
+>
+> *(figure: `diagram` — ALMA's two bands on a vertical frequency axis at left,
+> that same axis as the RSG's y axis at right, one f₀/(1+z) curve descending
+> through the two window stripes. Static SVG; the chapter is the axis lesson.
+> Annotations that earn their keep: a dashed panel divider (without it the band
+> blocks read as data at negative z), the O₂ tag in the gap, the ▲ saying the
+> curve enters off-scale at 346 GHz, and leader lines to the green segments.)*
+>
+> Pitch payoff, and it must include the transposition or a knowledgeable reader
+> bounces: you cannot hear 155 GHz, so divide by 250 million → ~360–650 Hz.
+> **Linearly** — ratios survive, so a chord in the sky is the same chord in the
+> headphones. (`audio.js`: `GHZ_TO_HZ = 4`.)
+
+*(fold-out: "how wide is one tuning, really?" — 7.5 GHz in four 1.875 GHz
+slices across two sidebands, so a window is tunings placed with care, not laid
+end to end; why *these* windows (two rungs at once over the widest z span,
+which Ch. 9 lets you try to beat); WSU at least doubles it.)*
+
+*(known gap: this is the longest chapter and the only one with nothing to
+touch. A slider dragging one line down the axis, sounding it, silent outside a
+window would deliver the transposition, "not observed", and f₀/(1+z) at once —
+and would put Ch. 4's beats within reach.)*
+
+## Ch. 3 — The galaxy is a chord
 
 > The galaxies in this game are monsters: dusty factories making stars a
 > thousand times faster than the Milky Way. So dusty that visible light
@@ -77,7 +148,7 @@ hard and redshift is the currency of cosmology.)*
 *(fold-out: "is the ladder really exact?" — CO rotational levels, the linear
 spacing, and that the approximation is good to what matters here.)*
 
-## Ch. 3 — You are a radio telescope
+## Ch. 4 — You are a radio telescope
 
 > Congratulations. You are now a millimetre-wave observatory in the Chilean
 > desert. Budget cuts: you may listen to TWO narrow frequency windows.
@@ -96,7 +167,7 @@ spacing, and that the approximation is good to what matters here.)*
 > This single number could mean a galaxy 4 billion years old, or 12.
 > We need another note.
 
-## Ch. 4 — Two notes are (almost) a song
+## Ch. 5 — Two notes are (almost) a song
 
 > Your second window catches something: 93.463 GHz. Two steady tones now.
 > A candidate redshift must lock BOTH — the whole chord shifts together,
@@ -111,7 +182,7 @@ spacing, and that the approximation is good to what matters here.)*
 >
 > …and also there. z ≈ 6.4. Locked too. Huh.
 
-## Ch. 5 — The impostor
+## Ch. 6 — The impostor
 
 > Here's the dirty secret of ladders: they're *too* regular.
 > If rung 3 and rung 5 fit at one redshift, then somewhere deeper there's a
@@ -132,7 +203,7 @@ spacing, and that the approximation is good to what matters here.)*
 *(fold-out: the GCD rule — when transitions share a common factor, the
 degenerate twin exists; eq. 1 of the paper drawn as ladder spacing.)*
 
-## Ch. 6 — Listen for the silence
+## Ch. 7 — Listen for the silence
 
 > **Cheat #1: the dog that didn't bark.**
 > The z = 6.4 impostor from Ch. 4 doesn't just predict your two detected
@@ -163,7 +234,7 @@ degenerate twin exists; eq. 1 of the paper drawn as ladder spacing.)*
 *(fold-out: "when can you NOT trust the silence?" — the paper's §2.3.2:
 faint lines, depth, and why [CI] needs a deep survey.)*
 
-## Ch. 7 — Three real galaxies
+## Ch. 8 — Three real galaxies
 
 > Enough training. Three real observations. The full toolkit. Go.
 >
@@ -182,7 +253,7 @@ faint lines, depth, and why [CI] needs a deep survey.)*
 > That third answer is the most important thing this game teaches.
 > Real astronomers say "we don't know yet" for a living.
 
-## Ch. 8 — Design the search
+## Ch. 9 — Design the search
 
 > Final promotion: you're not the observer anymore. You're the one WRITING
 > the telescope proposal. Thousands of dusty galaxies are waiting; you
@@ -203,7 +274,7 @@ faint lines, depth, and why [CI] needs a deep survey.)*
 > built on. The answer — you need BOTH bands — now steers real telescope
 > time on the largest array on Earth.
 
-## Ch. 9 — This was real
+## Ch. 10 — This was real
 
 > Every number you just played with is real. The galaxies are real
 > (Herschel and South-Pole-Telescope surveys). The windows are ALMA's.
