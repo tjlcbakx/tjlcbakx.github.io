@@ -392,6 +392,8 @@ button.warn { color: #ffb4a8; border-color: #4a2a26; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .bar { height: 4px; background: #1a1a24; border-radius: 3px; overflow: hidden; }
 .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .15s; }
+#loadHint { margin-top: 14px; }
+#loadHint button { margin-left: 4px; }
 
 .overlay {
   position: fixed;

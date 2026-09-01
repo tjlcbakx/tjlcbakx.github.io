@@ -114,12 +114,40 @@ function save() {
 
 // --- asset loading -----------------------------------------------------------
 
+// --- the stall hint -------------------------------------------------------
+// A load does not always fail loudly. Served by a single-threaded
+// `python -m http.server` (anything before 3.7), the eight parallel cutout
+// fetches can leave a request hanging rather than refused: nothing rejects,
+// boot()'s catch never runs, and the ring simply spins for ever. So watch the
+// progress bar instead of the errors, and offer a way out whenever it stops
+// moving. Any real progress puts the hint away again.
+const STALL_MS = 12000;
+let stallTimer = null;
+let loadDead = false;   // a failed boot keeps the hint up: see stallWatch
+
+/** Note progress: hide the hint and restart the clock. */
+function stallWatch() {
+  // One rejection fails the whole batch, but the other seven loaders carry on
+  // to the end of the queue and would tick the hint straight back off again.
+  if (loadDead) return;
+  clearTimeout(stallTimer);
+  $('loadHint').hidden = true;
+  stallTimer = setTimeout(() => { $('loadHint').hidden = false; }, STALL_MS);
+}
+
+function stallStop() {
+  clearTimeout(stallTimer);
+  stallTimer = null;
+}
+
+$('loadReload').addEventListener('click', () => location.reload());
+
 async function loadAll() {
   const bar = $('loadBar');
   const msg = $('loadMsg');
   let done = 0;
   let total = 1;
-  const tick = () => { bar.style.width = (100 * done / total).toFixed(1) + '%'; };
+  const tick = () => { bar.style.width = (100 * done / total).toFixed(1) + '%'; stallWatch(); };
 
   const [fieldsJson, sourcesJson] = await Promise.all([
     fetch('assets/fields.json').then((r) => r.json()),
@@ -171,9 +199,11 @@ function showLoader(text) {
   $('loadBar').style.width = '0%';
   $('loader').style.display = '';
   $('loader').hidden = false;
+  stallWatch();
 }
 
 function hideLoader() {
+  stallStop();
   $('loader').hidden = true;
   $('loader').style.display = 'none';
 }
@@ -184,7 +214,7 @@ async function decodeCutouts(list) {
   if (!need.length) return;
   let done = 0;
   const bar = $('loadBar');
-  const tick = () => { bar.style.width = (100 * done / need.length).toFixed(1) + '%'; };
+  const tick = () => { bar.style.width = (100 * done / need.length).toFixed(1) + '%'; stallWatch(); };
   tick();
   const queue = need.slice();
   await Promise.all(Array.from({ length: 8 }, async () => {
@@ -450,6 +480,24 @@ function notesFound() {
   return n;
 }
 
+// --- the counter ----------------------------------------------------------
+// A pageview only says someone arrived. These two say they actually played:
+// 'started' on the first piece they place, 'finished' when a set is complete.
+//
+// GoatCounter is loaded async and may never arrive at all — blocked, offline,
+// or simply refusing to count localhost — so every call goes through here and
+// swallows whatever happens. Counting must never be on the path of the game
+// itself (see the ground rule in CLAUDE.md).
+function countEvent(path, title) {
+  try {
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path, title, event: true });
+    }
+  } catch (e) { /* a counter is never worth an interrupted game */ }
+}
+
+let countedStart = false;   // once a visit, not once a piece
+
 // --- placing --------------------------------------------------------------------
 
 function place(p, silent) {
@@ -467,6 +515,10 @@ function place(p, silent) {
   board.dirty = true;
   updateProgress();
   if (!silent) {
+    if (!countedStart) {
+      countedStart = true;
+      countEvent('started', 'Started playing');
+    }
     Audio.click();
     bumpStreak();
     say(p.name + ' — home.' +
@@ -479,6 +531,8 @@ function place(p, silent) {
 }
 
 function complete() {
+  countEvent(state.set === 'all' ? 'finished-all' : 'finished-standout',
+             'Finished ' + (state.set === 'all' ? 'all 297' : 'the stand-outs'));
   Audio.fanfare();
   $('doneMsg').textContent = 'All ' + state.active.length + ' ' +
     (state.set === 'all' ? 'ALMA snapshots' : 'stand-out snapshots') +
@@ -822,9 +876,13 @@ function doReset() {
   say('Board cleared.', 1800);
 }
 
+stallWatch();   // the loader is up from the first paint, so watch it from there
 boot().catch((err) => {
   console.error(err);
+  loadDead = true;
+  stallStop();
   $('loadMsg').textContent = 'Could not load the game: ' + err.message +
     '  (serve this folder over http, e.g. python -m http.server)';
+  $('loadHint').hidden = false;
   document.querySelector('.ring').style.animation = 'none';
 });
