@@ -13,6 +13,20 @@ export function snapRadius(r_deg) {
   return Math.max(CFG.snapFactor * r_deg, CFG.snapFloor);
 }
 
+/**
+ * What putting `piece` down at the world point (wx, wy) means:
+ * 'place' (its own position), 'near' (someone else's) or 'miss'. One test for
+ * both ways of playing — the end of a drag, and a click with a piece selected.
+ */
+export function dropVerdict(state, layout, piece, wx, wy) {
+  if (layout.dist(wx, wy, piece) < snapRadius(piece.r_deg)) return 'place';
+  for (const s of state.active) {
+    if (s === piece || state.placed.has(s.name)) continue;
+    if (layout.dist(wx, wy, s) < CFG.nearFactor * snapRadius(s.r_deg)) return 'near';
+  }
+  return 'miss';
+}
+
 export class Dragger {
   /**
    * hooks: { onPlace(piece), onNearMiss(piece), onMiss(piece),
@@ -122,6 +136,10 @@ export class Dragger {
    */
   begin(piece, ev, opts) {
     if (this.state.placed.has(piece.name)) return;
+    // stop the browser from starting a text selection under the drag: the
+    // pointer sweeps the header and the tray captions on its way to the sky,
+    // and a mouse drag would paint all of it blue
+    if (ev.cancelable) ev.preventDefault();
     this.state.drag = {
       piece,
       pointerId: ev.pointerId,
@@ -186,22 +204,10 @@ export class Dragger {
     if (!inside) { this.hooks.onMiss(d.piece); return; }
 
     const [wx, wy] = this.board.toWorld(e.clientX - rect.left, e.clientY - rect.top);
-    const layout = this.board.layout;
     const p = d.piece;
-
-    if (layout.dist(wx, wy, p) < snapRadius(p.r_deg)) {
-      this.hooks.onPlace(p);
-      return;
-    }
-
-    // did they land on some *other* source in play?
-    for (const s of this.state.active) {
-      if (s === p || this.state.placed.has(s.name)) continue;
-      if (layout.dist(wx, wy, s) < CFG.nearFactor * snapRadius(s.r_deg)) {
-        this.hooks.onNearMiss(p);
-        return;
-      }
-    }
-    this.hooks.onMiss(p);
+    const verdict = dropVerdict(this.state, this.board.layout, p, wx, wy);
+    if (verdict === 'place') this.hooks.onPlace(p);
+    else if (verdict === 'near') this.hooks.onNearMiss(p);
+    else this.hooks.onMiss(p);
   }
 }

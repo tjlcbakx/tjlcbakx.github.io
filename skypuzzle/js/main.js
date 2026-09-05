@@ -13,7 +13,7 @@ import * as P from './pieces.js';
 import { Board, fmtDeg, fmtSign } from './board.js';
 import { boardLayout, skyLayout, boardToRaDec } from './layout.js';
 import { SkyFeatures } from './skyfeatures.js';
-import { Dragger, snapRadius } from './drag.js';
+import { Dragger, snapRadius, dropVerdict } from './drag.js';
 import { EGGS, PAPERS, MILESTONES, eggTotal } from './eggs.js';
 import * as Audio from './audio.js';
 import * as Score from './score.js';
@@ -195,7 +195,7 @@ async function loadAll() {
   }
 
   // Only the *metadata* of every source is read here. The cutouts themselves
-  // are decoded per set, so the default game still downloads the 82 stand-outs
+  // are decoded per set, so the default game still downloads the 86 stand-outs
   // and not the 8 MB of all 297 (see useSet).
   const rnd = mulberry32(store.seed);
   const pieces = sourcesJson.sources.map((s) => Object.assign({}, s));
@@ -241,11 +241,11 @@ async function decodeCutouts(list) {
 }
 
 /**
- * Switch to a set of pieces: 'standout' (the 82 curated ones, the default) or
+ * Switch to a set of pieces: 'standout' (the 86 curated ones, the default) or
  * 'all' (every ALMA snapshot in the survey). Its cutouts are fetched on first
  * use — the full set is 8 MB, and most players will never ask for it. What is
  * already placed stays placed: the two sets share `state.placed`, so finishing
- * the stand-outs and then switching leaves those 82 done.
+ * the stand-outs and then switching leaves those 86 done.
  */
 async function useSet(setName, opts = {}) {
   const wanted = state.sources.filter((p) => inSet(p, setName));
@@ -259,7 +259,7 @@ async function useSet(setName, opts = {}) {
   state.active = wanted;
 
   // Finishing the stand-outs stops the clock; asking for all 297 starts a
-  // longer run that those 82 are part of, so it starts again from where it
+  // longer run that those 86 are part of, so it starts again from where it
   // stood — the time for the full set includes the time they took.
   runDone = wanted.every((p) => state.placed.has(p.name));
   if (runDone) clockStop();
@@ -331,6 +331,7 @@ function repaintPiece(p) {
 
 function select(p) {
   state.selected = p;
+  $('board').classList.add('armed');   // a click on the sky now means "here" 
   for (const el of document.querySelectorAll('.thumb.sel')) el.classList.remove('sel');
   if (p._thumb) {
     p._thumb.classList.add('sel');
@@ -348,6 +349,7 @@ function select(p) {
 
 function deselect() {
   state.selected = null;
+  $('board').classList.remove('armed');
   $('inspector').hidden = true;
   for (const el of document.querySelectorAll('.thumb.sel')) el.classList.remove('sel');
 }
@@ -458,6 +460,14 @@ function showNote(key, note) {
   cite.textContent = paper.c;
   cite.href = paper.u;
   $('noteTag').textContent = paper.mine ? 'my paper' : paper.ext ? '' : 'co-authored';
+  // a second paper, for a source whose story took two of them (HERS1)
+  const paper2 = note.p2 ? PAPERS[note.p2] : null;
+  $('noteCite2Wrap').hidden = !paper2;
+  if (paper2) {
+    $('noteCite2').textContent = paper2.c;
+    $('noteCite2').href = paper2.u;
+    $('noteTag2').textContent = paper2.mine ? 'my paper' : paper2.ext ? '' : 'co-authored';
+  }
   state.seenNotes.add(key);
   $('note').hidden = false;
   save();
@@ -479,9 +489,9 @@ function noteFor(p) {
   }
 }
 
-/** Reading a note again: tap the galaxy on the board. */
+/** Reading a note again: tap the galaxy on the board. True if one opened. */
 function noteAt(wx, wy) {
-  if (!state.notes) return;
+  if (!state.notes) return false;
   let best = null;
   let bestD = Infinity;
   for (const p of state.active) {
@@ -490,6 +500,36 @@ function noteAt(wx, wy) {
     if (d < snapRadius(p.r_deg) && d < bestD) { best = p; bestD = d; }
   }
   if (best) showNote(best.name, EGGS[best.name]);
+  return !!best;
+}
+
+/**
+ * A click on the sky. With a piece selected it puts that piece down, judged
+ * exactly as a drag's drop is — the game is playable without ever holding the
+ * button down, which a trackpad, a shaky hand and a phone all prefer. A galaxy
+ * already placed answers with its note instead: that spot is taken, so a
+ * placement there could not have been right anyway.
+ */
+function boardTap(wx, wy) {
+  if (noteAt(wx, wy)) return;
+  const p = state.selected;
+  if (!p || state.placed.has(p.name)) return;
+  const verdict = dropVerdict(state, board.layout, p, wx, wy);
+  if (verdict === 'place') place(p);
+  else if (verdict === 'near') nearMiss(p);
+  else miss();
+}
+
+/** A drop (or a click) on someone else's galaxy, and on nothing at all. */
+function nearMiss(p) {
+  Audio.thunk();
+  breakStreak();
+  say('Something belongs there — but not ' + p.name + '.', 2600);
+}
+
+function miss() {
+  breakStreak();
+  say('Not there. Try the bright blobs.', 1800);
 }
 
 /**
@@ -710,16 +750,9 @@ async function boot() {
       $('board').classList.remove('dropping');
     },
     onPlace: (p) => place(p),
-    onNearMiss: (p) => {
-      Audio.thunk();
-      breakStreak();
-      say('Something belongs there — but not ' + p.name + '.', 2600);
-    },
-    onMiss: () => {
-      breakStreak();
-      say('Not there. Try the bright blobs.', 1800);
-    },
-    onBoardTap: (wx, wy) => noteAt(wx, wy),
+    onNearMiss: (p) => nearMiss(p),
+    onMiss: () => miss(),
+    onBoardTap: (wx, wy) => boardTap(wx, wy),
   });
 
   HS.init();

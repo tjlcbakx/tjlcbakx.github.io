@@ -25,7 +25,16 @@ html, body {
   overscroll-behavior: none;
 }
 
-body { overflow: hidden; }
+/* Dragging a piece sweeps the pointer across the header, the readout and the
+   tray captions; without this the browser selects that text and turns the
+   chrome blue behind the drag. Prose the player might want to keep — a note,
+   a citation, the help sheet — opts back in below. */
+body { overflow: hidden; user-select: none; -webkit-user-select: none; }
+
+.overlay .sheet, #noteTitle, #noteBody, #note .cite {
+  user-select: text;
+  -webkit-user-select: text;
+}
 
 #app {
   position: fixed;
@@ -62,6 +71,21 @@ body { overflow: hidden; }
   background: #1b1b26;
 }
 #topbar #btnBack:hover { color: var(--ink); background: #23232f; }
+
+/* The site mark. btnBack only appears for a player who came from the site, so
+   without this a visitor arriving from a link elsewhere has no way home at
+   all. 26 px, which is why it is bakx-icon-small.svg: the ring's arcs close up
+   below 64 px, so at this size the mark is the spike alone. */
+#topbar .sitemark {
+  flex: 0 0 auto;
+  display: block;
+  line-height: 0;
+  opacity: .8;
+}
+
+#topbar .sitemark:hover { opacity: 1; }
+
+#topbar .sitemark img { display: block; width: 26px; height: 26px; }
 
 #topbar h1 {
   margin: 0;
@@ -230,6 +254,7 @@ button.warn { color: #ffb4a8; border-color: #4a2a26; }
 }
 #board.grabbing { cursor: grabbing; }
 #board.dropping { cursor: none; }
+#board.armed { cursor: crosshair; }   /* a piece is selected: click to place it */
 
 #zoomctl {
   position: absolute;

@@ -2,7 +2,7 @@
  "sigma_lo": -2.0,
  "sigma_hi": 40.0,
  "magnification": 1300,
- "n_standout": 82,
+ "n_standout": 86,
  "sources": [
   {
    "name": "HELMS1",
@@ -734,8 +734,9 @@
    "y_deg": 24.328,
    "r_deg": 1.441,
    "img": "assets/cutouts/HERS3.png",
-   "px": 128,
-   "peak_sigma": 23.2
+   "px": 256,
+   "peak_sigma": 23.2,
+   "so": 1
   },
   {
    "name": "HERS4",
@@ -2228,8 +2229,9 @@
    "y_deg": 2.211,
    "r_deg": 0.482,
    "img": "assets/cutouts/HerBS-36.png",
-   "px": 128,
-   "peak_sigma": 86.9
+   "px": 134,
+   "peak_sigma": 86.9,
+   "so": 1
   },
   {
    "name": "HerBS-37",
@@ -2291,8 +2293,9 @@
    "y_deg": 2.197,
    "r_deg": 0.487,
    "img": "assets/cutouts/HerBS-41.png",
-   "px": 128,
-   "peak_sigma": 72.0
+   "px": 134,
+   "peak_sigma": 72.0,
+   "so": 1
   },
   {
    "name": "HerBS-42",
@@ -2621,8 +2624,9 @@
    "y_deg": 43.588,
    "r_deg": 0.519,
    "img": "assets/cutouts/HerBS-70.png",
-   "px": 128,
-   "peak_sigma": 23.6
+   "px": 144,
+   "peak_sigma": 23.6,
+   "so": 1
   },
   {
    "name": "HerBS-71",

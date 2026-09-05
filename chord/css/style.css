@@ -60,6 +60,21 @@ body {
 }
 .backlink:hover { color: var(--ink); border-color: var(--dim); }
 
+/* The site mark. .backlink only appears for a player who came from the site,
+   so without this a visitor arriving from a link elsewhere has no way home at
+   all. 26 px, which is why it is bakx-icon-small.svg: the ring's arcs close up
+   below 64 px, so at this size the mark is the spike alone. */
+.sitemark {
+  flex: 0 0 auto;
+  display: block;
+  line-height: 0;
+  opacity: .8;
+}
+
+.sitemark:hover { opacity: 1; }
+
+.sitemark img { display: block; width: 26px; height: 26px; }
+
 .progress { display: flex; gap: 5px; margin-left: auto; }
 
 .dot {

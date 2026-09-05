@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+	<head>
+		<title>Games - Tom Bakx</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Two browser games built out of my own research: place real ALMA images of lensed galaxies back on the Herschel sky, and find a galaxy's redshift by ear." />
+		<meta name="author" content="Tom Bakx" />
+		<!-- Open Graph / social sharing -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Games - Tom Bakx" />
+		<meta property="og:description" content="Two browser games built out of my own research: place real ALMA images of lensed galaxies back on the Herschel sky, and find a galaxy's redshift by ear." />
+		<meta property="og:image" content="https://tombak.xyz/skypuzzle/assets/og-card.png" />
+		<meta property="og:url" content="https://tombak.xyz/games.html" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/logo.css" />
+		<link rel="icon" href="favicon.ico" sizes="32x32" />
+		<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+		<link rel="mask-icon" href="images/logo/bakx-icon-mask.svg" color="#2e3842" />
+		<link rel="manifest" href="site.webmanifest" />
+		<meta name="theme-color" content="#2e3842" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<script data-goatcounter="https://tombakx.goatcounter.com/count"
+	        async src="//gc.zgo.at/count.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html"><img class="logo-mark" src="images/logo/bakx-icon-dark.svg" alt="" width="120" height="120" />Tom Bakx</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="research.html">Research</a></li>
+											<li><a href="games.html">Games</a></li>
+											<li><a href="cv.html">CV</a></li>
+											<li><a href="presentations.html">Presentations</a></li>
+											<li><a href="publications.html">Publications</a></li>
+											<li><a href="photos.html">Photos</a></li>
+											<li><a href="contact.html">Contact</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Games</h2>
+							<p>Two of my papers, made playable &middot; real data, in a browser, free</p>
+						</header>
+
+						<section class="wrapper style5">
+							<div class="inner">
+								<p>Both of these are the actual research rather than an illustration of it: the same images, the same line frequencies, the same scoring metric as the papers they come from. They need nothing but a browser &mdash; no account, no install, no tracking beyond a page count &mdash; and both work on a phone.</p>
+							</div>
+						</section>
+
+						<!-- Sky Puzzle -->
+						<section class="wrapper style5">
+							<div class="inner" id="skypuzzle">
+								<h3>Sky Puzzle</h3>
+								<span class="image fit"><a href="skypuzzle/"><img src="images/games/skypuzzle.png" alt="The Sky Puzzle board: the whole sky with the Herschel survey fields marked, and a tray of ALMA cutouts of lensed galaxies waiting to be placed." /></a></span>
+								<p>Short ALMA observations of 297 Herschel-selected sources resolve what the far-infrared surveys could only register as a single bright dot: Einstein rings, arcs and multiple images, each one a monster galaxy stretched around a foreground mass. <strong>Sky Puzzle</strong> hands them to you one at a time, magnified 1300&times; and badly stretched, and asks you to develop each one and put it back where the telescope found it.</p>
+								<p>The pieces are the real data: the brightness slider restretches the actual significance map rather than filtering a picture. Herschel's beam is far too coarse to tell the sources apart, so the board shows each unfound galaxy as a faint preview at its true spot &mdash; match the shape, drag the piece there, and it clicks into place. Fifty-four of them carry a note about what was actually found, with a link to the paper.</p>
+								<ul class="actions">
+									<li><a href="skypuzzle/" class="button primary">Play Sky Puzzle</a></li>
+									<li><a href="research.html#monster-galaxies" class="button">The research behind it</a></li>
+								</ul>
+							</div>
+						</section>
+
+						<!-- Listening for a Cosmic Chord -->
+						<section class="wrapper style5">
+							<div class="inner" id="chord">
+								<h3>Listening for a Cosmic Chord</h3>
+								<span class="image fit"><a href="chord/"><img src="images/games/chord.png" alt="The title screen of Listening for a Cosmic Chord, with a redshifted wave you can stretch and hear." /></a></span>
+								<p>The CO lines of a galaxy form a harmonic series, which means a galaxy is literally a chord &mdash; and its redshift is the key it is played in. <strong>Listening for a Cosmic Chord</strong> lets you find that key by ear: you tune until the predicted lines stop beating against the detected ones.</p>
+								<p>Nine chapters take you from one line and thirteen possible distances, through the degeneracies that make a wrong answer sound perfect, to the lines that <em>aren't</em> there &mdash; and finish by having you design the ALMA tuning yourself, scored live with the metric from <a href="publications.html#sudoku">Bakx &amp; Dannerbauer (2022)</a> on the real HerBS sample. Built with <a href="https://infravis.se">INFRAVIS</a>. The sound is the science, so play it with headphones if you can; every cue is also written out, so it works muted.</p>
+								<ul class="actions">
+									<li><a href="chord/" class="button primary">Play Cosmic Chord</a></li>
+									<li><a href="research.html#distances-frontier" class="button">The research behind it</a></li>
+								</ul>
+							</div>
+						</section>
+
+						<section class="wrapper style5">
+							<div class="inner">
+								<p>Using either of these in a classroom, a planetarium or an outreach evening is more than fine &mdash; that is what they are for. If you do, <a href="contact.html">tell me about it</a>; I would like to know what worked.</p>
+							</div>
+						</section>
+
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<img class="logo-mark" src="images/logo/bakx-icon-dark.svg" alt="" width="120" height="120" />
+						<ul class="menu">
+							<li><a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0002-5268-2221&sort=date%20desc">ADS</a></li>
+							<li><a href="https://orcid.org/0000-0002-5268-2221">ORCID</a></li>
+							<li><a href="https://github.com/tjlcbakx">GitHub</a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Tom Bakx</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

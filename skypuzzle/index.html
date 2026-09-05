@@ -7,6 +7,19 @@
 <meta name="description" content="Drag magnified ALMA images of lensed galaxies back to their true positions on the Herschel/SPIRE survey fields.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0f'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%237fd8e8' stroke-width='7'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23e8f4ff'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Link preview. Absolute URLs, as the scrapers require. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tombak.xyz/skypuzzle/">
+<meta property="og:site_name" content="Tom Bakx">
+<meta property="og:title" content="Sky Puzzle — ALMA snapshots on the Herschel sky">
+<meta property="og:description" content="Drag magnified ALMA images of lensed galaxies back to their true positions on the Herschel/SPIRE survey fields.">
+<meta property="og:image" content="https://tombak.xyz/skypuzzle/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The all-sky board with the Herschel survey fields marked, and a tray of ALMA cutouts of lensed galaxies waiting to be placed.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tombak.xyz/skypuzzle/assets/og-card.png">
 <script data-goatcounter="https://tombakx.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -15,6 +28,7 @@
 <div id="app" hidden>
 
   <header id="topbar">
+    <a class="sitemark" href="https://tombak.xyz/" title="Tom Bakx — tombak.xyz"><img src="assets/bakx-icon-small.svg" alt="Tom Bakx" width="120" height="120"></a>
     <a id="btnBack" href="../" hidden title="Back to where you came from">&larr;</a>
     <h1>Sky&nbsp;Puzzle <span class="sub">ALMA snapshots on the Herschel sky</span></h1>
     <div class="spacer"></div>
@@ -67,7 +81,7 @@
           <span>bright</span>
         </label>
         <div class="coords" id="inspCoords">&nbsp;</div>
-        <p class="tip" id="inspTip">Brighten it until you can see the galaxy, then drag it onto the sky.</p>
+        <p class="tip" id="inspTip">Brighten it until you can see the galaxy, then drag it onto the sky &mdash; or click where it belongs.</p>
       </div>
     </section>
 
@@ -77,13 +91,14 @@
       <h3 id="noteTitle"></h3>
       <p id="noteBody"></p>
       <p class="cite"><a id="noteCite" href="#" target="_blank" rel="noopener"></a><span id="noteTag"></span></p>
+      <p class="cite" id="noteCite2Wrap" hidden>see also <a id="noteCite2" href="#" target="_blank" rel="noopener"></a><span id="noteTag2"></span></p>
     </aside>
   </main>
 
   <footer id="trayWrap">
     <div id="trayHead">
       <span id="trayCount"></span>
-      <span class="hint">tap a piece to develop it &middot; drag it onto the sky</span>
+      <span class="hint">tap a piece to develop it &middot; drag it onto the sky, or click its spot</span>
     </div>
     <div id="tray"></div>
   </footer>
@@ -109,8 +124,8 @@
     <p>Every one of them sits on a source in the Herschel/SPIRE maps below &mdash;
        but Herschel's beam is far too coarse to tell them apart, so the board
        shows each unfound galaxy as a <em>faint preview</em> at its true spot.
-       Match the shape, drag the piece there, and it clicks into place.</p>
-    <p>You start with the <em>stand-outs</em>: 82 curated pieces, the ones with
+       Match the shape and put the piece there &mdash; drag it, or pick it up with a click and click the spot &mdash; and it snaps home, corner brackets and all.</p>
+    <p>You start with the <em>stand-outs</em>: 86 curated pieces, the ones with
        a ring, an arc or multiple images worth looking at. The button in the
        <em>Options</em> menu (or the <kbd>A</kbd> key) swaps them for <em>all 297</em> ALMA
        snapshots of the survey &mdash; the same puzzle at full length, most of

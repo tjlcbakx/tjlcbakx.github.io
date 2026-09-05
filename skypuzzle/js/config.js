@@ -70,6 +70,17 @@ export const CFG = {
                           // out: kills the black padding round each tilted
                           // field so the stars show through it
 
+  // --- solved pieces -----------------------------------------------------
+  // The mark on a galaxy the player has put in place. It is the UI accent,
+  // deliberately *not* the teal of the hint rings: those mean "still to find".
+  solvedColour: 'rgba(127, 216, 232, 0.80)',
+  solvedPad: 1.15,       // bracket box, in units of the piece's drawn radius
+  solvedArm: 0.42,       // arm length, in units of the smaller half-box
+  solvedLabelMinPx: 9,   // name it once the piece is this big on screen (px
+                         // radius): keeps the whole sky free of text
+  solvedLabelColour: 'rgba(190, 226, 240, 0.90)',
+  solvedLabelBg: 'rgba(6, 8, 16, 0.50)',
+
   // --- presentation -----------------------------------------------------
   thumbPx: 96,           // tray thumbnail size (CSS px)
   inspectorPx: 240,      // inspector preview size (CSS px)
@@ -114,7 +125,7 @@ export const SCORE = {
 export const DEFAULT_VIEW = 'sky';
 
 // --- which pieces ------------------------------------------------------------
-// 'standout' the 82 curated stand-out sources (CURATED in export_assets.py) —
+// 'standout' the 86 curated stand-out sources (CURATED in export_assets.py) —
 //            the default: the ones worth looking at, and a game you can finish
 // 'all'      every ALMA snapshot in the survey, 297 of them, most of them
 //            faint blobs. Its cutouts (8 MB) load only when asked for (key A)

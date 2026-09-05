@@ -16,6 +16,7 @@ import { featherImage } from './skyfeatures.js';
 
 const DEG = Math.PI / 180;
 const FIELD_LABEL_FONT = '500 12px ui-sans-serif, system-ui, -apple-system, sans-serif';
+const SOLVED_LABEL_FONT = '11px ui-monospace, SFMono-Regular, Menlo, monospace';
 
 export class Board {
   constructor(canvas, fieldsJson, images, layout, sky) {
@@ -250,6 +251,43 @@ export class Board {
     this._eachSource(state, true, (s, x, y, rx, ry) => {
       ctx.drawImage(boardCanvas(s), x - rx, y - ry, 2 * rx, 2 * ry);
     });
+
+    // ... and the mark that says a player put them there. A placed piece and
+    // the preview of an unplaced one are the same picture at two brightnesses
+    // — and the player's own slider can leave the placed one the fainter of
+    // the two — so brightness alone does not say which galaxies are done.
+    // Four corner brackets do, without drawing over the galaxy itself; the
+    // name follows once the piece is big enough on screen to carry it, which
+    // at whole-sky fit scale it never is.
+    ctx.save();
+    ctx.strokeStyle = CFG.solvedColour;
+    ctx.lineWidth = 1.4;
+    ctx.lineCap = 'square';
+    ctx.font = SOLVED_LABEL_FONT;
+    ctx.textAlign = 'center';
+    this._eachSource(state, true, (s, x, y, rx, ry) => {
+      const ax = rx * CFG.solvedPad;
+      const ay = ry * CFG.solvedPad;
+      const arm = Math.min(ax, ay) * CFG.solvedArm;
+      for (const sx of [-1, 1]) {
+        for (const sy of [-1, 1]) {
+          const cx = x + sx * ax;
+          const cy = y + sy * ay;
+          ctx.beginPath();
+          ctx.moveTo(cx - sx * arm, cy);
+          ctx.lineTo(cx, cy);
+          ctx.lineTo(cx, cy - sy * arm);
+          ctx.stroke();
+        }
+      }
+      if (rx < CFG.solvedLabelMinPx) return;
+      const w = ctx.measureText(s.name).width;
+      ctx.fillStyle = CFG.solvedLabelBg;
+      ctx.fillRect(x - w / 2 - 3, y + ay + 3, w + 6, 14);
+      ctx.fillStyle = CFG.solvedLabelColour;
+      ctx.fillText(s.name, x, y + ay + 14);
+    });
+    ctx.restore();
 
     this.drawLabels(fieldLabels);
 

@@ -82,6 +82,23 @@ export const PAPERS = {
     u: 'https://doi.org/10.1093/mnras/stz2180',
     ext: true,               // not one of Tom's: the note carries no tag
   },
+  geach: {
+    c: 'Geach et al. 2023, Nature 621, 483',
+    u: 'https://ui.adsabs.harvard.edu/abs/2023Natur.621..483G/abstract',
+    ext: true,
+  },
+  deroo: {
+    c: 'de Roo et al. 2025, MNRAS 540, L78',
+    u: 'https://ui.adsabs.harvard.edu/abs/2025MNRAS.540L..78D/abstract',
+    ext: true,
+  },
+  // Not a paper: the Chalmers news piece that HERS16 got a Valentine's day of
+  // its own out of. Carries no tag for the same reason `ext` ones do not.
+  hers16news: {
+    c: 'Chalmers news, 14 February 2025',
+    u: 'https://www.chalmers.se/en/current/news/see-a-message-of-love-from-a-galaxy-far-far-away/',
+    ext: true,
+  },
   negrello: {
     c: 'Negrello et al. 2017, MNRAS 465, 3558',
     u: 'https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3558N/abstract',
@@ -315,6 +332,17 @@ export const EGGS = {
   'HELMS19':   { t: 'A pair at the edge of the survey', d: 'Two galaxies, east and west, at z = 4.6871 and z = 4.6882 — neighbours 12.2 billion years ago, when the Universe was 1.25 billion years old.', p: 'zgal' },
   'HELMS24':   { t: 'z = 4.9841', d: 'One of the most distant sources in z-GAL, confirmed from CO(4-3), CO(5-4) and atomic carbon. The Universe was 1.2 billion years old.', p: 'zgal' },
   'HELMS45':   { t: 'Near the far edge of the survey', d: 'z = 5.3994, from CO(5-4), CO(8-7) and atomic carbon — the second highest redshift in z-GAL, whose 135 galaxies span 0.8 < z < 6.55. Its light has been travelling for 12.4 billion years, since the Universe was one billion years old.', p: 'zgal' },
+  'HERS1': {
+    t: 'A magnetic field, 2.5 billion years after the Big Bang',
+    d: 'Called 9io9 by the people who found it, HerS-1 here: a lensed starburst at z = 2.553, forming stars more than a thousand times faster than the Milky Way, and the galaxy in which polarized light from dust was detected this far away — grains lining up with the local magnetic field. The median polarization is about 1 per cent, as in nearby spirals, and points to an ordered field 5 kiloparsecs across, around 500 microgauss or less, lying parallel to the molecular gas disc. ALMA and the lens together later resolved it into a 4-kiloparsec grand-design spiral whose arms follow that same polarized emission.',
+    p: 'geach',
+    p2: 'deroo',
+  },
+  'HERS16': {
+    t: 'A message of love from a galaxy far, far away',
+    d: 'The heart is the lens\u2019s doing, not the galaxy\u2019s: a projection effect, in a way similar to a rainbow — only visible from a certain perspective. "It would not look like this in any other galaxy than ours, so it is a show just for us." I found it browsing the z-GAL catalogue of more than a hundred lensed galaxies, and what you are looking at is most of the galaxy\u2019s heat radiation, emanating from where it is building up most of its stars.',
+    p: 'hers16news',
+  },
   'HERS2':     { t: 'z = 2.0151', d: 'A HerS source — from the Herschel Stripe 82 survey. CO(2-1) and CO(4-3) give the distance; 10.3 billion years of look-back time.', p: 'zgal' },
   'HERS11':    { t: 'z = 4.6618', d: 'One of the most distant sources in z-GAL, from CO(4-3) and CO(7-6). At this redshift the Universe was 1.3 billion years old — remarkably little time in which to build a galaxy this dusty.', p: 'zgal' },
   'HERS13':    { t: 'z = 2.4759', d: 'CO(3-2) and atomic carbon. [CI] is faint, but it measures the cold gas directly rather than through the usual chain of assumptions about CO.', p: 'zgal' },
