@@ -87,6 +87,24 @@ export const CFG = {
   clickGain: 0.3,
 };
 
+// --- the score ---------------------------------------------------------------
+// What a finished board is worth. Arcade rules: one number, every part of it
+// printed on the completion sheet. Placing pieces is the bulk of it; the rest
+// pays for aim (a long run, few wrong drops), curiosity (notes read) and
+// speed, in that order of weight. `parSec` is the seconds a piece is "meant"
+// to take — the point at which the time bonus runs out — and `perSec` what
+// every second under that par is worth.
+export const SCORE = {
+  perPiece: 100,
+  perStreak: 50,
+  perNote: 150,
+  perMiss: -150,
+  parSec: 18,
+  perSec: 5,
+  tableMax: 10,          // rows on the high-score board
+  nameLen: 3,            // letters a pinball machine asks for
+};
+
 // --- which map ---------------------------------------------------------------
 // 'sky'   the real celestial sphere, pan through 0h, fields at their true
 //         RA/Dec, over the Milky Way and the constellations — the default: it
@@ -105,6 +123,11 @@ export const DEFAULT_SET = 'standout';
 // v2: the default view changed to 'board' and the sky gained real stars, so
 // old saved state would otherwise keep sending people back to the old default.
 export const STORE_KEY = 'onlineGame2.skypuzzle.v2';
+
+// The hall of fame is deliberately *not* in STORE_KEY: "Reset" clears the
+// board and a STORE_KEY bump retires an old save, and neither should ever
+// wipe a record.
+export const SCORE_KEY = 'onlineGame2.skypuzzle.scores.v1';
 
 // A save remembers the view it was left in, which would otherwise keep
 // returning players on the *previous* default for ever. Bump this whenever

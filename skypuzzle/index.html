@@ -36,6 +36,8 @@
           <button id="btnStreak" class="opt" type="button" aria-pressed="true"><span class="lab">Streak counter</span><kbd>K</kbd></button>
           <button id="btnNotes" class="opt" type="button" aria-pressed="true"><span class="lab">Did you know? notes</span><kbd>D</kbd></button>
           <button id="btnSound" class="opt" type="button" aria-pressed="true"><span class="lab">Sound</span><kbd></kbd></button>
+          <p class="grp">Records</p>
+          <button id="btnScores" class="opt cycle" type="button"><span class="lab">High scores</span><kbd>S</kbd></button>
         </div>
       </div>
       <button id="btnHelp" type="button" title="How to play">?</button>
@@ -122,6 +124,12 @@
        There are <span id="helpNoteCount">80</span> of them hidden across the board. Tap a galaxy you have
        already placed to read its note again, or switch the notes off in
        <em>Options</em> (<kbd>D</kbd>).</p>
+    <p>Finishing a set scores it, arcade style: a hundred a piece, more for
+       every note you turned up and for a long run, less for every wrong drop,
+       and a bonus for whatever time you had left. Beat one of the ten scores
+       on the board and the machine asks for three letters. That table is kept
+       in this browser and nowhere else &mdash; <em>Reset</em> clears the sky,
+       never the scores (<kbd>S</kbd>).</p>
     <p><em>Coordinates</em> draws the RA/Dec grid and puts each piece's sky
        position in its panel &mdash; the astronomer's way to find it.
        <em>Positions</em> just rings the spots that are still empty.
@@ -145,11 +153,36 @@
     <p>You have just rebuilt the ALMA snapshot survey on the Herschel sky &mdash;
        every piece back where the telescope found it.</p>
     <p id="doneNotes" hidden></p>
+    <table id="doneScore"><tbody></tbody></table>
     <p class="tip">Star, constellation and Milky Way data:
        <a href="https://github.com/ofrohn/d3-celestial" target="_blank"
           rel="noopener">d3-celestial</a> (Hipparcos / Yale BSC), MIT licence.
        Everything else is Herschel/SPIRE and ALMA data.</p>
-    <button id="btnDoneClose" type="button">Admire the board</button>
+    <div class="btns">
+      <button id="btnDoneScores" type="button" class="primary">High scores</button>
+      <button id="btnDoneClose" type="button">Admire the board</button>
+    </div>
+  </div>
+</div>
+
+<div id="hiscore" class="overlay" hidden>
+  <div class="sheet arcade">
+    <div class="scan" aria-hidden="true"></div>
+    <h2>Local High Scores</h2>
+    <div class="hsTabs" role="group" aria-label="Which set">
+      <button id="hsTabStandout" type="button" class="hsTab" aria-pressed="true">Stand-outs</button>
+      <button id="hsTabAll" type="button" class="hsTab" aria-pressed="false">All 297</button>
+    </div>
+    <ol id="hsList" class="hsList"></ol>
+    <div id="hsEntry" hidden>
+      <p class="hsAsk">Enter your initials</p>
+      <div id="hsWheels" class="wheels"></div>
+    </div>
+    <p class="tip" id="hsTip"></p>
+    <div class="btns">
+      <button id="btnHsOk" type="button" class="primary" hidden>Enter</button>
+      <button id="btnHsClose" type="button">Back to the board</button>
+    </div>
   </div>
 </div>
 

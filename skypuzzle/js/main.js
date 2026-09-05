@@ -16,6 +16,8 @@ import { SkyFeatures } from './skyfeatures.js';
 import { Dragger, snapRadius } from './drag.js';
 import { EGGS, PAPERS, MILESTONES, eggTotal } from './eggs.js';
 import * as Audio from './audio.js';
+import * as Score from './score.js';
+import * as HS from './hiscore.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -29,6 +31,11 @@ const state = {
   busy: false,            // a set switch is loading cutouts
   streak: 0,              // pieces placed in a row without a wrong drop
   best: 0,                // ... and the longest such run so far
+  runBest: 0,             // the longest run within *this* board: what scores
+  misses: 0,              // wrong drops on this board
+  runMs: 0,               // time on the clock (see "the clock")
+  runTimed: true,         // a board inherited from a save the clock never saw
+                          // cannot be timed, and scores no time bonus
   showStreak: true,
   hints: false,
   ghosts: true,          // previews on by default: they are how the puzzle
@@ -82,6 +89,7 @@ let store = loadStore() || { seed: (Math.random() * 1e9) | 0, placed: {},
                              hints: false, ghosts: true, grid: false,
                              view: DEFAULT_VIEW, set: DEFAULT_SET,
                              streak: 0, best: 0, showStreak: true,
+                             runBest: 0, misses: 0, runMs: 0, runTimed: true,
                              sound: true, seenHelp: false, viewRev: VIEW_REV,
                              notes: true, seenNotes: [] };
 
@@ -105,6 +113,10 @@ function save() {
   store.set = state.set;
   store.streak = state.streak;
   store.best = state.best;
+  store.runBest = state.runBest;
+  store.misses = state.misses;
+  store.runMs = Math.round(runMs());
+  store.runTimed = state.runTimed;
   store.showStreak = state.showStreak;
   store.notes = state.notes;
   store.seenNotes = [...state.seenNotes];
@@ -245,6 +257,13 @@ async function useSet(setName, opts = {}) {
   }
   state.set = setName;
   state.active = wanted;
+
+  // Finishing the stand-outs stops the clock; asking for all 297 starts a
+  // longer run that those 82 are part of, so it starts again from where it
+  // stood — the time for the full set includes the time they took.
+  runDone = wanted.every((p) => state.placed.has(p.name));
+  if (runDone) clockStop();
+  else if (runLive) clockStart();
 
   // tray order: shuffled, but deterministic per (seed, set)
   const rnd = mulberry32((store.seed ^ (setName === 'all' ? 0x9e3779b9
@@ -406,10 +425,12 @@ function updateStreak(lost) {
 function bumpStreak() {
   state.streak++;
   if (state.streak > state.best) state.best = state.streak;
+  if (state.streak > state.runBest) state.runBest = state.streak;
   updateStreak();
 }
 
 function breakStreak() {
+  state.misses++;
   const had = state.streak;
   state.streak = 0;
   updateStreak(had > 0);
@@ -471,13 +492,59 @@ function noteAt(wx, wy) {
   if (best) showNote(best.name, EGGS[best.name]);
 }
 
-/** "37 of 80" — what the completion sheet reports. */
+/**
+ * "37 of 80" — what the completion sheet reports, and what the score pays for.
+ * Counted over the set in play, so it is the same population `eggTotal()`
+ * measures: a note read on a galaxy that is only in the full set does not
+ * count towards the stand-outs.
+ */
 function notesFound() {
   let n = 0;
-  for (const k of state.seenNotes) {
-    if (EGGS[k] || k.startsWith('milestone:')) n++;
+  for (const p of state.active) {
+    if (EGGS[p.name] && state.seenNotes.has(p.name)) n++;
   }
+  for (const m of MILESTONES) if (state.seenNotes.has('milestone:' + m.at)) n++;
   return n;
+}
+
+// --- the clock ------------------------------------------------------------
+// A board is timed from the first piece placed to the last, but only while it
+// is actually on screen: a tab left open overnight would otherwise hand back a
+// nonsense time. That is why this accumulates rather than keeping a start
+// stamp. A save written before the clock existed has placed pieces and no
+// time behind them, and stays untimed for the rest of that board.
+
+let runFrom = 0;      // performance.now() when the clock last started; 0 = off
+let runDone = false;  // the set in play is finished: there is nothing to time
+let runLive = false;  // a piece has been placed this visit
+
+function clockStart() {
+  if (runFrom || runDone || document.hidden) return;
+  runFrom = performance.now();
+}
+
+function clockStop() {
+  if (!runFrom) return;
+  state.runMs += performance.now() - runFrom;
+  runFrom = 0;
+}
+
+/** The clock as it stands, running or not. */
+function runMs() {
+  return state.runMs + (runFrom ? performance.now() - runFrom : 0);
+}
+
+/** Everything the score is made of, at the moment the last piece went home. */
+function runStats() {
+  return {
+    set: state.set,
+    pieces: state.active.length,
+    streak: state.runBest,
+    notes: notesFound(),
+    misses: state.misses,
+    ms: state.runTimed ? Math.round(runMs()) : null,
+    timed: state.runTimed,
+  };
 }
 
 // --- the counter ----------------------------------------------------------
@@ -519,6 +586,8 @@ function place(p, silent) {
       countedStart = true;
       countEvent('started', 'Started playing');
     }
+    runLive = true;
+    clockStart();
     Audio.click();
     bumpStreak();
     say(p.name + ' — home.' +
@@ -530,7 +599,12 @@ function place(p, silent) {
   }
 }
 
+/** The run just finished, kept for the high-score screen. */
+let lastScore = null;
+
 function complete() {
+  clockStop();
+  runDone = true;
   countEvent(state.set === 'all' ? 'finished-all' : 'finished-standout',
              'Finished ' + (state.set === 'all' ? 'all 297' : 'the stand-outs'));
   Audio.fanfare();
@@ -543,7 +617,33 @@ function complete() {
   dn.hidden = !state.notes;
   dn.textContent = 'You uncovered ' + found + ' of the ' + total +
     ' notes in this set — tap any galaxy on the board to read its one again.';
+  showScore(runStats());
   $('done').hidden = false;
+}
+
+/** The itemised score on the completion sheet, and the button that follows it. */
+function showScore(run) {
+  const { rows, total } = Score.tally(run);
+  const body = $('doneScore').tBodies[0];
+  body.innerHTML = '';
+  for (const r of rows) {
+    const tr = body.insertRow();
+    tr.insertCell().textContent = r.k;
+    tr.insertCell().textContent = r.note !== undefined ? r.note
+      : r.n + ' \u00d7 ' + r.each;
+    const pts = tr.insertCell();
+    pts.textContent = (r.pts > 0 ? '+' : '') + r.pts;
+    pts.className = 'pts' + (r.pts < 0 ? ' neg' : '');
+  }
+  const tr = body.insertRow();
+  tr.className = 'total';
+  tr.insertCell().textContent = 'Score';
+  tr.insertCell().textContent = run.set === 'all' ? 'all 297' : 'stand-outs';
+  tr.insertCell().textContent = Score.fmtScore(total);
+
+  lastScore = { s: total, ms: run.ms, set: run.set };
+  const made = HS.qualifies(run.set, total);
+  $('btnDoneScores').textContent = made ? 'Enter your initials' : 'High scores';
 }
 
 // --- boot --------------------------------------------------------------------------
@@ -577,6 +677,13 @@ async function boot() {
   state.streak = store.streak | 0;
   state.best = store.best | 0;
   state.showStreak = store.showStreak !== false;
+  state.runBest = store.runBest | 0;
+  state.misses = store.misses | 0;
+  state.runMs = +store.runMs || 0;
+  // a save written before the clock existed: pieces on the board with no time
+  // behind them. Timing it now would hand out a record it never earned.
+  state.runTimed = store.runMs !== undefined ? store.runTimed !== false
+    : !Object.keys(store.placed || {}).length;
   state.notes = store.notes !== false;
   state.seenNotes = new Set(Array.isArray(store.seenNotes) ? store.seenNotes : []);
   Audio.setEnabled(store.sound !== false);
@@ -615,11 +722,13 @@ async function boot() {
     onBoardTap: (wx, wy) => noteAt(wx, wy),
   });
 
+  HS.init();
   wireUI();
 
   // Debug/QC handle: lets a console session (or a screenshot script) drive the
   // view and inspect state without touching game internals.
-  window.skyPuzzle = { state, board, CFG, place, save, EGGS };
+  window.skyPuzzle = { state, board, CFG, place, save, EGGS, Score, HS,
+                       runStats, showScore };
 
   window.addEventListener('resize', () => {
     board.resize(false);
@@ -797,6 +906,22 @@ function wireUI() {
     Audio.unlock();
   });
   $('btnDoneClose').addEventListener('click', () => { $('done').hidden = true; });
+  // A run that has not been entered yet keeps its place in the queue: whether
+  // the player goes straight to the machine or wanders back to it later, the
+  // score they just made is the one it asks about.
+  const openScores = () => {
+    $('done').hidden = true;
+    openOptions(false);
+    HS.open(lastScore ? lastScore.set : state.set, lastScore);
+    lastScore = null;              // a score goes on the board once
+  };
+  $('btnDoneScores').addEventListener('click', openScores);
+  $('btnScores').addEventListener('click', openScores);
+
+  // the clock only runs while the puzzle is on screen
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { clockStop(); } else if (runLive) clockStart();
+  });
 
   // two-step reset: no browser modal, no accidental wipe
   const reset = $('btnReset');
@@ -847,6 +972,7 @@ function wireUI() {
     else if (e.key === 'k' || e.key === 'K') $('btnStreak').click();
     else if (e.key === 'd' || e.key === 'D') $('btnNotes').click();
     else if (e.key === 'o' || e.key === 'O') $('btnOptions').click();
+    else if (e.key === 's' || e.key === 'S') $('btnScores').click();
     else if (e.key === '?') $('help').hidden = false;
     else if (e.key === 'Escape') {
       if (!$('options').hidden) openOptions(false);
@@ -861,6 +987,14 @@ function wireUI() {
 function doReset() {
   state.placed.clear();          // both sets: there is one board underneath
   state.streak = 0;              // the run goes, the record stays
+  state.runBest = 0;             // ... and the score starts from nothing
+  state.misses = 0;
+  state.runMs = 0;
+  state.runTimed = true;
+  runFrom = 0;
+  runDone = false;
+  runLive = false;
+  lastScore = null;
   for (const p of state.sources) {
     p.b = p._b0;
     p._boardCanvas = null;
