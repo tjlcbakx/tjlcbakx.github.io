@@ -1,0 +1,204 @@
+                                     ALMA Memo 627
+
+    Compilation of Technical Papers on ALMA Receivers
+    Tom Bakx1 and John Conway2, Chalmers University of Technology, Sweden
+
+                                        14th November 2024
+1. Introduction. The Atacama Large Millimeter/submillimeter Array (ALMA) is the world’s
+leading instrument for high-resolution imaging of the 0.3 to 10 mm wavelength sky. This
+interferometer exemplifies successful international collaboration even down to its individual
+components, including its telescope dishes and receivers produced in global partnerships.
+Over the past roughly ten years of ALMA operation, these receivers have been responsible
+for nearly ten thousand publications, as carefully monitored by the online ALMA Science
+Archive (see Figure 1). However, the citations of the relevant receiver papers have not
+managed to grow together with their use in the astronomical community, which points out
+an information gap among the astronomical community. To overcome this gap, this memo
+provides a comprehensive list of receiver references, which was created in direct contact
+with the receiver groups.
+
+
+
+
+Figure 1: The number of publications (as of May 2024) associated with each band according
+to the ALMA science archive after accounting for duplicates and multi-band observations.
+The number of citations of the receiver description paper is overlaid, showing a discrepancy
+between the scientific usage of the ALMA receivers and the academic recognition of the
+instrumentalists who have built these receivers caused by an information gap.
+
+
+1
+  tom.bakx@chalmers.se and 2 john.conway@chalmers.se ​
+Note – this memo solely contains the opinion of the authors formed in discussion with the astronomer and
+instrument builder communities. This memo does not reflect official ALMA policy. Please refer to
+https://almascience.org for official ALMA information.
+2. Compiled list of Technical Papers on ALMA Receivers
+
+
+In this memo, we aim to facilitate access to a list of technical references (see Table 1) to
+address the citation disparity. This table was compiled through a direct discussion with the
+relevant receiver groups. The acknowledgement of the usage of ALMA receivers can
+already be deduced from the online ALMA science archive, which provides a detailed
+overview of the relevant receiver usage statistics across ALMA’s wide scientific goals. An
+increase in the number of citations of the relevant ALMA receivers as well as the central
+correlator will further facilitate community-wide recognition and, for some instrumentation
+groups, increase access to academic funding sources, which in turn can help sustain future
+innovation in receiver technology providing great benefit to the whole ALMA community.
+The authors note that the receiver citation information is already (partially) available in
+Table 4.2 (page 31 of the current version) of the ALMA Technical Handbook at
+https://almascience.eso.org/documents-and-tools/cycle11/alma-technical-handbook.          This
+memo does not reflect official ALMA policy and aims to complement this official ALMA
+documentation.
+
+
+The authors identified the origins of the citation disparity as due to an information gap, both
+through their direct experience, as well as through extensive discussions within the
+astronomical community. In part, this gap is caused by the use of different journals across
+the instrument builder (e.g., IEEE) and observing (e.g., A&A, ApJ) communities. A first step
+to addressing the citation disparity would thus be the compilation of a list of references
+together with the instrument building community.
+
+
+Table 1 lists for each receiver band the compiled references, and has been produced
+through direct communication with each relevant receiver group. A reference to the local
+oscillator development common to all receiver bands (excluding future Band 2) is also
+included, as its design and subsequent performance is central to the functioning of ALMA.
+For Bands 1 and 2, the final papers describing these receivers are in preparation with likely
+completion within approximately 6 months; in the meantime, the relevant receiver groups
+have confirmed that the references given in Table 1 should be used. The ALMA Helpdesk
+can further provide information for the ALMA receiver papers, in particular regarding the
+Band 1 and 2 receivers. For some receiver bands, multiple references together give the full
+technical description of the receiver; these additional references are given in the Appendix
+Table 2.
+Table 1: Compiled paper references for ALMA receivers (Cit. indicates the total number of
+citations to the listed paper in both the astronomy and instrumentation literature, and Pub.
+gives the number of astronomy papers that have made use of that receiver as of May 2024).
+
+ Band        Reference               Cit.   Pub.   link
+
+ all: Local Bryerton et al. 2013     6      9138   http://ieeexplore.ieee.org/stamp/stamp.js
+ Oscillator                                        p?tp=&arnumber=6697622
+
+ 1           Huang et al. 2022 *     1      0      https://ui.adsabs.harvard.edu/abs/2022S
+                                                   PIE12190E..0KH/abstract
+
+ 2           Yagoubov     et      al. 24    0      https://ui.adsabs.harvard.edu/abs/2020A
+             2020 *                                %26A...634A..46Y/abstract
+
+ 3           Claude et al. 2008      10     2342   https://ui.adsabs.harvard.edu/abs/2008S
+                                                   PIE.7020E..1BC/abstract
+
+ 3+6         Kerr et al. 2014        31     6422   https://ui.adsabs.harvard.edu/abs/2014IT
+                                                   TST...4..201K/abstract
+
+ 4           Asayama et al. 2014     20     575    https://ui.adsabs.harvard.edu/abs/2014P
+                                                   ASJ...66...57A/abstract
+
+ 5           Belitsky et al. 2018    18     173    https://ui.adsabs.harvard.edu/abs/2018A
+                                                   %26A...611A..98B/abstract
+
+ 6           Ediss et al. 2004       15     4953   https://ui.adsabs.harvard.edu/abs/2004st
+                                                   t..conf..181E/abstract
+
+ 6           Kerr et al. 2004        9      4953   http://www.nrao.edu/meetings/isstt/pap
+                                                   ers/2004/2004055061.pdf
+
+ 7           Mahieu et al. 2012      17     3064   https://ui.adsabs.harvard.edu/abs/2012IT
+                                                   TST...2...29M/abstract
+
+ 8           Sekimoto et al. 2008    16     388    https://ui.adsabs.harvard.edu/abs/2008st
+                                                   t..conf..253S/abstract
+
+ 9           Baryshev et al. 2015    52     327    https://ui.adsabs.harvard.edu/abs/2015A
+                                                   %26A...577A.129B/abstract
+
+ 10          Uzawa et al. 2013       13     16     https://ui.adsabs.harvard.edu/abs/2013P
+                                                   hyC..494..189U/abstract
+Note * - The proposed papers to cite for Band 1 and 2 are preliminary pending the publication of
+final instrument papers that are currently in preparation, (expected within 6 to 8 months).
+
+
+
+
+Appendix - Additional references
+
+
+This appendix gives additional receiver references (Table 2) of the current ALMA system.
+
+
+Table 2: Additional receiver references
+
+
+ Paper focus              Reference                 Cit.        link
+
+ General                  Effland et al. 2013       0           http://ieeexplore.ieee.org/stamp
+ North-American                                                 /stamp.jsp?tp=&arnumber=669
+ receiver papers                                                7565
+
+
+ North-American SIS       Kerr et al. 2013          4           http://ieeexplore.ieee.org/stamp
+ mixers                                                         /stamp.jsp?tp=&arnumber=669
+                                                                7439
+
+ Additional Band 3        Pan et al. 2004           9           http://www.nrao.edu/meetings/i
+ receiver paper                                                 sstt/papers/2004/2004062069.
+                                                                pdf
+
+ Additional Band 3        Claude et al. 2006        10          https://ui.adsabs.harvard.edu/ab
+ receiver paper                                                 s/2006stt..conf..154C/abstract
+
+ Additional Band 3        Claude et al. 2005        6           http://ieeexplore.ieee.org/stamp
+ receiver paper                                                 /stamp.jsp?tp=&arnumber=157
+                                                                2585
+
+ Additional Band 3        Dindo et al. 2005         5           http://ieeexplore.ieee.org/stamp
+ receiver paper                                                 /stamp.jsp?tp=&arnumber=157
+                                                                2586
+
+ Additional Band 3        Chin et al. 2004          9           https://link.springer.com/article/
+ Side-band receiver                                             10.1023/B:IJIM.0000020748.7
+ paper                                                          9086.e9
+
+ Additional Band 5        Billade et al. 2012       35          https://ui.adsabs.harvard.edu/ab
+ receiver                                                       s/2012ITTST...2..208B/abstract
+Additional Band 7    Maier et al. 2005      15   https://ui.adsabs.harvard.edu/ab
+receiver paper                                   s/2005stt..conf..428M/abstract
+
+Additional Band 7    Mahieu et al. 2005     10   https://ui.adsabs.harvard.edu/ab
+receiver paper                                   s/2005stt..conf...99M/abstract
+
+Additional Band 8    Shan et al. 2005       15   https://ui.adsabs.harvard.edu/ab
+receiver paper                                   s/2005ITAS...15..503S/abstract
+
+Additional Band 8    Sekimoto      et    al. 2   https://ui.adsabs.harvard.edu/ab
+receiver paper       2009                        s/2009stt..conf....6S/abstract
+
+Additional Band 8    Tamura et al. 2014     5    http://ieeexplore.ieee.org/stamp
+receiver paper                                   /stamp.jsp?tp=&arnumber=694
+                                                 5347
+
+Additional Band 9    Baryshev      et    al. 4   https://ui.adsabs.harvard.edu/ab
+receiver paper       2007                        s/2007stt..conf..164B/abstract
+
+Additional Band 9    Mena et al. 2008       3    https://ui.adsabs.harvard.edu/ab
+receiver paper                                   s/2008stt..conf...90M/abstract
+
+Additional Band 9    Baryshev      et    al. 1   https://ui.adsabs.harvard.edu/ab
+receiver paper       2008                        s/2008stt..conf..258B/abstract
+
+Additional Band 9    Hesper et al. 2018     -    www.nrao.edu/meetings/isstt/p
+receiver paper                                   apers/2018/2018098103.pdf
+
+Additional Band 10   Gonzalez et al.        6    https://ui.adsabs.harvard.edu/ab
+paper (summary of    2014                        s/2014SPIE.9153E..0NG/abstra
+production)                                      ct
+
+Additional Band 10   Uzawa et al 2009       2    https://ui.adsabs.harvard.edu/ab
+receiver paper                                   s/2009stt..conf...12U/abstract
+
+Additional Band 10   Fujii et al. 2011      13   https://ui.adsabs.harvard.edu/ab
+receiver paper                                   s/2011ITAS...21..606F/abstract
+
+Additional Band 10   Fujii et al. 2013      26   http://ieeexplore.ieee.org/stamp
+receiver paper                                   /stamp.jsp?tp=&arnumber=642
+                                                 3869
+

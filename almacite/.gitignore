@@ -1,0 +1,8 @@
+.DS_Store
+
+# Build intermediates. Each records the local .bib path an entry came from,
+# which is the provenance record for this machine and not for the public site.
+# build.sh regenerates all three; see build/README.md.
+build/harvested.json
+build/refs.json
+build/data.json

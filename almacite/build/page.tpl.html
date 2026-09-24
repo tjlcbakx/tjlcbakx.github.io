@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cite the ALMA receivers</title>
+<meta name="description" content="Tick the ALMA bands you observed in, and get a copy-pastable acknowledgement sentence and BibTeX for the receiver papers, following ALMA Memo 627 (Bakx &amp; Conway 2024).">
+<meta name="author" content="Tom Bakx">
+<meta name="theme-color" content="#2e3842">
+<!-- The site mark, inlined so the page stays a single self-contained file. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M112.8,85.01 L73.89,55.93 L7.2,112.8 L64.07,46.11 L34.99,7.2 L73.89,36.28 L112.8,7.2 L83.72,46.11 Z' fill='%23ed4933'/%3E%3C/svg%3E">
+
+<!-- Link preview. Absolute URLs, as the scrapers require. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tombak.xyz/almacite/">
+<meta property="og:site_name" content="Tom Bakx">
+<meta property="og:title" content="Cite the ALMA receivers">
+<meta property="og:description" content="Tick the ALMA bands you observed in and get a copy-pastable acknowledgement sentence and verified BibTeX for the receiver papers, following ALMA Memo 627.">
+<meta property="og:image" content="https://tombak.xyz/almacite/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The band picker for Cite the ALMA receivers, with an acknowledgement sentence and BibTeX generated below it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cite the ALMA receivers">
+<meta name="twitter:description" content="Tick the ALMA bands you observed in and get a copy-pastable acknowledgement sentence and verified BibTeX for the receiver papers, following ALMA Memo 627.">
+<meta name="twitter:image" content="https://tombak.xyz/almacite/og-card.png">
+<style>
+:root{
+  --bg:#f7f8f9; --card:#ffffff; --ink:#2e3842; --dim:#6b7784; --line:#e3e7ea;
+  --accent:#2a7f8f; --accent-ink:#ffffff; --warn-bg:#fff8e6; --warn-line:#e8d18a;
+  --warn-ink:#6b5210; --code-bg:#f2f4f6; --ok:#2a7f5f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ -webkit-text-size-adjust:100%}
+.wrap{max-width:60rem;margin:0 auto;padding:2rem 1.25rem 4rem}
+header{margin-bottom:2rem}
+.sitemark{display:inline-block;line-height:0;opacity:.8;margin-bottom:.9rem}
+.sitemark:hover{opacity:1}
+.sitemark svg{display:block;width:26px;height:26px}
+h1{font-size:1.75rem;line-height:1.2;margin:0 0 .4rem;letter-spacing:-.01em}
+.lede{color:var(--dim);margin:0 0 .75rem;max-width:46rem}
+.lede a{color:var(--accent)}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);
+   margin:0 0 .6rem;font-weight:650}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;
+        padding:1.15rem 1.25rem;margin-bottom:1.1rem}
+/* band grid */
+.bands{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr))}
+.band{position:relative;display:block;cursor:pointer;border:1.5px solid var(--line);
+  border-radius:8px;padding:.6rem .7rem;background:#fdfdfe;transition:.12s}
+.band:hover{border-color:#b9c4cc}
+.band input{position:absolute;opacity:0;width:0;height:0}
+.band .n{font-weight:680;font-size:1rem;display:block}
+.band .f{font-size:.72rem;color:var(--dim);display:block;font-variant-numeric:tabular-nums}
+.band .r{font-size:.72rem;color:var(--dim);display:block;margin-top:.2rem;
+   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.band:has(input:checked){border-color:var(--accent);background:#eef7f8;
+   box-shadow:inset 0 0 0 1px var(--accent)}
+.band:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.band .star{color:#b0860a;font-weight:700}
+.rowbtns{margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border-radius:7px;border:1px solid var(--line);
+  background:#fff;color:var(--ink);padding:.35rem .7rem;font-size:.85rem;transition:.12s}
+button:hover{border-color:#b9c4cc;background:#fafbfc}
+.copy{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);
+  font-weight:600;padding:.32rem .8rem}
+.copy:hover{background:#24707e;border-color:#24707e}
+.copy.done{background:var(--ok);border-color:var(--ok)}
+/* options */
+.opts{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center}
+.opts fieldset{border:0;margin:0;padding:0;display:flex;gap:.75rem;align-items:center}
+.opts legend{float:left;margin-right:.6rem;padding:0;font-size:.8rem;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--dim);font-weight:650}
+label.inline{display:inline-flex;align-items:center;gap:.35rem;font-size:.9rem;cursor:pointer}
+/* outputs */
+.outhead{display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;margin-bottom:.55rem}
+.outhead h2{margin:0}
+pre{margin:0;background:var(--code-bg);border:1px solid var(--line);border-radius:8px;
+  padding:.85rem .95rem;overflow-x:auto;font:13px/1.6 ui-monospace,SFMono-Regular,
+  Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word;tab-size:2}
+pre.empty{color:var(--dim);font-style:italic;white-space:normal}
+#bibtex{white-space:pre;word-break:normal}
+/* notes */
+.note{border-radius:8px;padding:.7rem .9rem;font-size:.87rem;margin-top:.7rem;
+  background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink)}
+.note strong{font-weight:680}
+.note a{color:#8a6410}
+.note:first-child{margin-top:0}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--line);
+  vertical-align:top}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);
+  font-weight:650}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+table a{color:var(--accent);text-decoration:none}
+table a:hover{text-decoration:underline}
+.gap{color:#b34;font-weight:650}
+.tag{display:inline-block;font-size:.68rem;padding:.1rem .35rem;border-radius:4px;
+  background:#eef1f3;color:var(--dim);border:1px solid var(--line);white-space:nowrap}
+details{margin-top:.8rem}
+summary{cursor:pointer;font-size:.87rem;color:var(--accent);font-weight:600}
+summary:hover{text-decoration:underline}
+footer{color:var(--dim);font-size:.82rem;line-height:1.6;margin-top:1.5rem}
+footer a{color:var(--accent)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --bg:#171b1f; --card:#1e242a; --ink:#e6eaed; --dim:#9aa7b2; --line:#2e3740;
+  --accent:#4fb3c4; --accent-ink:#0e1417; --warn-bg:#2d2716; --warn-line:#5d5027;
+  --warn-ink:#e8d9a8; --code-bg:#161b20; --ok:#43a883;
+ }
+ :root:not([data-theme="light"]) .band{background:#20272e}
+ :root:not([data-theme="light"]) .band:has(input:checked){background:#1b3238}
+ :root:not([data-theme="light"]) button{background:#232b32;color:var(--ink)}
+ :root:not([data-theme="light"]) .tag{background:#232b32}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="sitemark" href="https://tombak.xyz/" title="Tom Bakx &mdash; tombak.xyz"
+     aria-label="Tom Bakx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"
+     role="img" aria-hidden="true"><path d="M112.8,85.01 L73.89,55.93 L7.2,112.8 L64.07,46.11
+     L34.99,7.2 L73.89,36.28 L112.8,7.2 L83.72,46.11 Z" fill="#ed4933"/></svg></a>
+  <h1>Cite the ALMA receivers</h1>
+  <p class="lede">Tick the bands you observed in. Out comes an acknowledgement
+  sentence and the BibTeX, ready to paste into your manuscript.</p>
+  <p class="lede" style="font-size:.87rem">References follow
+  <a href="https://arxiv.org/abs/2409.02164">ALMA Memo 627</a> (Bakx &amp; Conway
+  2024), which compiled them in direct contact with the receiver groups. ALMA's
+  receivers underpin nearly ten thousand papers; the receiver papers themselves
+  are cited a few dozen times at best. That gap is an information gap, and this
+  page exists to close it in one click.</p>
+</header>
+
+<section>
+  <h2>Bands observed</h2>
+  <div class="bands" id="bands"></div>
+  <div class="rowbtns">
+    <button type="button" id="all">Select all</button>
+    <button type="button" id="none">Clear</button>
+  </div>
+</section>
+
+<section class="opts">
+  <fieldset>
+    <legend>Format</legend>
+    <label class="inline"><input type="radio" name="fmt" value="latex" checked> LaTeX</label>
+    <label class="inline"><input type="radio" name="fmt" value="plain"> Plain text</label>
+  </fieldset>
+</section>
+
+<section>
+  <div class="outhead">
+    <h2>Acknowledgement</h2>
+    <button type="button" class="copy" data-copy="sentence">Copy</button>
+  </div>
+  <pre id="sentence" class="empty">Tick a band to build the sentence.</pre>
+  <div id="notes"></div>
+</section>
+
+<section>
+  <div class="outhead">
+    <h2>BibTeX <span id="bibcount" class="tag"></span></h2>
+    <button type="button" class="copy" data-copy="bibtex">Copy</button>
+  </div>
+  <pre id="bibtex" class="empty">Tick a band to build the BibTeX.</pre>
+  <p style="font-size:.82rem;color:var(--dim);margin:.7rem 0 0">
+  Entries use the standard ADS journal macros (<code>\aap</code>,
+  <code>\pasj</code>), which every astronomy journal class defines. Outside
+  one, add
+  <code>\newcommand{\aap}{A\&amp;A}\newcommand{\pasj}{PASJ}</code>.
+  Verified: this output compiles under <code>natbib</code> with no errors and
+  no undefined citations.</p>
+</section>
+
+<section>
+  <h2>References for your selection</h2>
+  <table>
+    <thead><tr><th>Band</th><th>Reference</th><th class="num">Cited</th>
+      <th class="num">Papers using it</th><th></th></tr></thead>
+    <tbody id="reftable"><tr><td colspan="5" style="color:var(--dim)">—</td></tr></tbody>
+  </table>
+  <details id="appdetails">
+    <summary>Additional receiver references for these bands (Memo 627, Table 2)</summary>
+    <table style="margin-top:.6rem">
+      <thead><tr><th>Reference</th><th>Focus</th><th class="num">Cited</th><th></th></tr></thead>
+      <tbody id="apptable"></tbody>
+    </table>
+    <p style="font-size:.82rem;color:var(--dim);margin:.7rem 0 0">
+    These are the appendix references that together give the fuller technical
+    description. BibTeX is only shipped for entries verified against a
+    publisher record; for the rest, follow the link and export from ADS.</p>
+  </details>
+</section>
+
+<footer>
+  <p><strong>Provenance.</strong> Bands, references, citation counts and links
+  are transcribed from
+  <a href="https://arxiv.org/abs/2409.02164">ALMA Memo 627</a>, Tables 1 and 2
+  (counts as of May 2024). Every BibTeX entry here was verified against a
+  publisher record or an ADS export &mdash; none was hand-written. The memo is
+  the authors' recommendation and not official ALMA policy; see
+  <a href="https://almascience.org">almascience.org</a> and Table 4.2 of the
+  ALMA Technical Handbook for the official documentation.</p>
+  <p>Built by <a href="../interactive.html">Tom Bakx</a>. Nothing is uploaded; everything runs
+  in your browser.</p>
+</footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/;
+const {refs, bands, meta, appendix} = DATA;
+const BANDREFS = {}, PRELIM = {}, FREQ = {};
+bands.forEach(([n, f, _p, rs, prelim]) => { BANDREFS[n]=rs; PRELIM[n]=prelim; FREQ[n]=f; });
+
+const $ = s => document.querySelector(s);
+const el = (t, c, h) => { const e=document.createElement(t); if(c)e.className=c;
+                          if(h!==undefined)e.innerHTML=h; return e; };
+const esc = s => String(s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+/* ---- build the band grid ---- */
+const grid = $('#bands');
+bands.forEach(([n,f,,rs,prelim])=>{
+  const lab = el('label','band');
+  const names = rs.map(k=>meta[k][0]+' '+meta[k][1]).join(', ');
+  lab.innerHTML = `<input type="checkbox" value="${n}">
+    <span class="n">Band ${n}${prelim?' <span class="star" title="preliminary reference">*</span>':''}</span>
+    <span class="f">${f} GHz</span>
+    <span class="r" title="${esc(names)}">${esc(names)}</span>`;
+  grid.appendChild(lab);
+});
+grid.addEventListener('change', render);
+$('#all').onclick  = ()=>{ grid.querySelectorAll('input').forEach(i=>i.checked=true);  render(); };
+$('#none').onclick = ()=>{ grid.querySelectorAll('input').forEach(i=>i.checked=false); render(); };
+document.querySelectorAll('input[name=fmt]').forEach(r=>r.onchange=render);
+
+const sel = () => [...grid.querySelectorAll('input:checked')].map(i=>+i.value)
+                  .sort((a,b)=>a-b);
+const isLatex = () => $('input[name=fmt]:checked').value==='latex';
+
+/* ---- citation formatting ---- */
+function citep(keys){
+  return isLatex() ? '\\citep{'+keys.join(',')+'}'
+    : '('+keys.map(k=>meta[k][0]+' '+meta[k][1]).join('; ')+')';
+}
+function citet(k){
+  return isLatex() ? '\\citet{'+k+'}' : meta[k][0]+' ('+meta[k][1]+')';
+}
+function listjoin(a){
+  return a.length<2 ? (a[0]||'')
+    : a.slice(0,-1).join(', ')+' and '+a[a.length-1];
+}
+
+/* ---- the sentence ---- */
+function buildSentence(s){
+  if(!s.length) return '';
+  const parts = s.map(b=>'Band '+b+' '+citep(BANDREFS[b]));
+  let out = 'These observations were carried out with the Atacama Large '
+          + 'Millimeter/submillimeter Array (ALMA) in '+listjoin(parts)+'.';
+
+  const clauses = [];
+  const sb = s.filter(b=>b===3||b===6);
+  if(sb.length) clauses.push({
+    subj:'the '+listjoin(sb.map(b=>'Band '+b))+' sideband-separating SIS mixers',
+    verb:'are described', ref:citet('Kerr2014')});
+  /* Memo 627: the local oscillator is common to all receiver bands except future Band 2 */
+  if(s.some(b=>b!==2)) clauses.push({
+    subj:'the ALMA local oscillator system', verb:'is described',
+    ref:citet('Bryerton2013')});
+
+  /* One clause spells the verb out; later clauses elide it but keep "by",
+     which is the normal academic construction: "A are described by X, and B by Y." */
+  if(clauses.length){
+    const c0=clauses[0];
+    out += ' '+cap(c0.subj)+' '+c0.verb+' by '+c0.ref
+        +  clauses.slice(1).map(c=>', and '+c.subj+' by '+c.ref).join('')+'.';
+  }
+  return out;
+}
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+
+/* ---- which keys does a selection need ---- */
+function keysFor(s){
+  const k=[];
+  s.forEach(b=>BANDREFS[b].forEach(r=>{ if(!k.includes(r)) k.push(r); }));
+  if(s.some(b=>b===3||b===6) && !k.includes('Kerr2014')) k.push('Kerr2014');
+  if(s.some(b=>b!==2) && !k.includes('Bryerton2013')) k.push('Bryerton2013');
+  return k;
+}
+
+/* ---- render ---- */
+function render(){
+  const s = sel(), keys = keysFor(s);
+
+  const sen=$('#sentence'), txt=buildSentence(s);
+  sen.textContent = txt || 'Tick a band to build the sentence.';
+  sen.classList.toggle('empty', !txt);
+
+  const bib=$('#bibtex');
+  const body = keys.map(k=>refs[k].bib).join('\n\n');
+  bib.textContent = body || 'Tick a band to build the BibTeX.';
+  bib.classList.toggle('empty', !body);
+  $('#bibcount').textContent = keys.length
+    ? keys.length+(keys.length===1?' entry':' entries') : '';
+
+  /* notes */
+  const nb=$('#notes'); nb.innerHTML='';
+  const prelim = s.filter(b=>PRELIM[b]);
+  if(prelim.length) nb.appendChild(el('div','note',
+    `<strong>Band ${prelim.join(' and ')}: check for a newer paper.</strong>
+     Memo 627 marks ${prelim.length>1?'these':'this'} reference as preliminary,
+     with the final instrument paper "in preparation, expected within 6 to 8
+     months" as of November 2024 &mdash; a window that has since passed. The
+     receiver groups confirmed this reference should be used in the meantime,
+     but ask the <a href="https://help.almascience.org/">ALMA Helpdesk</a> or
+     check ADS before submitting.`));
+  if(s.length && !s.some(b=>b!==2)) nb.appendChild(el('div','note',
+    `<strong>No local oscillator reference.</strong> Memo 627 gives the local
+     oscillator reference as common to all receiver bands <em>except</em> the
+     future Band 2, so it is omitted here.`));
+
+  /* main table */
+  const tb=$('#reftable'); tb.innerHTML='';
+  if(!keys.length){
+    tb.appendChild(el('tr',null,'<td colspan="5" style="color:var(--dim)">&mdash;</td>'));
+  } else {
+    keys.forEach(k=>{
+      const [au,yr,cit,url]=meta[k];
+      let who = s.filter(b=>BANDREFS[b].includes(k)).map(b=>'Band '+b);
+      if(k==='Kerr2014') who=[listjoin(s.filter(b=>b===3||b===6).map(b=>'Band '+b))+' mixers'];
+      if(k==='Bryerton2013') who=['all bands'];
+      const tr=el('tr',null,
+        `<td>${esc(who.join(', '))}</td>
+         <td><a href="${url}" target="_blank" rel="noopener">${esc(au+' '+yr)}</a></td>
+         <td class="num">${cit===null?'&ndash;':cit}</td>
+         <td class="num">${PUBS[k]===undefined?'':PUBS[k]}</td>
+         <td><code style="font-size:.78rem;color:var(--dim)">${esc(k)}</code></td>`);
+      tb.appendChild(tr);
+    });
+  }
+
+  /* appendix */
+  const rel = appendix.filter(([b])=> b==='all' ? s.length : s.includes(+b));
+  const ad=$('#appdetails'), at=$('#apptable');
+  ad.style.display = rel.length ? '' : 'none';
+  at.innerHTML='';
+  rel.forEach(([,label,focus,cit,key,url])=>{
+    at.appendChild(el('tr',null,
+      `<td><a href="${url}" target="_blank" rel="noopener">${esc(label)}</a></td>
+       <td style="color:var(--dim)">${esc(focus)}</td>
+       <td class="num">${cit===null?'&ndash;':cit}</td>
+       <td>${key?'<span class="tag">BibTeX above</span>'
+                :'<span class="tag">export from link</span>'}</td>`));
+  });
+}
+
+/* publication counts from Memo 627 Table 1 (astronomy papers using that receiver) */
+const PUBS = {Bryerton2013:9138,Huang2022:0,Yagoubov2020:0,Claude2008:2342,
+  Kerr2014:6422,Asayama2014:575,Belitsky2018:173,Ediss2004:4953,Kerr2004:4953,
+  Mahieu2012:3064,Sekimoto2008:388,Baryshev2015:327,Uzawa2013:16};
+
+/* ---- copy ---- */
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.onclick = async ()=>{
+    const src=$('#'+btn.dataset.copy);
+    if(src.classList.contains('empty')) return;
+    const text=src.textContent;
+    try{ await navigator.clipboard.writeText(text); }
+    catch(e){
+      const t=el('textarea'); t.value=text; t.style.position='fixed';
+      t.style.opacity='0'; document.body.appendChild(t); t.select();
+      try{ document.execCommand('copy'); }catch(_){}
+      t.remove();
+    }
+    const old=btn.textContent; btn.textContent='Copied'; btn.classList.add('done');
+    setTimeout(()=>{ btn.textContent=old; btn.classList.remove('done'); },1400);
+  };
+});
+
+render();
+</script>
+<script data-goatcounter="https://tombakx.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
